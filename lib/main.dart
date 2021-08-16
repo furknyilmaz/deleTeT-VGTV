@@ -42,7 +42,7 @@ class MyHomePage extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20.0),
             child: SizedBox(
               width: width / 1.5,
-              child: Image.asset("lib/img/logo.png"),
+              child: Image.asset("assets/logo.png"),
             ),
           ),
           Padding(
