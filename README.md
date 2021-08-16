@@ -1,3 +1,3 @@
-# deleTET - Gençlerin Kariyer Noktası
+# deleTET 
 
 
