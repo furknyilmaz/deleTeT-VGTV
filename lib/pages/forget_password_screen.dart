@@ -1,3 +1,4 @@
+// bu sayfa register sayfası
 import 'package:flutter/material.dart';
 
 class ForgetPassword extends StatefulWidget {
