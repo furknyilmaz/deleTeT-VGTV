@@ -1,4 +1,4 @@
-// bu sayfa register sayfası
+// bu sayfa flutter-mülakat brancı ile yazıldı.
 import 'package:flutter/material.dart';
 
 class ForgetPassword extends StatefulWidget {
