@@ -101,7 +101,7 @@ class RegisterScreen extends StatelessWidget {
               width: width - (width / 5),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => RegisterScreen(),
