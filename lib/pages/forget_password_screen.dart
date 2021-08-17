@@ -1,4 +1,4 @@
-// bu sayfa register sayfası
+// bu sayfa register sayfası olarak adlandırılır.
 import 'package:flutter/material.dart';
 
 class ForgetPassword extends StatefulWidget {
