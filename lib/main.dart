@@ -1,155 +1,130 @@
-import 'package:deletedvgtv/pages/forget_password_screen.dart';
-import 'package:deletedvgtv/pages/register_screen.dart';
+// Home page
+
+// Flutter code sample for BottomNavigationBar
+//
+// This example shows a [BottomNavigationBar] as it is used within a [Scaffold]
+// widget. The [BottomNavigationBar] has three [BottomNavigationBarItem]
+// widgets, which means it defaults to [BottomNavigationBarType.fixed], and
+// the [currentIndex] is set to index 0. The selected item is
+// amber. The `_onItemTapped` function changes the selected item's index
+// and displays a corresponding message in the center of the [Scaffold].
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
+/// This is the main application widget.
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
+
+  static const String _title = 'Flutter Code Sample';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hello World Flutter Application',
+    return const MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Anasayfa'),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  // This widget is the home page of your application.
-  final String title;
+/// This is the stateful widget that the main application instantiates.
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+/// This is the private State class that goes with MyStatefulWidget.
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Anasayfa',
+      style: optionStyle,
+    ),
+    Text(
+      'Gönderiler',
+      style: optionStyle,
+    ),
+    Text(
+      'Firmalar',
+      style: optionStyle,
+    ),
+    Text(
+      'Ağ',
+      style: optionStyle,
+    ),
+    Text(
+      'Profil',
+      style: optionStyle,
+    ),
+    Text(
+      'İlanlar',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double height = screen.size.height;
-    final double width = screen.size.width;
-
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      appBar: AppBar(
+        leading: Icon(Icons.menu),
+        backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+        title: const Text('Kariyer Planı'),
+        actions: [
+          Icon(Icons.notifications_outlined),
           Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: SizedBox(
-              width: width / 1.5,
-              child: Image.asset("assets/logo.png"),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: height / 60,
-              left: width / 10,
-              right: width / 10,
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.only(left: 15.0, bottom: 0.0, top: 0.0),
-                hintText: 'E-posta adresinizi giriniz',
-                hintStyle: TextStyle(fontSize: 12),
-                filled: true,
-                fillColor: Colors.white,
-                prefixIcon: const Icon(
-                  Icons.mail,
-                  color: Colors.blue,
-                  size: 18,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: height / 40,
-              left: width / 10,
-              right: width / 10,
-            ),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(left: 15.0),
-                hintText: 'Şifrenizi giriniz',
-                hintStyle: TextStyle(fontSize: 12),
-                filled: true,
-                prefixIcon: const Icon(
-                  Icons.lock,
-                  color: Colors.blue,
-                  size: 18,
-                ),
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: width - (width / 5),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterScreen(),
-                  ),
-                );
-              },
-              child: Text('Giriş yap'),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(top: 10, left: width * 0.1),
-              child: TextButton(
-                child: Text(
-                  'Şifremi Unuttum',
-                  style: TextStyle(
-                      color: Colors.blueGrey, fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ForgetPassword(),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: height / 20),
-            child: Text("Henüz hesabınız yok mu?"),
-          ),
-          TextButton(
-            child: Text(
-              'Hemen Kayıt Ol',
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RegisterScreen(),
-                ),
-              );
-            },
+            padding: EdgeInsets.symmetric(horizontal: 8),
           ),
         ],
-      )),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Anasayfa',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.article_outlined), label: 'Gönderiler'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business_outlined),
+            label: 'Firmalar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sensors_outlined),
+            label: 'Ağ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Profil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fact_check_outlined),
+            label: 'İlanlar',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blueGrey,
+        unselectedItemColor: Colors.black26,
+        selectedLabelStyle: TextStyle(fontSize: 11),
+        unselectedFontSize: 10,
+        showUnselectedLabels: true,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
