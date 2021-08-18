@@ -107,7 +107,7 @@ class MyHomePage extends StatelessWidget {
                     child: Image.asset("assets/logo.png"),
                   ),
                 ),
-                TextField(
+                TextFormField(
                   controller: tfUsername,
                   decoration: InputDecoration(
                     contentPadding:
