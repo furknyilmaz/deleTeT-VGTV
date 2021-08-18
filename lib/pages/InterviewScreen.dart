@@ -14,11 +14,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                width: 200,
+                height: 100,
+                child: Image.asset("assets/logo.png"),
+              ),
+              Container(height: 30,),
               Container(
                 width: MediaQuery.of(context).size.width * 0.85,
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -38,16 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                   /* Text(
                       'Katıl',
                       style: TextStyle(fontSize: 20),
                     ),
                     Icon(
                       Icons.remove_red_eye,
-                    )
+                    ) */
+
                   ],
                 ),
               ),
+
               TextButton(
                 style: TextButton.styleFrom(
                   primary: Colors.pink,
@@ -57,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Oluştur    ',
+                      'Oturusma Katıl    ',
                       style: TextStyle(fontSize: 20),
                     ),
                     Icon(Icons.live_tv)

@@ -106,7 +106,7 @@ class _BottomMenuState extends State<BottomMenu> {
               Icons.business_outlined,
               size: 28.0,
             ),
-            label: 'Şirketler',
+            label: 'Mülakat',
           ),
         ],
         currentIndex: _selectedIndex,

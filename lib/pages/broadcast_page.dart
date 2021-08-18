@@ -1,4 +1,5 @@
 import 'package:deletedvgtv/utils/appId.dart';
+import 'package:deletedvgtv/utils/token.dart';
 import 'package:flutter/material.dart';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
@@ -42,7 +43,7 @@ class _BroadcastPageState extends State<BroadcastPage> {
     await _initAgoraRtcEngine();
 
     if (widget.isBroadcaster!)
-      streamId = (await _engine?.createDataStream(false, false))!;
+      streamId = (await _engine.createDataStream(false, false))!;
 
     _engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
@@ -79,15 +80,15 @@ class _BroadcastPageState extends State<BroadcastPage> {
       },
     ));
 
-    await _engine.joinChannel(null, widget.channelName!, null, 0);
+    await _engine.joinChannel(token, widget.channelName!, null, 0);
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    _engine = await RtcEngine.createWithConfig(RtcEngineConfig(appId));
+    _engine = await RtcEngine.createWithContext(RtcEngineContext(appId));
     await _engine.enableVideo();
 
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    if (widget.isBroadcaster!) {
+    if (widget.isBroadcaster != null) {
       await _engine.setClientRole(ClientRole.Broadcaster);
     } else {
       await _engine.setClientRole(ClientRole.Audience);
@@ -232,8 +233,10 @@ class _BroadcastPageState extends State<BroadcastPage> {
   }
 
   void _onSwitchCamera() {
-    if (streamId != null)
-      _engine?.sendStreamMessage(streamId, "mute user blet");
+    // ignore: unnecessary_null_comparison
+    if (streamId != null) {
+      _engine.sendStreamMessage(streamId, "mute user blet");
+    }
     //_engine.switchCamera();
   }
 }
