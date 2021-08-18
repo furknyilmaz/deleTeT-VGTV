@@ -28,6 +28,7 @@ class _BottomMenuState extends State<BottomMenu> {
     AdvertScreen(),
     CompanyScreen()
   ];
+  //CompanyScreen()
 
   void _onItemTapped(int index) {
     setState(() {
