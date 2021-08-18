@@ -18,6 +18,7 @@ class BottomMenu extends StatefulWidget {
 /// This is the private State class that goes with BottomMenu.
 class _BottomMenuState extends State<BottomMenu> {
   int _selectedIndex = 2;
+
   // ignore: unused_field
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -50,10 +51,98 @@ class _BottomMenuState extends State<BottomMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 120,
+              child: DrawerHeader(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: SizedBox(
+                          width: 60,
+                          height: 60,
+                          child: Image.network(
+                              'https://pbs.twimg.com/media/DTm1DagWkAEDsFL.jpg'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'İsim Soyisim',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'Görevi - Çalışma Alanı',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.album_outlined),
+                        Text(
+                          'Uygulama Hakkında',
+                          style: TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.phone_android),
+                        Text(
+                          'İletişim Bilgileri',
+                          style: TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.settings),
+                        Text(
+                          'Ayarlar',
+                          style: TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        leading: Icon(Icons.menu),
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
-        title: const Text('Benim Kariyerim'),
+        title: const Text('Başvurular'),
         actions: [
           IconButton(
             onPressed: () {
