@@ -7,6 +7,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  agora_rtc_engine: ^4.0.1
+  permission_handler: null
+  shared_preferences: ^2.0.6
   carousel_slider: ^2.2.1
   google_fonts: ^1.1.0
   cupertino_icons: ^1.0.2
@@ -17,6 +20,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.png
+    - assets/vg.png
   #- images/a_dot_ham.jpeg
 
   # fonts:
