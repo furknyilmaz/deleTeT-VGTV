@@ -1,3 +1,4 @@
+import 'package:deletedvgtv/pages/ApplicationDetailScreen.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class ApplicationScreen extends StatelessWidget {
       "Yazılım Geliştirme Uzmanı",
       "Elektironik ve Haberleşme Uzmanı",
       "Siber Güvenlik Uzmanı",
-      "Elektronik Haberşme Stajyer Programı",
+      "Elektronik Haberleşme Stajyer Programı",
     ];
 
     final List<String> applicationDetails = <String>[
@@ -40,49 +41,119 @@ class ApplicationScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    height: 120,
                     margin:
                         EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(0),
-                            color: Colors.white,
-                            width: width * 0.2,
-                            height: 80,
-                            child: Image.network(imageUri[index]),
-                          ),
-                          Container(
-                            width: width * 0.65,
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  companyName[index],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                Container(
-                                  height: 5,
-                                ),
-                                Text(
-                                  applicationDetails[index],
-                                  style: TextStyle(fontSize: 11),
+                                Icon(
+                                  Icons.more_horiz_outlined,
+                                  size: 24,
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(40)),
+                                      border: Border.all(
+                                          width: 2, color: Colors.red)),
+                                  padding: EdgeInsets.all(0),
+                                  width: width * 0.2,
+                                  height: 80,
+                                  child: Image.network(
+                                    imageUri[index],
+                                  ),
+                                ),
+                                Container(
+                                  width: width * 0.65,
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        companyName[index],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      Container(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        applicationDetails[index],
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Container(
+                              height: 1,
+                              color: Colors.grey.shade200,
+                              margin: EdgeInsets.only(top: 10),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.date_range,
+                                          size: 16,
+                                        ),
+                                        Text(
+                                          "16 Ağustos",
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "Mülakata bekleniyor...",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      color: Colors.green[100],
+                                      padding: EdgeInsets.all(12),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ApplicationDetailScreen(
+                                                      imageUri[index],
+                                                      applicationDetails[index],
+                                                      companyName[index])),
+                                        );
+                                      },
+                                      child: Text('İncele'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
                   );
                 })));
   }
