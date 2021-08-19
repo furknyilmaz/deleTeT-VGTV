@@ -30,7 +30,7 @@ class AdvertScreen extends StatelessWidget {
       "JOB DESCRIPTION",
       "GENEL NİTELİKLER VE İŞ TANIMI",
       "GENEL NİTELİKLER VE İŞ TANIMI",
-      ];
+    ];
 
     final List<String> advertsdetails = <String>[
       "Üniversitelerin Bilgisayar Mühendisliği ve benzeri bölümlerinin birinden mezunum, C#, Java, JavaScript dillerinden herhangi birini biliyorum...",
@@ -48,9 +48,8 @@ class AdvertScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    height: 120,
                     margin:
-                    EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
+                        EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.all(10),
@@ -83,8 +82,9 @@ class AdvertScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   advertstitleDetails[index],
-                                  style: TextStyle(fontSize: 11,
-                                    fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Container(
                                   height: 5,
@@ -93,6 +93,26 @@ class AdvertScreen extends StatelessWidget {
                                   advertsdetails[index],
                                   style: TextStyle(fontSize: 11),
                                 ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.blue,
+                                    ),
+                                    margin: EdgeInsets.only(top: 10),
+                                    width: width,
+                                    height: 30,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Detaylı İncele",
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      ],
+                                    ))
                               ],
                             ),
                           )
@@ -102,5 +122,4 @@ class AdvertScreen extends StatelessWidget {
                   );
                 })));
   }
-
 }

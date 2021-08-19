@@ -18,6 +18,14 @@ class ApplicationScreen extends StatelessWidget {
     ];
 
     final List<String> companyName = <String>[
+      "Aselsan A.Ş",
+      "Akgün Yazılım",
+      "ICC Endustiriyel Ürünler",
+      "INTER PROBE",
+      "Yonga Teknoloji Mikroelektirik A.Ş",
+    ];
+
+    final List<String> program = <String>[
       "Aday Mühendis Programı",
       "Yazılım Geliştirme Uzmanı",
       "Elektironik ve Haberleşme Uzmanı",
@@ -32,6 +40,8 @@ class ApplicationScreen extends StatelessWidget {
       "InterProbe, 'Yeni Nesil Savunma Teknolojileri', 'Siber Tehdit İstihbaratı' ve 'Siber Güvenlik' çözümlerinde uzmanlaşmış bir Türk şirketidir. InterProbe, yüksek teknolojiye dayalı...",
       "Yonga Teknoloji Mikroelektronik ArGe, ASIC (Uygulamaya Yönelik Tümdevre)/FPGA (Programlanabilir Kapı Dizisi) ve SoC (Yonga Üzeri Sistem) tasarımı ve doğrulaması "
     ];
+
+    final List<String> statusState = <String>["1", "2", "3", "4", "1"];
 
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
@@ -63,17 +73,20 @@ class ApplicationScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(40)),
-                                      border: Border.all(
-                                          width: 2, color: Colors.red)),
-                                  padding: EdgeInsets.all(0),
-                                  width: width * 0.2,
-                                  height: 80,
-                                  child: Image.network(
-                                    imageUri[index],
-                                  ),
+                                  width: 80.0,
+                                  height: 80.0,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Colors.grey.shade300),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: new DecorationImage(
+                                              fit: BoxFit.fitWidth,
+                                              image: new NetworkImage(
+                                                  imageUri[index])))),
                                 ),
                                 Container(
                                   width: width * 0.65,
@@ -121,40 +134,104 @@ class ApplicationScreen extends StatelessWidget {
                                           size: 16,
                                         ),
                                         Text(
-                                          "16 Ağustos",
+                                          "16 Ağustos 2021",
                                           style: TextStyle(fontSize: 10),
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      child: Text(
-                                        "Mülakata bekleniyor...",
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      color: Colors.green[100],
-                                      padding: EdgeInsets.all(12),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
+                                    GestureDetector(
+                                      onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ApplicationDetailScreen(
-                                                      imageUri[index],
-                                                      applicationDetails[index],
-                                                      companyName[index])),
+                                                    imageUri[index],
+                                                    applicationDetails[index],
+                                                    companyName[index],
+                                                    program[index],
+                                                    statusState[index],
+                                                  )),
                                         );
                                       },
-                                      child: Text('İncele'),
+                                      child: Status(statusState[index]),
                                     ),
                                   ],
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         )),
                   );
                 })));
+  }
+}
+
+class Status extends StatelessWidget {
+  final String status;
+  Status(this.status);
+
+  @override
+  Widget build(BuildContext context) {
+    String title = "Başvuru beklemede   ";
+    var color = const Color(0xffb74093);
+
+    switch (status) {
+      case "1":
+        {
+          title = "Başvurunuz alındı   ";
+          color = const Color(0xffc1def8);
+        }
+        break;
+
+      case "2":
+        {
+          title = "İnceleniyor   ";
+          color = const Color(0xfffcebba);
+        }
+        break;
+
+      case "3":
+        {
+          title = "Mülakata bekleniyor   ";
+          color = const Color(0xffcee4cb);
+        }
+        break;
+
+      case "4":
+        {
+          title = "Olumsuz Sonuçlandı   ";
+          color = const Color(0xfff7c7d3);
+        }
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ),
+          Icon(
+            Icons.arrow_forward_outlined,
+          )
+        ],
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    );
   }
 }
