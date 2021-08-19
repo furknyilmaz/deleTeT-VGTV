@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomMenu extends StatefulWidget {
-  const BottomMenu({Key? key}) : super(key: key);
+
 
   @override
   State<BottomMenu> createState() => _BottomMenuState();
@@ -17,13 +17,16 @@ class BottomMenu extends StatefulWidget {
 
 /// This is the private State class that goes with BottomMenu.
 class _BottomMenuState extends State<BottomMenu> {
+
+
+
   int _selectedIndex = 2;
 
   // ignore: unused_field
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    ProfileScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    ProfileScreen("Hello World", "dec"),
     ApplicationScreen(),
     HomePageScreen(),
     AdvertScreen(),
