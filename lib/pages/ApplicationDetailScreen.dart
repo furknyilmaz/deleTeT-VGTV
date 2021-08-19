@@ -89,8 +89,8 @@ class ApplicationDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        width: 150.0,
-                        height: 150.0,
+                        width: 130.0,
+                        height: 130.0,
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(75),
