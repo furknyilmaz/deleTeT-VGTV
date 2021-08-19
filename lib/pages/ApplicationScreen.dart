@@ -33,6 +33,8 @@ class ApplicationScreen extends StatelessWidget {
       "Yonga Teknoloji Mikroelektronik ArGe, ASIC (Uygulamaya Yönelik Tümdevre)/FPGA (Programlanabilir Kapı Dizisi) ve SoC (Yonga Üzeri Sistem) tasarımı ve doğrulaması "
     ];
 
+    final List<String> statusState = <String>["1", "2", "3", "4", "5"];
+
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: Center(
@@ -63,17 +65,20 @@ class ApplicationScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(40)),
-                                      border: Border.all(
-                                          width: 2, color: Colors.red)),
-                                  padding: EdgeInsets.all(0),
-                                  width: width * 0.2,
-                                  height: 80,
-                                  child: Image.network(
-                                    imageUri[index],
-                                  ),
+                                  width: 80.0,
+                                  height: 80.0,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Colors.grey.shade300),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: new DecorationImage(
+                                              fit: BoxFit.fitWidth,
+                                              image: new NetworkImage(
+                                                  imageUri[index])))),
                                 ),
                                 Container(
                                   width: width * 0.65,
@@ -126,28 +131,24 @@ class ApplicationScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      child: Text(
-                                        "Mülakata bekleniyor...",
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      color: Colors.green[100],
-                                      padding: EdgeInsets.all(12),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ApplicationDetailScreen(
+                                    Status(statusState[index]),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ApplicationDetailScreen(
                                                       imageUri[index],
                                                       applicationDetails[index],
-                                                      companyName[index])),
-                                        );
-                                      },
-                                      child: Text('İncele'),
-                                    ),
+                                                      companyName[index],
+                                                      statusState[index],
+                                                    )),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_forward_outlined,
+                                        )),
                                   ],
                                 ),
                               ),
@@ -156,5 +157,37 @@ class ApplicationScreen extends StatelessWidget {
                         )),
                   );
                 })));
+  }
+}
+
+class Status extends StatelessWidget {
+  final String status;
+
+  Status(this.status);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 170,
+      child: Text(
+        status == "1"
+            ? "Başvurunuz alındı..."
+            : status == "2"
+                ? "İnceleniyor..."
+                : status == "3"
+                    ? "Mülakata bekleniyor..."
+                    : "Olumsuz Sonuçlandı...",
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+        textAlign: TextAlign.center,
+      ),
+      color: status == "1"
+          ? Colors.blue[100]
+          : status == "2"
+              ? Colors.amber[100]
+              : status == "3"
+                  ? Colors.green[100]
+                  : Colors.red[100],
+      padding: EdgeInsets.all(12),
+    );
   }
 }

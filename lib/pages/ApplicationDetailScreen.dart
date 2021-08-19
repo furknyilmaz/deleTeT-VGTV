@@ -4,8 +4,10 @@ class ApplicationDetailScreen extends StatelessWidget {
   final String title;
   final String imageUri;
   final String applicationDetails;
+  final String statusState;
 
-  ApplicationDetailScreen(this.imageUri, this.applicationDetails, this.title);
+  ApplicationDetailScreen(
+      this.imageUri, this.applicationDetails, this.title, this.statusState);
 
   @override
   Widget build(BuildContext context) {
@@ -82,31 +84,38 @@ class ApplicationDetailScreen extends StatelessWidget {
                         padding: EdgeInsets.all(20),
                         margin: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.amber,
+                          color: statusState == "1"
+                              ? Colors.blue[100]
+                              : statusState == "2"
+                                  ? Colors.amber[100]
+                                  : statusState == "3"
+                                      ? Colors.green[100]
+                                      : Colors.red[100],
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
                           ),
                         ),
                         child: Text(
-                          'Başvurunuz Kabul Edildi.',
-                          style: TextStyle(color: Colors.white),
+                          statusState == "1"
+                              ? "Başvurunuz alındı..."
+                              : statusState == "2"
+                                  ? "Başvurunuz İnceleniyor..."
+                                  : statusState == "3"
+                                      ? "Olumlu Sonuçlandı. Mülakata bekleniyor..."
+                                      : "Olumsuz Sonuçlandı...",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Container(
-                          width: width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Başvuru Adı:' + title),
-                              Text('Başvuru Tarihi:' + '12 ocak 2021'),
-                              Text('Başvuru Detayı:' +
-                                  'Firmamızda yetiştirmek üzere Flutter ve Vue Js ile mühendsislik sistemlerinden kullanılacak uygulamalar geliştirmesi istenmektedir.'),
-                              Text('Başvuru Tarihi:' + '12 ocak 2021'),
-                            ],
-                          ),
+                        padding: EdgeInsets.only(top: 50, left: 30, right: 30),
+                        child: Text(
+                          // ignore: unnecessary_brace_in_string_interps
+                          "12 Ocak 2021 belirtilen şirkete ait ${title}  pozisyonu için yapmış olduğunuz başvurunuz kabul edilmiştir. Firma yetkilileri en kısa zamanda sizinle iletişime geçecektir",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
                         ),
                       )
                     ],
