@@ -18,6 +18,14 @@ class ApplicationScreen extends StatelessWidget {
     ];
 
     final List<String> companyName = <String>[
+      "Aselsan A.Ş",
+      "Akgün Yazılım",
+      "ICC Endustiriyel Ürünler",
+      "INTER PROBE",
+      "Yonga Teknoloji Mikroelektirik A.Ş",
+    ];
+
+    final List<String> program = <String>[
       "Aday Mühendis Programı",
       "Yazılım Geliştirme Uzmanı",
       "Elektironik ve Haberleşme Uzmanı",
@@ -33,7 +41,7 @@ class ApplicationScreen extends StatelessWidget {
       "Yonga Teknoloji Mikroelektronik ArGe, ASIC (Uygulamaya Yönelik Tümdevre)/FPGA (Programlanabilir Kapı Dizisi) ve SoC (Yonga Üzeri Sistem) tasarımı ve doğrulaması "
     ];
 
-    final List<String> statusState = <String>["1", "2", "3", "4", "5"];
+    final List<String> statusState = <String>["1", "2", "3", "4", "1"];
 
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
@@ -126,33 +134,32 @@ class ApplicationScreen extends StatelessWidget {
                                           size: 16,
                                         ),
                                         Text(
-                                          "16 Ağustos",
+                                          "16 Ağustos 2021",
                                           style: TextStyle(fontSize: 10),
                                         ),
                                       ],
                                     ),
-                                    Status(statusState[index]),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ApplicationDetailScreen(
-                                                      imageUri[index],
-                                                      applicationDetails[index],
-                                                      companyName[index],
-                                                      statusState[index],
-                                                    )),
-                                          );
-                                        },
-                                        child: Icon(
-                                          Icons.arrow_forward_outlined,
-                                        )),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ApplicationDetailScreen(
+                                                    imageUri[index],
+                                                    applicationDetails[index],
+                                                    companyName[index],
+                                                    program[index],
+                                                    statusState[index],
+                                                  )),
+                                        );
+                                      },
+                                      child: Status(statusState[index]),
+                                    ),
                                   ],
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         )),
                   );
@@ -162,32 +169,69 @@ class ApplicationScreen extends StatelessWidget {
 
 class Status extends StatelessWidget {
   final String status;
-
   Status(this.status);
 
   @override
   Widget build(BuildContext context) {
+    String title = "Başvuru beklemede   ";
+    var color = const Color(0xffb74093);
+
+    switch (status) {
+      case "1":
+        {
+          title = "Başvurunuz alındı   ";
+          color = const Color(0xffc1def8);
+        }
+        break;
+
+      case "2":
+        {
+          title = "İnceleniyor   ";
+          color = const Color(0xfffcebba);
+        }
+        break;
+
+      case "3":
+        {
+          title = "Mülakata bekleniyor   ";
+          color = const Color(0xffcee4cb);
+        }
+        break;
+
+      case "4":
+        {
+          title = "Olumsuz Sonuçlandı   ";
+          color = const Color(0xfff7c7d3);
+        }
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+
     return Container(
-      width: 170,
-      child: Text(
-        status == "1"
-            ? "Başvurunuz alındı..."
-            : status == "2"
-                ? "İnceleniyor..."
-                : status == "3"
-                    ? "Mülakata bekleniyor..."
-                    : "Olumsuz Sonuçlandı...",
-        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        textAlign: TextAlign.center,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
       ),
-      color: status == "1"
-          ? Colors.blue[100]
-          : status == "2"
-              ? Colors.amber[100]
-              : status == "3"
-                  ? Colors.green[100]
-                  : Colors.red[100],
-      padding: EdgeInsets.all(12),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ),
+          Icon(
+            Icons.arrow_forward_outlined,
+          )
+        ],
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     );
   }
 }
