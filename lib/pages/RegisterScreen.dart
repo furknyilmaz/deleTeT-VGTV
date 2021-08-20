@@ -18,6 +18,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
 
   late RegisterRequestModal requestModal;
   bool isApiCallProgress = false;
+  bool checkbox = false;
 
   @override
   void initState() {
@@ -61,18 +62,29 @@ class _RegisterPageeState extends State<RegisterScreen> {
                         Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
-                            width: 200,
+                            width: 280,
                             height: 100,
                             child: Image.asset("assets/logo.png"),
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: SelectRoleButton(),
+                        ),
                         new TextFormField(
+                          style: TextStyle(fontSize: 12),
                           keyboardType: TextInputType.name,
                           onSaved: (input) => requestModal.name = input,
                           decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: (BorderSide(
+                                color: Colors.green,
+                              )),
+                            ),
                             contentPadding: EdgeInsets.only(left: 15.0),
-                            hintText: 'Adınızı giriniz',
+                            hintText: 'Lütfen adınızı giriniz',
                             hintStyle: TextStyle(fontSize: 12),
+                            errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -81,7 +93,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             prefixIcon: const Icon(
                               Icons.person_rounded,
-                              color: Colors.blue,
+                              color: Colors.green,
                               size: 18,
                             ),
                           ),
@@ -90,15 +102,22 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           height: 10,
                         ),
                         new TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(fontSize: 12),
                           validator: (input) => !input!.contains('@')
-                              ? "Geçerli bir adres girinikz!"
+                              ? "Geçerli bir adres giriniz!"
                               : null,
+                          keyboardType: TextInputType.emailAddress,
                           onSaved: (input) => requestModal.email = input,
                           decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: (BorderSide(
+                                color: Colors.green,
+                              )),
+                            ),
                             contentPadding: EdgeInsets.only(left: 15.0),
-                            hintText: 'E-posta adresiniz giriniz',
+                            hintText: 'E-posta adresinizi giriniz',
                             hintStyle: TextStyle(fontSize: 12),
+                            errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -107,7 +126,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             prefixIcon: const Icon(
                               Icons.mail_outline,
-                              color: Colors.blue,
+                              color: Colors.green,
                               size: 18,
                             ),
                           ),
@@ -116,45 +135,84 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           height: 10,
                         ),
                         new TextFormField(
-                            keyboardType: TextInputType.visiblePassword,
-                            onSaved: (input) => requestModal.password = input,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 15.0),
-                              hintText: 'Şifrenizi Giriniz',
-                              hintStyle: TextStyle(fontSize: 12),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
+                          style: TextStyle(fontSize: 12),
+                          keyboardType: TextInputType.visiblePassword,
+                          onSaved: (input) => requestModal.password = input,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: (BorderSide(
+                                color: Colors.green,
+                              )),
+                            ),
+                            contentPadding: EdgeInsets.only(left: 15.0),
+                            hintText:
+                                'En az 6 karakterli bir şifre belirleyiniz',
+                            hintStyle: TextStyle(fontSize: 12),
+                            errorStyle: TextStyle(color: Colors.green),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.lock,
+                              color: Colors.green,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0, left: 0),
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: checkbox,
+                                onChanged: (onChanged) => {
+                                  setState(() {
+                                    checkbox = !checkbox;
+                                  })
+                                },
+                                activeColor: Colors.green,
                               ),
-                              prefixIcon: const Icon(
-                                Icons.lock,
-                                color: Colors.blue,
-                                size: 18,
-                              ),
-                            )),
+                              Row(
+                                children: [
+                                  Text(
+                                    ' Kullanıcı sözleşmesinini',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black54),
+                                  ),
+                                  Text(
+                                    ' kabul ediyorum',
+                                    style: TextStyle(fontSize: 12),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                         SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         ElevatedButton(
-                            onPressed: () {
-                              register();
-                            },
-                            child: Text('Giriş yap')),
+                          style: TextButton.styleFrom(
+                              primary: Colors.black,
+                              backgroundColor: Colors.grey.shade300,
+                              fixedSize: Size(350, 35)),
+                          onPressed: () {
+                            register();
+                          },
+                          child: Text('Giriş yap'),
+                        ),
                         Padding(
                           padding: EdgeInsets.only(top: 40),
                           child: Text("Zaten bir hesabınız var mı?"),
                         ),
-                        TextButton(
-                          child: Text(
-                            'Hemen Oturum Aç',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
+                        GestureDetector(
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -162,6 +220,15 @@ class _RegisterPageeState extends State<RegisterScreen> {
                               ),
                             );
                           },
+                          child: Padding(
+                            padding: EdgeInsets.all(3),
+                            child: Text(
+                              'Hemen Oturum Aç',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -187,5 +254,83 @@ class _RegisterPageeState extends State<RegisterScreen> {
         });
       });
     }
+  }
+}
+
+bool role = false;
+
+class SelectRoleButton extends StatefulWidget {
+  const SelectRoleButton({Key? key}) : super(key: key);
+
+  @override
+  _SelectRoleButtonState createState() => _SelectRoleButtonState();
+}
+
+class _SelectRoleButtonState extends State<SelectRoleButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                role = true;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.green),
+                color: role ? Colors.green : Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    bottomLeft: Radius.circular(5)),
+              ),
+              width: 120,
+              height: 35,
+              child: Text(
+                'Kurumsal',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: role ? Colors.white : Colors.grey.shade800,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                role = false;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.green),
+                color: !role ? Colors.green : Colors.white,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    bottomRight: Radius.circular(5)),
+              ),
+              width: 120,
+              height: 35,
+              child: Text(
+                'Bireysel',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: !role ? Colors.white : Colors.grey.shade800,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
