@@ -9,17 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomMenu extends StatefulWidget {
-
-
   @override
   State<BottomMenu> createState() => _BottomMenuState();
 }
 
 /// This is the private State class that goes with BottomMenu.
 class _BottomMenuState extends State<BottomMenu> {
-
-
-
   int _selectedIndex = 2;
 
   // ignore: unused_field
@@ -42,7 +37,7 @@ class _BottomMenuState extends State<BottomMenu> {
 
   Future<void> logOut() async {
     var sp = await SharedPreferences.getInstance();
-    sp.remove("value");
+    sp.remove("user_id");
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
