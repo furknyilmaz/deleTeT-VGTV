@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
- final String myTitle;
- final String decr;
+  final String myTitle;
+  final String decr;
 
-ProfileScreen(this.myTitle, this.decr);
+  ProfileScreen(this.myTitle, this.decr);
 
   @override
   Widget build(BuildContext context) {

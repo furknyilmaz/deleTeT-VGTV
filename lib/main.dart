@@ -1,9 +1,13 @@
+import 'package:deletedvgtv/api/api_services.dart';
+import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/pages/RegisterScreen.dart';
+import 'package:deletedvgtv/utils/token.dart';
 import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
+
 var tfUsername = TextEditingController();
 var tfPassword = TextEditingController();
 
@@ -37,15 +41,110 @@ class MyApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 bool? ok = snapshot.data;
-                return ok == true
-                    ? BottomMenu()
-                    : MyHomePage(title: 'Homepage');
+                return ok == true ? BottomMenu() : LoginScreenPage();
               } else {
                 return Container();
               }
             })
         //MyHomePage(title: 'Home page'),
         );
+  }
+}
+
+class LoginScreenPage extends StatefulWidget {
+  const LoginScreenPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenPAgeState createState() => _LoginScreenPAgeState();
+}
+
+class _LoginScreenPAgeState extends State<LoginScreenPage> {
+  final scoffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<FormState> globalKeyForm = new GlobalKey<FormState>();
+
+  late LoginRequestModal requestModal;
+
+  @override
+  void initState() {
+    super.initState();
+    requestModal = new LoginRequestModal();
+    print(requestModal);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        key: scoffoldKey,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Form(
+                key: globalKeyForm,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Text("Giriş Ekranı"),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    new TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (input) => !input!.contains('@')
+                          ? "Geçerli bir adres girinikz!"
+                          : null,
+                      onSaved: (input) => requestModal.email = input,
+                      decoration: new InputDecoration(
+                        hintText: 'E-posta adresi',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    new TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      onSaved: (input) => requestModal.password = input,
+                      decoration: new InputDecoration(
+                        hintText: 'Parola',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          if (validateAndSave()) {
+                            print("selamla");
+                            APIServices apiServices = new APIServices();
+                            apiServices.login(requestModal).then((value) {
+                              print(value.email);
+                              print(value.name);
+                            });
+                          }
+                        },
+                        child: Text('Giriş yap'))
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  bool validateAndSave() {
+    final form = globalKeyForm.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
   }
 }
 
@@ -74,7 +173,6 @@ class MyHomePage extends StatelessWidget {
             builder: (context) => BottomMenu(),
           ),
         );
-        print('oldu');
       } else {
         final snackBar = SnackBar(
           content: Text(
@@ -107,80 +205,13 @@ class MyHomePage extends StatelessWidget {
                     child: Image.asset("assets/logo.png"),
                   ),
                 ),
-                TextFormField(
-                  controller: tfUsername,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.only(left: 0.0, bottom: 0.0, top: 0.0),
-                    hintText: 'E-posta adresssinizi giriniz',
-                    hintStyle: TextStyle(fontSize: 12),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefixIcon: const Icon(
-                      Icons.mail,
-                      color: Colors.blue,
-                      size: 18,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 10,
-                  height: 10,
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: tfPassword,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 15.0),
-                    hintText: 'Şifrenizi giriniz',
-                    hintStyle: TextStyle(fontSize: 12),
-                    filled: true,
-                    prefixIcon: const Icon(
-                      Icons.lock,
-                      color: Colors.blue,
-                      size: 18,
-                    ),
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 10,
-                  height: 30,
-                ),
+                TextInputWidget("username"),
+                TextInputWidget("password"),
                 ElevatedButton(
-                  onPressed: () {
-                    LoginControl();
-                  },
+                  onPressed: () {},
                   child: Text('Oturum Aç'),
                 ),
-                Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Column(
-                      children: [
-                        Text("Henüz hesabınız yok mu?"),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterScreen(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'Hemen Kayıt Ol',
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ],
-                    )),
+                LoginRegisterButton("Henuz Hesabınız yok mu?", 'Hemen Kayıt Ol')
               ],
             ),
           ),
@@ -188,3 +219,77 @@ class MyHomePage extends StatelessWidget {
   }
 }
 //BottomMenu(),
+
+class TextInputWidget extends StatelessWidget {
+  String value;
+  TextInputWidget(this.value);
+
+  late LoginRequestModal requestModal;
+
+  @override
+  void initState() {
+    // super.initState();
+    requestModal = new LoginRequestModal();
+    print(requestModal);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: TextFormField(
+        onSaved: (input) => requestModal.password = input,
+        obscureText: value == 'password' ? true : false,
+        controller: value == 'password' ? tfPassword : tfUsername,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(left: 15.0),
+          hintText: value == 'password'
+              ? 'Şifrenizi giriniz '
+              : 'E-posta adresinizi giriniz',
+          hintStyle: TextStyle(fontSize: 12),
+          filled: true,
+          prefixIcon: const Icon(
+            Icons.lock,
+            color: Colors.blue,
+            size: 18,
+          ),
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LoginRegisterButton extends StatelessWidget {
+  String text, buttonText;
+  LoginRegisterButton(this.text, this.buttonText);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        children: [
+          Text(text),
+          TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                buttonText,
+                style:
+                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              )),
+        ],
+      ),
+    );
+  }
+}
