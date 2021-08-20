@@ -1,136 +1,191 @@
-import 'package:deletedvgtv/main.dart';
+import 'package:deletedvgtv/pages/LoginScreen.dart';
+import 'package:deletedvgtv/models/login_model.dart';
+import 'package:deletedvgtv/utils/userRegister.dart';
+import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
+  _RegisterPageeState createState() => _RegisterPageeState();
+}
+
+class _RegisterPageeState extends State<RegisterScreen> {
+  final scoffoldKey = GlobalKey<ScaffoldState>();
+  final programssKey = GlobalKey<ScaffoldState>();
+  GlobalKey<FormState> globalKeyForm = new GlobalKey<FormState>();
+
+  late RegisterRequestModal requestModal;
+  bool isApiCallProgress = false;
+
+  @override
+  void initState() {
+    super.initState();
+    requestModal = new RegisterRequestModal();
+    print(requestModal);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double height = screen.size.height;
-    final double width = screen.size.width;
+    return ProgressHUD(
+      key: programssKey,
+      child: _uiSteup(context),
+      inAsyncCall: isApiCallProgress,
+      opacity: 0.3,
+    );
+  }
+
+  @override
+  // ignore: override_on_non_overriding_member
+  Widget _uiSteup(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        key: scoffoldKey,
+        backgroundColor: Colors.white,
         body: Center(
+          child: SingleChildScrollView(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: SizedBox(
-                width: width / 1.5,
-                child: Image.asset("assets/logo.png"),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: height / 60,
-                left: width / 10,
-                right: width / 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 15.0, bottom: 0.0, top: 0.0),
-                  hintText: 'E-posta adresinizi giriniz',
-                  hintStyle: TextStyle(fontSize: 12),
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: const Icon(
-                    Icons.mail,
-                    color: Colors.blue,
-                    size: 18,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: height / 60,
-                left: width / 10,
-                right: width / 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 15.0, bottom: 0.0, top: 0.0),
-                  hintText: 'Şifrenizi giriniz',
-                  hintStyle: TextStyle(fontSize: 12),
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: const Icon(
-                    Icons.lock,
-                    color: Colors.blue,
-                    size: 18,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: height / 60,
-                left: width / 10,
-                right: width / 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 15.0, bottom: 0.0, top: 0.0),
-                  hintText: 'Şifrenizi onaylayınız',
-                  hintStyle: TextStyle(fontSize: 12),
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: const Icon(
-                    Icons.lock,
-                    color: Colors.blue,
-                    size: 18,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: width - (width / 5),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RegisterScreen(),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                  child: Form(
+                    key: globalKeyForm,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: SizedBox(
+                            width: 200,
+                            height: 100,
+                            child: Image.asset("assets/logo.png"),
+                          ),
+                        ),
+                        new TextFormField(
+                          keyboardType: TextInputType.name,
+                          onSaved: (input) => requestModal.name = input,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 15.0),
+                            hintText: 'Adınızı giriniz',
+                            hintStyle: TextStyle(fontSize: 12),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person_rounded,
+                              color: Colors.blue,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        new TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (input) => !input!.contains('@')
+                              ? "Geçerli bir adres girinikz!"
+                              : null,
+                          onSaved: (input) => requestModal.email = input,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 15.0),
+                            hintText: 'E-posta adresiniz giriniz',
+                            hintStyle: TextStyle(fontSize: 12),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.mail_outline,
+                              color: Colors.blue,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        new TextFormField(
+                            keyboardType: TextInputType.visiblePassword,
+                            onSaved: (input) => requestModal.password = input,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 15.0),
+                              hintText: 'Şifrenizi Giriniz',
+                              hintStyle: TextStyle(fontSize: 12),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: Colors.blue,
+                                size: 18,
+                              ),
+                            )),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              register();
+                            },
+                            child: Text('Giriş yap')),
+                        Padding(
+                          padding: EdgeInsets.only(top: 40),
+                          child: Text("Zaten bir hesabınız var mı?"),
+                        ),
+                        TextButton(
+                          child: Text(
+                            'Hemen Oturum Aç',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreenPage(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Text('Kayıt Ol'),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: height / 20),
-              child: Text("Zaten bir hesabınız var mı?"),
-            ),
-            TextButton(
-              child: Text(
-                'Hemen Oturum Aç',
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        )));
+          ),
+        ));
+  }
+
+  Future<void> register() async {
+    final form = globalKeyForm.currentState;
+    if (form!.validate()) {
+      setState(() {
+        isApiCallProgress = true;
+      });
+      form.save();
+      userRegister(requestModal, context);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        setState(() {
+          isApiCallProgress = false;
+        });
+      });
+    }
   }
 }

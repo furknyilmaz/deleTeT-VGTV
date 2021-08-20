@@ -40,3 +40,36 @@ class LoginRequestModal {
     return map;
   }
 }
+
+class RegisterRequestModal {
+  String? name;
+  String? email;
+  String? password;
+
+  RegisterRequestModal({this.name, this.email, this.password});
+
+  Map<String, dynamic>? toJson() {
+    Map<String, dynamic> map = {
+      'name': name?.trim(),
+      'email': email?.trim(),
+      'password': password?.trim(),
+    };
+    return map;
+  }
+}
+
+class RegisterResponseModal {
+  String? name;
+  String? email;
+  String? password;
+
+  RegisterResponseModal({this.name, this.email, this.password});
+
+  factory RegisterResponseModal.fromJson(Map<String, dynamic> json) {
+    return RegisterResponseModal(
+      name: json['name'] as String,
+      email: json['email'] as String,
+      password: json['password'] as String,
+    );
+  }
+}

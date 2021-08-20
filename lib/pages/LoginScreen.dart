@@ -1,10 +1,8 @@
-import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/pages/RegisterScreen.dart';
-import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
+import 'package:deletedvgtv/utils/userLogin.dart';
+import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 class LoginScreenPage extends StatefulWidget {
   const LoginScreenPage({Key? key}) : super(key: key);
@@ -15,19 +13,32 @@ class LoginScreenPage extends StatefulWidget {
 
 class _LoginScreenPAgeState extends State<LoginScreenPage> {
   final scoffoldKey = GlobalKey<ScaffoldState>();
+  final programssKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalKeyForm = new GlobalKey<FormState>();
 
   late LoginRequestModal requestModal;
+  bool isApiCallProgress = false;
 
   @override
   void initState() {
     super.initState();
     requestModal = new LoginRequestModal();
-    print(requestModal);
+    print(requestModal.toJson());
   }
 
   @override
   Widget build(BuildContext context) {
+    return ProgressHUD(
+      key: programssKey,
+      child: _uiSteup(context),
+      inAsyncCall: isApiCallProgress,
+      opacity: 0.3,
+    );
+  }
+
+  @override
+  // ignore: override_on_non_overriding_member
+  Widget _uiSteup(BuildContext context) {
     return Scaffold(
         key: scoffoldKey,
         backgroundColor: Colors.white,
@@ -72,7 +83,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                                   BorderRadius.all(Radius.circular(5.0)),
                             ),
                             prefixIcon: const Icon(
-                              Icons.lock,
+                              Icons.mail_outline,
                               color: Colors.blue,
                               size: 18,
                             ),
@@ -106,7 +117,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                         ),
                         ElevatedButton(
                             onPressed: () {
-                              validateAndSave();
+                              login();
                             },
                             child: Text('Giriş yap')),
                         Padding(
@@ -139,41 +150,18 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
         ));
   }
 
-  Future<void> validateAndSave() async {
+  Future<void> login() async {
     final form = globalKeyForm.currentState;
-
     if (form!.validate()) {
+      setState(() {
+        isApiCallProgress = true;
+      });
       form.save();
-      APIServices apiServices = new APIServices();
-      apiServices.login(requestModal).then((response) async {
-        print(response.statusCode);
-        if (response.statusCode == 200) {
-          var data = LoginResponseModal.fromJson(json.decode(response.body));
-
-          var sp = await SharedPreferences.getInstance();
-          sp.setString("user_id", data.id.toString());
-          sp.setString("user_email", data.email.toString());
-          sp.setString("name", data.name.toString());
-
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BottomMenu(),
-            ),
-          );
-        } else {
-          final snackBar = SnackBar(
-            content: Text(
-                'Kullanıcı adı veya şifreyi hatalı girdiniz. Lütfen kontrol ediniz.'),
-            action: SnackBarAction(
-              label: 'Tamam',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
+      userLogin(requestModal, context);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        setState(() {
+          isApiCallProgress = false;
+        });
       });
     }
   }
