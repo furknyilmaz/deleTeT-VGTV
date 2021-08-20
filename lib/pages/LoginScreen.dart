@@ -18,6 +18,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
 
   late LoginRequestModal requestModal;
   bool isApiCallProgress = false;
+  bool isSwitched = false;
 
   @override
   void initState() {
@@ -61,21 +62,32 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                         Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
-                            width: 200,
+                            width: 280,
                             height: 100,
                             child: Image.asset("assets/logo.png"),
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: SelectRoleButton(),
+                        ),
                         new TextFormField(
+                          style: TextStyle(fontSize: 12),
                           keyboardType: TextInputType.emailAddress,
                           validator: (input) => !input!.contains('@')
-                              ? "Geçerli bir adres girinikz!"
+                              ? "Geçerli bir adres giriniz!"
                               : null,
                           onSaved: (input) => requestModal.email = input,
                           decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: (BorderSide(
+                                color: Colors.green,
+                              )),
+                            ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresiniz giriniz',
                             hintStyle: TextStyle(fontSize: 12),
+                            errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -84,7 +96,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             ),
                             prefixIcon: const Icon(
                               Icons.mail_outline,
-                              color: Colors.blue,
+                              color: Colors.green,
                               size: 18,
                             ),
                           ),
@@ -96,19 +108,27 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             keyboardType: TextInputType.visiblePassword,
                             onSaved: (input) => requestModal.password = input,
                             obscureText: true,
+                            style: TextStyle(fontSize: 12),
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: (BorderSide(
+                                  color: Colors.green,
+                                )),
+                              ),
                               contentPadding: EdgeInsets.only(left: 15.0),
                               hintText: 'Şifrenizi Giriniz',
                               hintStyle: TextStyle(fontSize: 12),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.green, width: 5.0),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
+                                    BorderRadius.all(Radius.circular(3.0)),
                               ),
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                color: Colors.blue,
+                                color: Colors.green,
                                 size: 18,
                               ),
                             )),
@@ -116,22 +136,21 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                           height: 30,
                         ),
                         ElevatedButton(
-                            onPressed: () {
-                              login();
-                            },
-                            child: Text('Giriş yap')),
+                          style: TextButton.styleFrom(
+                              primary: Colors.black,
+                              backgroundColor: Colors.grey.shade300,
+                              fixedSize: Size(350, 35)),
+                          onPressed: () {
+                            login();
+                          },
+                          child: Text('Giriş yap'),
+                        ),
                         Padding(
                           padding: EdgeInsets.only(top: 40),
-                          child: Text("Zaten bir hesabınız var mı?"),
+                          child: Text("Henüz hesap oluşturmadın mı?"),
                         ),
-                        TextButton(
-                          child: Text(
-                            'Hemen Oturum Aç',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
+                        GestureDetector(
+                          onTap: () {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -139,6 +158,15 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                               ),
                             );
                           },
+                          child: Padding(
+                            padding: EdgeInsets.all(3),
+                            child: Text(
+                              'Hemen Kayıt Ol',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -164,5 +192,83 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
         });
       });
     }
+  }
+}
+
+bool role = false;
+
+class SelectRoleButton extends StatefulWidget {
+  const SelectRoleButton({Key? key}) : super(key: key);
+
+  @override
+  _SelectRoleButtonState createState() => _SelectRoleButtonState();
+}
+
+class _SelectRoleButtonState extends State<SelectRoleButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                role = true;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.green),
+                color: role ? Colors.green : Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    bottomLeft: Radius.circular(5)),
+              ),
+              width: 120,
+              height: 35,
+              child: Text(
+                'Kurumsal',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: role ? Colors.white : Colors.grey.shade800,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                role = false;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.green),
+                color: !role ? Colors.green : Colors.white,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    bottomRight: Radius.circular(5)),
+              ),
+              width: 120,
+              height: 35,
+              child: Text(
+                'Bireysel',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: !role ? Colors.white : Colors.grey.shade800,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
