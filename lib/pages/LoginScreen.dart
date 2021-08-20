@@ -72,7 +72,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                           child: SelectRoleButton(),
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 16),
                           keyboardType: TextInputType.emailAddress,
                           validator: (input) => !input!.contains('@')
                               ? "Geçerli bir adres giriniz!"
@@ -83,6 +83,10 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                               borderSide: (BorderSide(
                                 color: Colors.green,
                               )),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 0.5),
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresiniz giriniz',
@@ -108,14 +112,18 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             keyboardType: TextInputType.visiblePassword,
                             onSaved: (input) => requestModal.password = input,
                             obscureText: true,
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 16),
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
                                 borderSide: (BorderSide(
                                   color: Colors.green,
                                 )),
                               ),
-                              contentPadding: EdgeInsets.only(left: 15.0),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 0.5),
+                              ),
+                              contentPadding: EdgeInsets.only(left: 5.0),
                               hintText: 'Şifrenizi Giriniz',
                               hintStyle: TextStyle(fontSize: 12),
                               filled: true,
@@ -225,8 +233,8 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 border: Border.all(width: 0.5, color: Colors.green),
                 color: role ? Colors.green : Colors.white,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    bottomLeft: Radius.circular(5)),
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10)),
               ),
               width: 120,
               height: 35,
@@ -252,8 +260,8 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 border: Border.all(width: 0.5, color: Colors.green),
                 color: !role ? Colors.green : Colors.white,
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(5),
-                    bottomRight: Radius.circular(5)),
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
               ),
               width: 120,
               height: 35,

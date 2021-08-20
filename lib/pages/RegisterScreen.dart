@@ -81,6 +81,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                 color: Colors.green,
                               )),
                             ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 0.5),
+                            ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'Lütfen adınızı giriniz',
                             hintStyle: TextStyle(fontSize: 12),
@@ -114,6 +118,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                 color: Colors.green,
                               )),
                             ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 0.5),
+                            ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresinizi giriniz',
                             hintStyle: TextStyle(fontSize: 12),
@@ -144,6 +152,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                               borderSide: (BorderSide(
                                 color: Colors.green,
                               )),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 0.5),
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText:
@@ -287,8 +299,8 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 border: Border.all(width: 0.5, color: Colors.green),
                 color: role ? Colors.green : Colors.white,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    bottomLeft: Radius.circular(5)),
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10)),
               ),
               width: 120,
               height: 35,
@@ -314,8 +326,8 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 border: Border.all(width: 0.5, color: Colors.green),
                 color: !role ? Colors.green : Colors.white,
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(5),
-                    bottomRight: Radius.circular(5)),
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
               ),
               width: 120,
               height: 35,
