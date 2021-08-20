@@ -6,14 +6,14 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> entries = <String>[
-      'IDEF21 Uluslararası Savunma Sanayi Fuarında yerlerimizi aldık.',
-      'ROBOTİK 2021 İnsansız Su Üstü Araçları Protatip Yarışması başvuruları başladı',
       'Kabi Partners Bilişim Teknoljilerinin iş ve staj ilanları artık vizyonergenc.com da',
+      'ROBOTİK 2021 İnsansız Su Üstü Araçları Protatip Yarışması başvuruları başladı',
+      'IDEF21 Uluslararası Savunma Sanayi Fuarında yerlerimizi aldık.',
     ];
     final List<String> imageUri = <String>[
-      "https://vizyonergenc.com/storage/posts/586576/yatay%20%289%29.png",
+      "https://vizyonergenc.com/storage/posts/586441/Yatay.jpg",
       "https://vizyonergenc.com/storage/posts/586561/yatay%20%288%29.png",
-      "https://vizyonergenc.com/storage/posts/586441/Yatay.jpg"
+      "https://vizyonergenc.com/storage/posts/586576/yatay%20%289%29.png",
     ];
 
     final List<String> date = <String>["7", "8", "12"];

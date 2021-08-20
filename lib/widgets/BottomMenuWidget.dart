@@ -4,7 +4,6 @@ import 'package:deletedvgtv/pages/ApplicationScreen.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/pages/ProfileScreen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +15,7 @@ class BottomMenu extends StatefulWidget {
 /// This is the private State class that goes with BottomMenu.
 class _BottomMenuState extends State<BottomMenu> {
   int _selectedIndex = 2;
+  String name = 'İsim Soyisim';
 
   // ignore: unused_field
   static const TextStyle optionStyle =
@@ -27,7 +27,6 @@ class _BottomMenuState extends State<BottomMenu> {
     AdvertScreen(),
     CompanyScreen()
   ];
-  //CompanyScreen()
 
   void _onItemTapped(int index) {
     setState(() {
@@ -38,6 +37,8 @@ class _BottomMenuState extends State<BottomMenu> {
   Future<void> logOut() async {
     var sp = await SharedPreferences.getInstance();
     sp.remove("user_id");
+    sp.remove("user_email");
+    sp.remove("name");
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -76,7 +77,7 @@ class _BottomMenuState extends State<BottomMenu> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'İsim Soyisim',
+                              name,
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(

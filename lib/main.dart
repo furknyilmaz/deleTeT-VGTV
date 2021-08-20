@@ -11,6 +11,8 @@ var tfPassword = TextEditingController();
 
 class MyApp extends StatelessWidget {
   // ignore: non_constant_identifier_names
+
+  // ignore: non_constant_identifier_names
   Future<bool> Control() async {
     var sp = await SharedPreferences.getInstance();
     String? username = sp.getString("user_id");
