@@ -1,11 +1,8 @@
 import 'package:deletedvgtv/pages/LoginScreen.dart';
-import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/models/login_model.dart';
-import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
+import 'package:deletedvgtv/utils/userRegister.dart';
 import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -83,11 +80,14 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   BorderRadius.all(Radius.circular(5.0)),
                             ),
                             prefixIcon: const Icon(
-                              Icons.lock,
+                              Icons.person_rounded,
                               color: Colors.blue,
                               size: 18,
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         new TextFormField(
                           keyboardType: TextInputType.emailAddress,
@@ -106,7 +106,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   BorderRadius.all(Radius.circular(5.0)),
                             ),
                             prefixIcon: const Icon(
-                              Icons.lock,
+                              Icons.mail_outline,
                               color: Colors.blue,
                               size: 18,
                             ),
@@ -175,53 +175,16 @@ class _RegisterPageeState extends State<RegisterScreen> {
 
   Future<void> register() async {
     final form = globalKeyForm.currentState;
-
     if (form!.validate()) {
       setState(() {
         isApiCallProgress = true;
       });
       form.save();
-
-      APIServices apiServices = new APIServices();
-      apiServices
-          .register(
-        requestModal,
-        'https://dgsbilgim.com/api/register',
-      )
-          .then((response) async {
-        print('ResponseCode: ' + response.statusCode.toString());
-        if (response.statusCode == 200) {
-          var data = RegisterResponseModal.fromJson(json.decode(response.body));
-          var sp = await SharedPreferences.getInstance();
-          sp.setString("name", data.name.toString());
-          sp.setString("user_email", data.email.toString());
-          setState(() {
-            isApiCallProgress = false;
-          });
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BottomMenu(),
-            ),
-          );
-        } else {
-          setState(() {
-            isApiCallProgress = false;
-          });
-          final snackBar = SnackBar(
-            backgroundColor: Color(0xffE63946),
-            content: Text(
-                'Kullanıcı adı veya şifreyi hatalı girdiniz. Lütfen kontrol ediniz.'),
-            action: SnackBarAction(
-              textColor: Color(0xffffffff),
-              label: 'Tamam',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
+      userRegister(requestModal, context);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        setState(() {
+          isApiCallProgress = false;
+        });
       });
     }
   }
