@@ -2,26 +2,26 @@ class LoginResponseModal {
   int? id;
   String? name;
   String? email;
-  String? email_verified_at;
-  String? created_at;
-  String? updated_at;
+  String? emailVerifiedAt;
+  String? createdAt;
+  String? updatedAt;
 
-  LoginResponseModal(
-      {this.id,
-      this.name,
-      this.email,
-      this.email_verified_at,
-      this.created_at,
-      this.updated_at});
+  LoginResponseModal({
+    this.id,
+    this.name,
+    this.email,
+    this.emailVerifiedAt,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   factory LoginResponseModal.fromJson(Map<String, dynamic> json) {
     return LoginResponseModal(
       id: json['id'] as int,
       name: json['name'] as String,
-      email: json['emai'] as String,
-      email_verified_at: json['email_verified_at'] as String,
-      created_at: json['created_at'] as String,
-      updated_at: json['updated_at'] as String,
+      email: json['email'] as String,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
     );
   }
 }

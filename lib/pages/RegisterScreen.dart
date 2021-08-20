@@ -122,7 +122,7 @@ class RegisterScreen extends StatelessWidget {
                     TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => MyApp(),
