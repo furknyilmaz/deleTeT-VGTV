@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,34 +32,59 @@ class _CompanyScreenState extends State<CompanyScreen> {
     return Scaffold(
         body: ListView.builder(
             padding: const EdgeInsets.all(0),
-            itemCount: 8,
+            itemCount: data.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 30.0, vertical: 10.0),
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                  right: 20,
+                  bottom: 0,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    index % 2 == 0
-                        ? Row(
-                            children: [
-                              Image.network(
-                                data[index]['photo'],
-                                width: (width / 2) - 40,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Image.network(
-                                data[index + 1]['photo'],
-                                width: (width / 2) - 40,
-                              ),
-                            ],
-                          )
-                        : SizedBox(
-                            height: 1,
-                          )
+                    if (index % 2 == 0)
+                      Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  width: 1, color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.network(
+                              data[index]['photo'],
+                              fit: BoxFit.scaleDown,
+                              width: (width / 2) - 35,
+                              height: (width / 2) - 60,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  width: 1, color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.network(
+                              data[index + 1]['photo'],
+                              fit: BoxFit.fitWidth,
+                              width: (width / 2) - 35,
+                              height: (width / 2) - 60,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      SizedBox(
+                        height: 0,
+                      )
                   ],
                 ),
               );
