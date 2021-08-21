@@ -3,6 +3,7 @@ import 'package:deletedvgtv/pages/AdvertsScreen.dart';
 import 'package:deletedvgtv/pages/ApplicationScreen.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
+import 'package:deletedvgtv/pages/InterviewListScreen.dart';
 import 'package:deletedvgtv/pages/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,9 +23,9 @@ class _BottomMenuState extends State<BottomMenu> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     ProfileScreen("Hello World", "dec"),
-    ApplicationScreen(),
-    HomePageScreen(),
     AdvertScreen(),
+    HomePageScreen(),
+    ApplicationScreen(),
     CompanyScreen()
   ];
 
@@ -133,6 +134,23 @@ class _BottomMenuState extends State<BottomMenu> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout_outlined),
+                        GestureDetector(
+                          onTap: () {
+                            logOut();
+                          },
+                          child: Text(
+                            'Çıkış yap',
+                            style: TextStyle(fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -141,19 +159,28 @@ class _BottomMenuState extends State<BottomMenu> {
       ),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
-        title: const Text('DELETET AKADEMİ'),
+        centerTitle: true,
+        title: const Text(
+          'deletet Akademi',
+          style: TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.w500),
+        ),
         actions: [
           IconButton(
             onPressed: () {
-              logOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InterviewListScreen(),
+                ),
+              );
             },
             icon: Icon(
-              Icons.logout_outlined,
+              Icons.record_voice_over,
               size: 24,
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.symmetric(horizontal: 4),
           ),
         ],
       ),
@@ -173,7 +200,7 @@ class _BottomMenuState extends State<BottomMenu> {
             icon: Icon(
               Icons.article_outlined,
             ),
-            label: 'Başvurular',
+            label: 'İlanlar',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -187,14 +214,14 @@ class _BottomMenuState extends State<BottomMenu> {
               Icons.fact_check_outlined,
               size: 28.0,
             ),
-            label: 'İlanlar',
+            label: 'Başvurular',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.business_outlined,
               size: 28.0,
             ),
-            label: 'Mülakat',
+            label: 'Firmalar',
           ),
         ],
         currentIndex: _selectedIndex,

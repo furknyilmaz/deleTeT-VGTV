@@ -10,19 +10,19 @@ class ApplicationScreen extends StatelessWidget {
     final double width = screen.size.width;
 
     final List<String> imageUri = <String>[
-      "https://vizyonergenc.com/company/aselsan.png",
-      "https://vizyonergenc.com/company/akgun.png",
-      "https://vizyonergenc.com/company/icc-dijital-endustriyel-teknolojiler-ltd-sti.png",
-      "https://vizyonergenc.com/company/intelprobe-savunma-teknolojileri-as.jpeg",
-      "https://vizyonergenc.com/company/yonga-teknoloji-mikroelektronik-arge.jpeg",
+      "https://vizyonergenc.com/company/crs-soft.png",
+      "https://vizyonergenc.com/company/ssb.png",
+      "https://vizyonergenc.com/company/pavotek-pavo-tasarim-uretim-elektronik-tic-as.jpeg",
+      "https://vizyonergenc.com/company/selvi-technology.png",
+      "https://vizyonergenc.com/company/fnss.png",
     ];
 
     final List<String> companyName = <String>[
-      "Aselsan A.Ş",
-      "Akgün Yazılım",
-      "ICC Endustiriyel Ürünler",
-      "INTER PROBE",
-      "Yonga Teknoloji Mikroelektirik A.Ş",
+      "Yazılım Mühendisi (Tam Zamanlı)",
+      "ROBOİK 2021",
+      "Rf Hardware Engineer (Tam Zamanlı)",
+      "Yazılım Geliştirme Takım Lideri",
+      "Ürün Destek Yetkilisi",
     ];
 
     final List<String> program = <String>[
@@ -34,14 +34,14 @@ class ApplicationScreen extends StatelessWidget {
     ];
 
     final List<String> applicationDetails = <String>[
-      "Türk Silahlı Kuvvetleri'nin haberleşme ihtiyaçlarının milli imkanlarla karşılanması için 1975 yılında kurulan ASELSAN; Türk Silahlı Kuvvetlerini Güçlendirme Vakfı'na (TSKGV) bağlı bir anonim şirkettir. ",
-      "AKGÜN Yazılım, 1986’dan bu güne kadar kendi iç kaynakları ile geliştirdiği %100 yerli üretim olan ürünleri ve sağlık sektöründe %20'lik pazar payı ile sektöre yön vermektedir. ",
-      "ICC endüstriyel uygulamalar için gereken Endüstriyel Bilgisayar Endüstriyel Haberleşme Ürünleri​ ve Scada Yazılımları ürünlerini satışı yapmaktadır.",
-      "InterProbe, 'Yeni Nesil Savunma Teknolojileri', 'Siber Tehdit İstihbaratı' ve 'Siber Güvenlik' çözümlerinde uzmanlaşmış bir Türk şirketidir. InterProbe, yüksek teknolojiye dayalı...",
-      "Yonga Teknoloji Mikroelektronik ArGe, ASIC (Uygulamaya Yönelik Tümdevre)/FPGA (Programlanabilir Kapı Dizisi) ve SoC (Yonga Üzeri Sistem) tasarımı ve doğrulaması "
+      "Üniversitelerin Bilgisayar Mühendisliği ve benzeri bölümlerinin birinden mezunum, C#, Java, JavaScript dillerinden herhangi birini biliyorum...",
+      "Yarışmaya takım adına sadece Takım Lideri başvuruda bulunabilecektir. Yarışmaya takım olarak katılmak zorunludur.  Her takım en az dört (4) en fazla on (10) kişi ve bir (1) danışmandan oluşmalıdır...",
+      "Experience in one or more of the following: Wi-Fi, Bluetooth, 2G/3G/4G Cellular systems, GPS, or similar wireless technologies...",
+      "Bilgisayar mühendisliğinden lisans (tercihen yüksek lisans) dereceli olmak, Yazılım tasarımı ve geliştirmede +3 yıl deneyim...",
+      "Üniversitelerin 2 yıllık bölümlerinden mezun (Mekatronik, Otomotiv, Elektrik-Elektronik),Otomotiv veya iş makinaları satış sonrası hizmetlerde en az 2 yıl tecrübe sahibi...",
     ];
 
-    final List<String> statusState = <String>["1", "2", "3", "4", "1"];
+    final List<String> statusState = <String>["1", "2", "3", "4", "5"];
 
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
@@ -51,25 +51,21 @@ class ApplicationScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                          Border.all(width: 0.5, color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     margin:
                         EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
-                    color: Colors.white,
                     child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(
+                            top: 15, left: 10, right: 10, bottom: 0),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.more_horiz_outlined,
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
@@ -79,10 +75,10 @@ class ApplicationScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           border: Border.all(
-                                              width: 1,
+                                              width: 0.5,
                                               color: Colors.grey.shade300),
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(6),
                                           image: new DecorationImage(
                                               fit: BoxFit.fitWidth,
                                               image: new NetworkImage(
@@ -100,14 +96,16 @@ class ApplicationScreen extends StatelessWidget {
                                         companyName[index],
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                                            fontSize: 16,
+                                            fontFamily: 'Nunito'),
                                       ),
                                       Container(
                                         height: 5,
                                       ),
                                       Text(
                                         applicationDetails[index],
-                                        style: TextStyle(fontSize: 11),
+                                        style: TextStyle(
+                                            fontSize: 11, fontFamily: 'Nunito'),
                                       ),
                                     ],
                                   ),
@@ -134,8 +132,10 @@ class ApplicationScreen extends StatelessWidget {
                                           size: 16,
                                         ),
                                         Text(
-                                          "16 Ağustos 2021",
-                                          style: TextStyle(fontSize: 10),
+                                          " 16 Ağustos 2021",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily: 'Nunito'),
                                         ),
                                       ],
                                     ),
@@ -175,12 +175,14 @@ class Status extends StatelessWidget {
   Widget build(BuildContext context) {
     String title = "Başvuru beklemede   ";
     var color = const Color(0xffb74093);
+    var icon = const Icon(Icons.ac_unit);
 
     switch (status) {
       case "1":
         {
           title = "Başvurunuz alındı   ";
           color = const Color(0xffc1def8);
+          icon = const Icon(Icons.mark_email_read_outlined, size: 18);
         }
         break;
 
@@ -188,6 +190,7 @@ class Status extends StatelessWidget {
         {
           title = "İnceleniyor   ";
           color = const Color(0xfffcebba);
+          icon = const Icon(Icons.hourglass_bottom_outlined, size: 18);
         }
         break;
 
@@ -195,6 +198,7 @@ class Status extends StatelessWidget {
         {
           title = "Mülakata bekleniyor   ";
           color = const Color(0xffcee4cb);
+          icon = const Icon(Icons.task_alt_outlined, size: 18);
         }
         break;
 
@@ -202,6 +206,15 @@ class Status extends StatelessWidget {
         {
           title = "Olumsuz Sonuçlandı   ";
           color = const Color(0xfff7c7d3);
+          icon = const Icon(Icons.mood_bad_outlined, size: 18);
+        }
+        break;
+
+      case "5":
+        {
+          title = "Olumlu Sonuçlandı   ";
+          color = const Color(0xff57cc99);
+          icon = const Icon(Icons.verified_outlined, size: 18);
         }
         break;
 
@@ -213,6 +226,7 @@ class Status extends StatelessWidget {
     }
 
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.all(
@@ -221,17 +235,21 @@ class Status extends StatelessWidget {
       ),
       child: Row(
         children: [
+          icon,
           Text(
             title,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Nunito'),
             textAlign: TextAlign.center,
           ),
           Icon(
             Icons.arrow_forward_outlined,
+            size: 18,
           )
         ],
       ),
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     );
   }
 }

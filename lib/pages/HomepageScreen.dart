@@ -44,13 +44,17 @@ class HomePageScreen extends StatelessWidget {
                                   Text(
                                     "  Vizyoner Genç",
                                     textAlign: TextAlign.start,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Nunito'),
                                   ),
                                   Text(
                                     '  ${date[index]} saat önce',
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Nunito',
+                                    ),
                                   ),
                                 ],
                               )
@@ -59,7 +63,10 @@ class HomePageScreen extends StatelessWidget {
                           Container(
                             height: 20,
                           ),
-                          Text('${entries[index]}'),
+                          Text(
+                            '${entries[index]}',
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                           Container(
                             height: 20,
                           ),
