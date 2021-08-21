@@ -72,7 +72,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           child: SelectRoleButton(),
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Nunito',
+                          ),
                           validator: (input) => input!.length < 2
                               ? "Lütfen tam adınızı giriniz!"
                               : null,
@@ -90,7 +93,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'Lütfen adınızı giriniz',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Nunito',
+                            ),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
@@ -106,10 +112,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 12, fontFamily: 'Nunito'),
                           validator: (input) =>
                               input!.contains('@') && input.contains('.')
                                   ? null
@@ -128,8 +134,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresinizi giriniz',
-                            hintStyle: TextStyle(fontSize: 12),
-                            errorStyle: TextStyle(color: Colors.green),
+                            hintStyle:
+                                TextStyle(fontSize: 12, fontFamily: 'Nunito'),
+                            errorStyle: TextStyle(
+                                color: Colors.green, fontFamily: 'Nunito'),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -144,7 +152,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 12),
@@ -166,7 +174,8 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'Şifrenizi giriniz.',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle:
+                                TextStyle(fontSize: 12, fontFamily: 'Nunito'),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
@@ -199,13 +208,15 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   Text(
                                     ' Kullanıcı sözleşmesinini',
                                     style: TextStyle(
+                                        fontFamily: 'Nunito',
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black54),
                                   ),
                                   Text(
                                     ' kabul ediyorum',
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(
+                                        fontSize: 12, fontFamily: 'Nunito'),
                                   )
                                 ],
                               )
@@ -223,11 +234,17 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           onPressed: () {
                             register();
                           },
-                          child: Text('Giriş yap'),
+                          child: Text(
+                            'Giriş yap',
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 40),
-                          child: Text("Zaten bir hesabınız var mı?"),
+                          child: Text(
+                            "Zaten bir hesabınız var mı?",
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -243,6 +260,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             child: Text(
                               'Hemen Oturum Aç',
                               style: TextStyle(
+                                  fontFamily: 'Nunito',
                                   color: Colors.green,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -330,6 +348,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Kurumsal',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),
@@ -357,6 +376,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Bireysel',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: !role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),

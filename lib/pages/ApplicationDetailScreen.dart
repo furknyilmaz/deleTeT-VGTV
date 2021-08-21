@@ -100,8 +100,8 @@ class ApplicationDetailScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: 120.0,
-                          height: 120.0,
+                          width: 150.0,
+                          height: 150.0,
                           child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(75),
@@ -121,6 +121,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
+                                fontFamily: 'Nunito',
                                 color: Colors.black),
                           ),
                         ),
@@ -132,6 +133,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16,
+                                fontFamily: 'Nunito',
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                           ),
@@ -144,6 +146,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 12,
+                                fontFamily: 'Nunito',
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                           ),
@@ -175,6 +178,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
+                                  fontFamily: 'Nunito',
                                   fontSize: 16,
                                 ),
                                 textAlign: TextAlign.center,
@@ -183,6 +187,9 @@ class ApplicationDetailScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Text(
                                   messageDescription,
+                                  style: TextStyle(
+                                    fontFamily: 'Nunito',
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -223,25 +230,40 @@ class InterviewButton extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.all(10),
-          child: Text('Mülakat Zamanı'),
+          child: Text(
+            'Mülakat Zamanı',
+            style: TextStyle(
+              fontFamily: 'Nunito',
+            ),
+          ),
         ),
         Text(
           '23 Ağustos 2021 Pazartesi',
           style: TextStyle(
             fontWeight: FontWeight.w600,
+            fontFamily: 'Nunito',
             fontSize: 16,
           ),
         ),
         Text(
           'Saat: 10.30',
-          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            fontFamily: 'Nunito',
+          ),
         ),
         ElevatedButton(
           onLongPress: () {
             print('selam');
           },
           onPressed: () {},
-          child: Text("Mülakata Katıl"),
+          child: Text(
+            "Mülakata Katıl",
+            style: TextStyle(
+              fontFamily: 'Nunito',
+            ),
+          ),
         ),
       ],
     );

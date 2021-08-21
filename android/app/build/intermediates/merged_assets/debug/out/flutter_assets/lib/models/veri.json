@@ -2,10 +2,35 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://vizyonergenc.com/company/afyon-usak-zafer-teknoloji-gelistirme-bolgesi-yonetici-as.png",
+          "https://vizyonergenc.com/company/havelsanlogo.png",
       "title": "Ayasofya",
       "content":
           "Ayasofya İstanbul Tarihi Yarımadada yer alan tarihi 300'lü yıllara dayanan harika bir eserdir.",
+      "comments": [
+        {"comment": "Çok güzel bir yer"},
+        {"comment": "Mükemmel bir yer"}
+      ]
+    },
+    {
+      "date": "7/11/2020",
+      "photo":
+          "https://vizyonergenc.com/company/aselsan.png",
+      "title": "Kapadokya",
+      "content":
+          "Doğanın yer yüzündeki izlerine tanık olmak her yıl dünyanın dört bir yanından gelen ziyaretçileri ağırlayan Kapadokya, Nevşehir sınırlarında yer alıyor. Yer altı şehirleri, peri bacaları, şarap atölyeleri, kaya otelleri ve balon turlarıyla Kapadokya dünyanın en özgün yerlerinden.",
+      "comments": [
+        {"comment": "Çok güzel bir yer"},
+        {"comment": "Mükemmel bir yer"}
+      ]
+    },
+   
+    {
+      "date": "7/11/2020",
+      "photo":
+          "https://vizyonergenc.com/company/tai.png",
+      "title": "Efes Antik Kenti",
+      "content":
+          "İzmir’in UNESCO Dünya Mirası Listesi’ndeki turistik çekim merkezi Efes Antik Kenti, İyonya’nın 12 şehri arasında yer alıyor. İzmir, Selçuk’ta bulunan antik kent, farklı medeniyetlerin izlerini taşıyan MÖ 6 binli yıllara uzanan geçmişe sahip. Efes Antik Kenti’nde Celcus Kütüphanesi, Artemis Tapınağı, Yedi Uyurlar Mağarası ve Meryemana Evi görülmeye değer.",
       "comments": [
         {"comment": "Çok güzel bir yer"},
         {"comment": "Mükemmel bir yer"}
@@ -26,30 +51,6 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://vizyonergenc.com/company/akdi-muhendislik.png",
-      "title": "Efes Antik Kenti",
-      "content":
-          "İzmir’in UNESCO Dünya Mirası Listesi’ndeki turistik çekim merkezi Efes Antik Kenti, İyonya’nın 12 şehri arasında yer alıyor. İzmir, Selçuk’ta bulunan antik kent, farklı medeniyetlerin izlerini taşıyan MÖ 6 binli yıllara uzanan geçmişe sahip. Efes Antik Kenti’nde Celcus Kütüphanesi, Artemis Tapınağı, Yedi Uyurlar Mağarası ve Meryemana Evi görülmeye değer.",
-      "comments": [
-        {"comment": "Çok güzel bir yer"},
-        {"comment": "Mükemmel bir yer"}
-      ]
-    },
-    {
-      "date": "7/11/2020",
-      "photo":
-          "https://vizyonergenc.com/company/aselsan.png",
-      "title": "Kapadokya",
-      "content":
-          "Doğanın yer yüzündeki izlerine tanık olmak her yıl dünyanın dört bir yanından gelen ziyaretçileri ağırlayan Kapadokya, Nevşehir sınırlarında yer alıyor. Yer altı şehirleri, peri bacaları, şarap atölyeleri, kaya otelleri ve balon turlarıyla Kapadokya dünyanın en özgün yerlerinden.",
-      "comments": [
-        {"comment": "Çok güzel bir yer"},
-        {"comment": "Mükemmel bir yer"}
-      ]
-    },
-    {
-      "date": "7/11/2020",
-      "photo":
           "https://vizyonergenc.com/company/asis.png",
       "title": "Sümela Manastırı",
       "content":
@@ -62,10 +63,10 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://res.cloudinary.com/turna/image/upload/f_auto,q_auto/v1537892284/Safranbolu_kpjouc.jpg",
-      "title": "Safranbolu",
+          "https://vizyonergenc.com/company/c-tech-bilisim-teknolojileri-san-ve-tic-as.png",
+      "title": "Sümela Manastırı",
       "content":
-          "Batı Karadeniz’in turizm cenneti Safranbolu, benzerlerini Arnavutluk Berat, Makedonya Ohrid, Beypazarı, Göynük gibi yerlerde görebileceğiniz tarihi Osmanlı evleriyle UNESCO Dünya Mirası Listesi’nde. 3 bin yıla uzanan tarihi geçmişi ile bölgenin en eski yerleşim yerlerinden olan Safranbolu’nun adı safran bitkisinden geliyor. Kültür turizmiyle öne çıkan ilçe Karabük’e bağlı.",
+          "Rum Ortodoks manastırı ve kilise kompleksinden oluşan Sümela Manastırı, Trabzon’un Maçka ilçesinde, sarp bir tepede yer alıyor. Kapadokya’da da örnekleri görülen Hristiyanlığın ilk dönemindeki kilise mimarisi anlayışla inşa edilen Sümela, deniz seviyesinden bin 150 metre yükseklikte. Duvarlarındaki freskler ve figürleriyle ziyaretçilerini büyüleyen manastırda yılda bir kez ayin yapılıyor.",
       "comments": [
         {"comment": "Çok güzel bir yer"},
         {"comment": "Mükemmel bir yer"}
@@ -74,10 +75,10 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://res.cloudinary.com/turna/image/upload/f_auto,q_auto/v1537892283/Nemrut-Dagi_jfjooh.jpg",
-      "title": "Nemrut Dağı",
+          "https://vizyonergenc.com/company/cey-savunma-ve-simulasyon-sistemleri.png",
+      "title": "Sümela Manastırı",
       "content":
-          "Gün doğumu manzarasıyla ünlü Nemrut Dağı, Adıyaman il sınırlarında. GAP turlarının rotasında yer alan Nemrut Dağı, Kommagene Kralı Antiochos’un mezarı, Yunan ve Pers tanrıların heykelleriyle birlikte Nemrut Dağı Milli Parkı’nı oluşturuyor. UNESCO Dünya Mirası Listesi’ne Türkiye’den giren en eski noktalardan biri olan Nemrut’ta ateş sunakları ve gün doğumu manzarası harika.",
+          "Rum Ortodoks manastırı ve kilise kompleksinden oluşan Sümela Manastırı, Trabzon’un Maçka ilçesinde, sarp bir tepede yer alıyor. Kapadokya’da da örnekleri görülen Hristiyanlığın ilk dönemindeki kilise mimarisi anlayışla inşa edilen Sümela, deniz seviyesinden bin 150 metre yükseklikte. Duvarlarındaki freskler ve figürleriyle ziyaretçilerini büyüleyen manastırda yılda bir kez ayin yapılıyor.",
       "comments": [
         {"comment": "Çok güzel bir yer"},
         {"comment": "Mükemmel bir yer"}
@@ -86,37 +87,14 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://res.cloudinary.com/turna/image/upload/f_auto,q_auto/v1537892282/Hattusas_mbfbsz.jpg",
-      "title": "Hattuşaş",
+          "https://vizyonergenc.com/company/tei.png",
+      "title": "Sümela Manastırı",
       "content":
-          "Hitilerin başkenti Hattuşaş, Çorum’un Boğazkale ilçesinde yer alan ve UNESCO Dünya Mirası Listesi’nin üyesi olan yerleşim yeri. Anadolu uygarlık tarihine tanık olmak için görülmesi gereken Hattuşaş’ta MÖ 3 binden bu yana yaşamın olduğu, 5 ayrı kültür katmanında keşfedilmiş. Siyasi, dini ve kültürel bir merkez konumunda olan Hattuşaş’taki birçok eser Ankara Anadolu Medeniyetleri Müzesi’nde sergileniyor.",
-      "comments": [
-        {"comment": "Çok güzel bir yer"},
-        {"comment": "Mükemmel bir yer"}
-      ]
-    },
-    {
-      "date": "7/11/2020",
-      "photo":
-          "https://res.cloudinary.com/turna/image/upload/f_auto,q_auto/v1537892283/Divrigi-Camii_t5md3x.jpg",
-      "title": "Divriği Ulu Camii",
-      "content":
-          "Divriği Ulu Cami ve Darüşşifası, UNESCO Dünya Mirası Listesi’ne Türkiye’den dahil olan ilk mimari yapı unvanına sahip. Sivas’ın en önemli turistik değeri olan cami ve darüşşifa, 1229 yılında Mengücekli Beyi Ahmed Şah tarafından yaptırılmış. Cami mimarlık tarihinin en özgün eserleri arasında dünyaca tanınan bir yapı.",
-      "comments": [
-        {"comment": "Çok güzel bir yer"},
-        {"comment": "Mükemmel bir yer"}
-      ]
-    },
-    {
-      "date": "7/11/2020",
-      "photo":
-          "https://blog.obilet.com/wp-content/uploads/2019/06/shutterstock_1322180021.webp",
-      "title": "Ağrı Dağı",
-      "content":
-          "5137 metreyle Türkiye’nin en yüksek dağı olan Ağrı Dağı, Nuh’un gemisi efsanesinde de yer alıyor.",
+          "Rum Ortodoks manastırı ve kilise kompleksinden oluşan Sümela Manastırı, Trabzon’un Maçka ilçesinde, sarp bir tepede yer alıyor. Kapadokya’da da örnekleri görülen Hristiyanlığın ilk dönemindeki kilise mimarisi anlayışla inşa edilen Sümela, deniz seviyesinden bin 150 metre yükseklikte. Duvarlarındaki freskler ve figürleriyle ziyaretçilerini büyüleyen manastırda yılda bir kez ayin yapılıyor.",
       "comments": [
         {"comment": "Çok güzel bir yer"},
         {"comment": "Mükemmel bir yer"}
       ]
     }
+    
   ]

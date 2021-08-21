@@ -51,25 +51,21 @@ class ApplicationScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                          Border.all(width: 0.5, color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     margin:
                         EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
-                    color: Colors.white,
                     child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(
+                            top: 15, left: 10, right: 10, bottom: 0),
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.more_horiz_outlined,
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
@@ -79,10 +75,10 @@ class ApplicationScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           border: Border.all(
-                                              width: 1,
+                                              width: 0.5,
                                               color: Colors.grey.shade300),
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(6),
                                           image: new DecorationImage(
                                               fit: BoxFit.fitWidth,
                                               image: new NetworkImage(
@@ -100,14 +96,16 @@ class ApplicationScreen extends StatelessWidget {
                                         companyName[index],
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                            fontSize: 16,
+                                            fontFamily: 'Nunito'),
                                       ),
                                       Container(
                                         height: 5,
                                       ),
                                       Text(
                                         applicationDetails[index],
-                                        style: TextStyle(fontSize: 11),
+                                        style: TextStyle(
+                                            fontSize: 11, fontFamily: 'Nunito'),
                                       ),
                                     ],
                                   ),
@@ -135,7 +133,9 @@ class ApplicationScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           " 16 Ağustos 2021",
-                                          style: TextStyle(fontSize: 12),
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily: 'Nunito'),
                                         ),
                                       ],
                                     ),
@@ -226,6 +226,7 @@ class Status extends StatelessWidget {
     }
 
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.all(
@@ -237,7 +238,10 @@ class Status extends StatelessWidget {
           icon,
           Text(
             title,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Nunito'),
             textAlign: TextAlign.center,
           ),
           Icon(
@@ -246,7 +250,6 @@ class Status extends StatelessWidget {
           )
         ],
       ),
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     );
   }
 }

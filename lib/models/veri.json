@@ -14,18 +14,6 @@
     {
       "date": "7/11/2020",
       "photo":
-          "https://vizyonergenc.com/company/aerotim.png",
-      "title": "Pamukkale",
-      "content":
-          "Hierapolis Antik Kenti ile birlikte aynı bölge içerisinde yer alan Pamukkale, UNESCO Dünya Mirası Listesi’nde yer alan tarihi ve doğal güzelliklerimizden. Ülkemizin en tanınmış doğal güzelliklerinden biri olan Pamukkale Travertenleri ile Antik Havuz, kaynak sularının kirecinden oluşan yüksek bir tepede yer alıyor. Onlarca kilometre öteden bile kendini gösteren bembeyaz Pamukkale, Denizli’de.",
-      "comments": [
-        {"comment": "Çok güzel bir yer"},
-        {"comment": "Mükemmel bir yer"}
-      ]
-    },
-    {
-      "date": "7/11/2020",
-      "photo":
           "https://vizyonergenc.com/company/tai.png",
       "title": "Efes Antik Kenti",
       "content":
@@ -42,6 +30,18 @@
       "title": "Kapadokya",
       "content":
           "Doğanın yer yüzündeki izlerine tanık olmak her yıl dünyanın dört bir yanından gelen ziyaretçileri ağırlayan Kapadokya, Nevşehir sınırlarında yer alıyor. Yer altı şehirleri, peri bacaları, şarap atölyeleri, kaya otelleri ve balon turlarıyla Kapadokya dünyanın en özgün yerlerinden.",
+      "comments": [
+        {"comment": "Çok güzel bir yer"},
+        {"comment": "Mükemmel bir yer"}
+      ]
+    },
+    {
+      "date": "7/11/2020",
+      "photo":
+          "https://vizyonergenc.com/company/aerotim.png",
+      "title": "Pamukkale",
+      "content":
+          "Hierapolis Antik Kenti ile birlikte aynı bölge içerisinde yer alan Pamukkale, UNESCO Dünya Mirası Listesi’nde yer alan tarihi ve doğal güzelliklerimizden. Ülkemizin en tanınmış doğal güzelliklerinden biri olan Pamukkale Travertenleri ile Antik Havuz, kaynak sularının kirecinden oluşan yüksek bir tepede yer alıyor. Onlarca kilometre öteden bile kendini gösteren bembeyaz Pamukkale, Denizli’de.",
       "comments": [
         {"comment": "Çok güzel bir yer"},
         {"comment": "Mükemmel bir yer"}

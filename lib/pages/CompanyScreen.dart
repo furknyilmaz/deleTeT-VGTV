@@ -30,64 +30,33 @@ class _CompanyScreenState extends State<CompanyScreen> {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
     return Scaffold(
-        body: ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemCount: data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  left: 20,
-                  right: 20,
-                  bottom: 0,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        child: GridView.count(
+          addSemanticIndexes: true,
+          // Create a grid with 2 columns. If you change the scrollDirection to
+          // horizontal, this produces 2 rows.
+          crossAxisCount: 2,
+          // Generate 100 widgets that display their index in the List.
+          children: List.generate(data.length, (index) {
+            return Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 0.6, color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (index % 2 == 0)
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1, color: Colors.grey.shade300),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.network(
-                              data[index]['photo'],
-                              fit: BoxFit.scaleDown,
-                              width: (width / 2) - 35,
-                              height: (width / 2) - 60,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1, color: Colors.grey.shade300),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.network(
-                              data[index + 1]['photo'],
-                              fit: BoxFit.fitWidth,
-                              width: (width / 2) - 35,
-                              height: (width / 2) - 60,
-                            ),
-                          ),
-                        ],
-                      )
-                    else
-                      SizedBox(
-                        height: 0,
-                      )
-                  ],
+                child: Image.network(
+                  data[index]['photo'],
+                  fit: BoxFit.scaleDown,
+                  width: (width / 2) - 25,
+                  height: (width / 2) - 25,
                 ),
-              );
-            }));
+              ),
+            );
+          }),
+        ),
+      ),
+    );
   }
 }

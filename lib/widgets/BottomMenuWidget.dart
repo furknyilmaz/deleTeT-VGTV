@@ -159,7 +159,11 @@ class _BottomMenuState extends State<BottomMenu> {
       ),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
-        title: const Text('DELETET AKADEMİ'),
+        centerTitle: true,
+        title: const Text(
+          'deletet Akademi',
+          style: TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.w500),
+        ),
         actions: [
           IconButton(
             onPressed: () {
