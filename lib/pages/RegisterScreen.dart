@@ -73,6 +73,9 @@ class _RegisterPageeState extends State<RegisterScreen> {
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 12),
+                          validator: (input) => input!.length < 2
+                              ? "Lütfen tam adınızı giriniz!"
+                              : null,
                           keyboardType: TextInputType.name,
                           onSaved: (input) => requestModal.name = input,
                           decoration: InputDecoration(
@@ -107,9 +110,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 12),
-                          validator: (input) => !input!.contains('@')
-                              ? "Geçerli bir adres giriniz!"
-                              : null,
+                          validator: (input) =>
+                              input!.contains('@') && input.contains('.')
+                                  ? null
+                                  : "Geçerli bir adres giriniz!",
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (input) => requestModal.email = input,
                           decoration: InputDecoration(
@@ -144,6 +148,9 @@ class _RegisterPageeState extends State<RegisterScreen> {
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 12),
+                          validator: (input) => input!.length < 6
+                              ? "En az 6 karakterli bir şifre belirleyiniz"
+                              : null,
                           keyboardType: TextInputType.visiblePassword,
                           onSaved: (input) => requestModal.password = input,
                           obscureText: true,
@@ -158,8 +165,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   BorderSide(color: Colors.grey, width: 0.5),
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
-                            hintText:
-                                'En az 6 karakterli bir şifre belirleyiniz',
+                            hintText: 'Şifrenizi giriniz.',
                             hintStyle: TextStyle(fontSize: 12),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
@@ -254,17 +260,33 @@ class _RegisterPageeState extends State<RegisterScreen> {
 
   Future<void> register() async {
     final form = globalKeyForm.currentState;
+
     if (form!.validate()) {
-      setState(() {
-        isApiCallProgress = true;
-      });
-      form.save();
-      userRegister(requestModal, context);
-      Future.delayed(const Duration(milliseconds: 500), () {
+      if (checkbox) {
         setState(() {
-          isApiCallProgress = false;
+          isApiCallProgress = true;
         });
-      });
+        form.save();
+        userRegister(requestModal, context);
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            isApiCallProgress = false;
+          });
+        });
+      } else {
+        final snackBar = SnackBar(
+          backgroundColor: Color(0xff38a3a5),
+          content: Text('Lüften kullanıcı sözleşmesini okuyun ve kabul edin.'),
+          action: SnackBarAction(
+            textColor: Color(0xffffffff),
+            label: 'Tamam',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     }
   }
 }

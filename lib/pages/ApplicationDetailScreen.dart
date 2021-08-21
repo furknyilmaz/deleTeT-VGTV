@@ -66,6 +66,16 @@ class ApplicationDetailScreen extends StatelessWidget {
         }
         break;
 
+      case "5":
+        {
+          message = "Başvurunuz Olumlu Sonuçlandı ";
+          icon = const Icon(Icons.verified_outlined, size: 50);
+          color = const Color(0xff57cc99);
+          messageDescription =
+              "Tebrikler! Artık ekibimizin bir parçası oldunuz.İşe alım işlemleriniz başlatıldı. En kısa zamanda sizleri ofisimize bekliyoruz. ";
+        }
+        break;
+
       default:
         {
           //statements;
