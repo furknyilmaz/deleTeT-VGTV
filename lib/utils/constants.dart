@@ -5,3 +5,4 @@ const registerAPI = BASE_URL + 'register';
 const companyAPI = BASE_URL + '/company.json';
 const interviewAPI = BASE_URL + '/interview.json';
 const newsfeedAPI = BASE_URL + '/newsfeed.json';
+const applicationAPI = BASE_URL + '/application.json';

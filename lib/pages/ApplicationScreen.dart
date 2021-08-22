@@ -1,169 +1,180 @@
+import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/pages/ApplicationDetailScreen.dart';
+import 'package:deletedvgtv/services/api_services.dart';
+import 'package:deletedvgtv/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class ApplicationScreen extends StatelessWidget {
+class ApplicationScreen extends StatefulWidget {
   const ApplicationScreen({Key? key}) : super(key: key);
+
+  @override
+  _ApplicationScreenState createState() => _ApplicationScreenState();
+}
+
+class _ApplicationScreenState extends State<ApplicationScreen> {
+  late Application application;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade200,
+      body: FutureBuilder(
+        future: getApplication(applicationAPI),
+        builder: (context, AsyncSnapshot<Application> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            debugPrint(snapshot.data!.application[0].companyName);
+            return ApplicationItem(snapshot.data);
+          } else {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class ApplicationItem extends StatelessWidget {
+  Application? snapshot;
+
+  ApplicationItem(this.snapshot);
 
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-
-    final List<String> imageUri = <String>[
-      "https://vizyonergenc.com/company/crs-soft.png",
-      "https://vizyonergenc.com/company/ssb.png",
-      "https://vizyonergenc.com/company/pavotek-pavo-tasarim-uretim-elektronik-tic-as.jpeg",
-      "https://vizyonergenc.com/company/selvi-technology.png",
-      "https://vizyonergenc.com/company/fnss.png",
-    ];
-
-    final List<String> companyName = <String>[
-      "Yazılım Mühendisi (Tam Zamanlı)",
-      "ROBOİK 2021",
-      "Rf Hardware Engineer (Tam Zamanlı)",
-      "Yazılım Geliştirme Takım Lideri",
-      "Ürün Destek Yetkilisi",
-    ];
-
-    final List<String> program = <String>[
-      "Aday Mühendis Programı",
-      "Yazılım Geliştirme Uzmanı",
-      "Elektironik ve Haberleşme Uzmanı",
-      "Siber Güvenlik Uzmanı",
-      "Elektronik Haberleşme Stajyer Programı",
-    ];
-
-    final List<String> applicationDetails = <String>[
-      "Üniversitelerin Bilgisayar Mühendisliği ve benzeri bölümlerinin birinden mezunum, C#, Java, JavaScript dillerinden herhangi birini biliyorum...",
-      "Yarışmaya takım adına sadece Takım Lideri başvuruda bulunabilecektir. Yarışmaya takım olarak katılmak zorunludur.  Her takım en az dört (4) en fazla on (10) kişi ve bir (1) danışmandan oluşmalıdır...",
-      "Experience in one or more of the following: Wi-Fi, Bluetooth, 2G/3G/4G Cellular systems, GPS, or similar wireless technologies...",
-      "Bilgisayar mühendisliğinden lisans (tercihen yüksek lisans) dereceli olmak, Yazılım tasarımı ve geliştirmede +3 yıl deneyim...",
-      "Üniversitelerin 2 yıllık bölümlerinden mezun (Mekatronik, Otomotiv, Elektrik-Elektronik),Otomotiv veya iş makinaları satış sonrası hizmetlerde en az 2 yıl tecrübe sahibi...",
-    ];
-
-    final List<String> statusState = <String>["1", "2", "3", "4", "5"];
-
-    return Scaffold(
-        backgroundColor: Colors.grey.shade200,
-        body: Center(
-            child: ListView.builder(
-                padding: const EdgeInsets.all(0),
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border:
-                          Border.all(width: 0.5, color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    margin:
-                        EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
-                    child: Padding(
-                        padding: EdgeInsets.only(
-                            top: 15, left: 10, right: 10, bottom: 0),
-                        child: Column(
+    return Center(
+        child: ListView.builder(
+            padding: const EdgeInsets.all(0),
+            itemCount: snapshot!.application.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 0.5, color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                margin: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
+                child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 15, left: 10, right: 10, bottom: 0),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 80.0,
-                                  height: 80.0,
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              width: 0.5,
-                                              color: Colors.grey.shade300),
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          image: new DecorationImage(
-                                              fit: BoxFit.fitWidth,
-                                              image: new NetworkImage(
-                                                  imageUri[index])))),
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        companyName[index],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            fontFamily: 'Nunito'),
-                                      ),
-                                      Container(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        applicationDetails[index],
-                                        style: TextStyle(
-                                            fontSize: 11, fontFamily: 'Nunito'),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                            Container(
+                              width: 80.0,
+                              height: 80.0,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          width: 0.5,
+                                          color: Colors.grey.shade300),
+                                      borderRadius: BorderRadius.circular(6),
+                                      image: new DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          image: new NetworkImage(
+                                            snapshot!
+                                                .application[index].companyIcon,
+                                          )))),
                             ),
                             Container(
-                              height: 1,
-                              color: Colors.grey.shade200,
-                              margin: EdgeInsets.only(top: 10),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                              width: width * 0.65,
+                              padding: EdgeInsets.only(left: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    snapshot!.application[index].adversTitle,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        fontFamily: 'Nunito'),
+                                  ),
+                                  Container(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    snapshot!
+                                        .application[index].adversDescription,
+                                    style: TextStyle(
+                                        fontSize: 11, fontFamily: 'Nunito'),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Container(
+                          height: 1,
+                          color: Colors.grey.shade200,
+                          margin: EdgeInsets.only(top: 10),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.date_range,
-                                          size: 16,
-                                        ),
-                                        Text(
-                                          " 16 Ağustos 2021",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'Nunito'),
-                                        ),
-                                      ],
+                                    Icon(
+                                      Icons.date_range,
+                                      size: 16,
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ApplicationDetailScreen(
-                                                    imageUri[index],
-                                                    applicationDetails[index],
-                                                    companyName[index],
-                                                    program[index],
-                                                    statusState[index],
-                                                  )),
-                                        );
-                                      },
-                                      child: Status(statusState[index]),
+                                    Text(
+                                      ' ' +
+                                          snapshot!
+                                              .application[index].adversTime,
+                                      style: TextStyle(
+                                          fontSize: 12, fontFamily: 'Nunito'),
                                     ),
                                   ],
                                 ),
-                              ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ApplicationDetailScreen(
+                                                snapshot!.application[index]
+                                                    .companyIcon,
+                                                snapshot!.application[index]
+                                                    .adversDescription,
+                                                snapshot!.application[index]
+                                                    .adversTitle,
+                                                snapshot!.application[index]
+                                                    .companyDesc,
+                                                snapshot!
+                                                    .application[index].status
+                                                    .toString(),
+                                              )),
+                                    );
+                                  },
+                                  child: Status(
+                                    snapshot!.application[index].status
+                                        .toString(),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        )),
-                  );
-                })));
+                          ),
+                        ),
+                      ],
+                    )),
+              );
+            }));
   }
 }
 

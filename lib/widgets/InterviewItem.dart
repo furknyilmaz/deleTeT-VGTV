@@ -1,5 +1,5 @@
 import 'package:deletedvgtv/models/interview_model.dart';
-import 'package:deletedvgtv/pages/HomepageScreen.dart';
+import 'package:deletedvgtv/pages/InterviewScreen.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -29,7 +29,7 @@ class InterviewItem extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePageScreen()),
+                                builder: (context) => InterviewScreen()),
                           );
                         },
                         child: Column(

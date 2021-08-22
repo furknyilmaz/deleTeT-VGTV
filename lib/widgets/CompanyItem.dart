@@ -1,4 +1,5 @@
 import 'package:deletedvgtv/models/company_model.dart';
+import 'package:deletedvgtv/pages/CompanyDetailScreen.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -19,20 +20,31 @@ class CompanyItem extends StatelessWidget {
         addSemanticIndexes: true,
         crossAxisCount: 2,
         children: List.generate(snapshot!.company.length, (index) {
-          return Center(
-            child: Container(
-              width: itemWidth,
-              height: itemWidth,
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(width: 0.6, color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(8),
-              ),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CompanyDetail(snapshot, index),
+                  //Listeden hangi firmanın üzerine tıklanırsa o firmanın indexi aktarılır
+                ),
+              );
+            },
+            child: Center(
               child: Container(
-                child: Image.network(
-                  snapshot!.company[index].imageUri,
-                  fit: BoxFit.scaleDown,
+                width: itemWidth,
+                height: itemWidth,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 0.6, color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Container(
+                  child: Image.network(
+                    snapshot!.company[index].imageUri,
+                    fit: BoxFit.scaleDown,
+                  ),
                 ),
               ),
             ),

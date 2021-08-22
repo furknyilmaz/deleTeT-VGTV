@@ -1,3 +1,4 @@
+import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:deletedvgtv/models/interview_model.dart';
 import 'package:deletedvgtv/models/login_model.dart';
@@ -48,6 +49,15 @@ Future<Newsfeed> getFeedNews(urlx) async {
   var apiUrl = await http.get(url);
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Newsfeed.fromJson(response);
+  print(data.toString());
+  return data;
+}
+
+Future<Application> getApplication(urlx) async {
+  var url = Uri.parse(urlx);
+  var apiUrl = await http.get(url);
+  var response = json.decode(utf8.decode(apiUrl.bodyBytes));
+  var data = Application.fromJson(response);
   print(data.toString());
   return data;
 }
