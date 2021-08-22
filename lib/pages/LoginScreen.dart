@@ -72,7 +72,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                           child: SelectRoleButton(),
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16, fontFamily: 'Nunito'),
                           keyboardType: TextInputType.emailAddress,
                           validator: (input) => !input!.contains('@')
                               ? "Geçerli bir adres giriniz!"
@@ -90,7 +90,8 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresiniz giriniz',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle:
+                                TextStyle(fontSize: 12, fontFamily: 'Nunito'),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
@@ -112,7 +113,8 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             keyboardType: TextInputType.visiblePassword,
                             onSaved: (input) => requestModal.password = input,
                             obscureText: true,
-                            style: TextStyle(fontSize: 16),
+                            style:
+                                TextStyle(fontSize: 16, fontFamily: 'Nunito'),
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
                                 borderSide: (BorderSide(
@@ -125,7 +127,8 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                               ),
                               contentPadding: EdgeInsets.only(left: 5.0),
                               hintText: 'Şifrenizi Giriniz',
-                              hintStyle: TextStyle(fontSize: 12),
+                              hintStyle:
+                                  TextStyle(fontSize: 12, fontFamily: 'Nunito'),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -151,11 +154,19 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                           onPressed: () {
                             login();
                           },
-                          child: Text('Giriş yap'),
+                          child: Text(
+                            'Giriş yap',
+                            style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 40),
-                          child: Text("Henüz hesap oluşturmadın mı?"),
+                          child: Text(
+                            "Henüz hesap oluşturmadın mı?",
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -171,6 +182,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             child: Text(
                               'Hemen Kayıt Ol',
                               style: TextStyle(
+                                  fontFamily: 'Nunito',
                                   color: Colors.green,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -242,6 +254,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Kurumsal',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),
@@ -269,6 +282,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Bireysel',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: !role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),

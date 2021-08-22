@@ -1,24 +1,37 @@
-import 'package:deletedvgtv/pages/InterviewScreen.dart';
+import 'package:deletedvgtv/models/company_model.dart';
+import 'package:deletedvgtv/services/api_services.dart';
+import 'package:deletedvgtv/utils/constants.dart';
+import 'package:deletedvgtv/widgets/CompanyItem.dart';
 import 'package:flutter/material.dart';
 
-class CompanyScreen extends StatelessWidget {
-  const CompanyScreen({Key? key}) : super(key: key);
+class CompanyScreen extends StatefulWidget {
+  @override
+  _CompanyScreenState createState() => _CompanyScreenState();
+}
+
+class _CompanyScreenState extends State<CompanyScreen> {
+  late Company company;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MyHomePage(),
-            ),
-          );
+      body: FutureBuilder(
+        future: getCompany(companyAPI),
+        builder: (context, AsyncSnapshot<Company> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            debugPrint(snapshot.data!.company[0].title);
+            return CompanyItem(snapshot.data);
+          } else {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
         },
-        child: Text('Mülakat Başlat'),
       ),
-    ));
+    );
   }
 }

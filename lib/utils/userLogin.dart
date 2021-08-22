@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 Future<void> userLogin(requestModal, context) async {
-  APIServices apiServices = new APIServices();
+  UserAPIServices apiServices = new UserAPIServices();
   apiServices
       .login(
     requestModal,

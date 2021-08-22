@@ -72,7 +72,13 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           child: SelectRoleButton(),
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Nunito',
+                          ),
+                          validator: (input) => input!.length < 2
+                              ? "Lütfen tam adınızı giriniz!"
+                              : null,
                           keyboardType: TextInputType.name,
                           onSaved: (input) => requestModal.name = input,
                           decoration: InputDecoration(
@@ -87,7 +93,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'Lütfen adınızı giriniz',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Nunito',
+                            ),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
@@ -103,13 +112,14 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         new TextFormField(
-                          style: TextStyle(fontSize: 12),
-                          validator: (input) => !input!.contains('@')
-                              ? "Geçerli bir adres giriniz!"
-                              : null,
+                          style: TextStyle(fontSize: 12, fontFamily: 'Nunito'),
+                          validator: (input) =>
+                              input!.contains('@') && input.contains('.')
+                                  ? null
+                                  : "Geçerli bir adres giriniz!",
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (input) => requestModal.email = input,
                           decoration: InputDecoration(
@@ -124,8 +134,10 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
                             hintText: 'E-posta adresinizi giriniz',
-                            hintStyle: TextStyle(fontSize: 12),
-                            errorStyle: TextStyle(color: Colors.green),
+                            hintStyle:
+                                TextStyle(fontSize: 12, fontFamily: 'Nunito'),
+                            errorStyle: TextStyle(
+                                color: Colors.green, fontFamily: 'Nunito'),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -140,10 +152,13 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 12),
+                          validator: (input) => input!.length < 6
+                              ? "En az 6 karakterli bir şifre belirleyiniz"
+                              : null,
                           keyboardType: TextInputType.visiblePassword,
                           onSaved: (input) => requestModal.password = input,
                           obscureText: true,
@@ -158,9 +173,9 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   BorderSide(color: Colors.grey, width: 0.5),
                             ),
                             contentPadding: EdgeInsets.only(left: 15.0),
-                            hintText:
-                                'En az 6 karakterli bir şifre belirleyiniz',
-                            hintStyle: TextStyle(fontSize: 12),
+                            hintText: 'Şifrenizi giriniz.',
+                            hintStyle:
+                                TextStyle(fontSize: 12, fontFamily: 'Nunito'),
                             errorStyle: TextStyle(color: Colors.green),
                             filled: true,
                             fillColor: Colors.white,
@@ -193,13 +208,15 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   Text(
                                     ' Kullanıcı sözleşmesinini',
                                     style: TextStyle(
+                                        fontFamily: 'Nunito',
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black54),
                                   ),
                                   Text(
                                     ' kabul ediyorum',
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(
+                                        fontSize: 12, fontFamily: 'Nunito'),
                                   )
                                 ],
                               )
@@ -217,11 +234,17 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           onPressed: () {
                             register();
                           },
-                          child: Text('Giriş yap'),
+                          child: Text(
+                            'Giriş yap',
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 40),
-                          child: Text("Zaten bir hesabınız var mı?"),
+                          child: Text(
+                            "Zaten bir hesabınız var mı?",
+                            style: TextStyle(fontFamily: 'Nunito'),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -237,6 +260,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             child: Text(
                               'Hemen Oturum Aç',
                               style: TextStyle(
+                                  fontFamily: 'Nunito',
                                   color: Colors.green,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -254,17 +278,33 @@ class _RegisterPageeState extends State<RegisterScreen> {
 
   Future<void> register() async {
     final form = globalKeyForm.currentState;
+
     if (form!.validate()) {
-      setState(() {
-        isApiCallProgress = true;
-      });
-      form.save();
-      userRegister(requestModal, context);
-      Future.delayed(const Duration(milliseconds: 500), () {
+      if (checkbox) {
         setState(() {
-          isApiCallProgress = false;
+          isApiCallProgress = true;
         });
-      });
+        form.save();
+        userRegister(requestModal, context);
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            isApiCallProgress = false;
+          });
+        });
+      } else {
+        final snackBar = SnackBar(
+          backgroundColor: Color(0xff38a3a5),
+          content: Text('Lüften kullanıcı sözleşmesini okuyun ve kabul edin.'),
+          action: SnackBarAction(
+            textColor: Color(0xffffffff),
+            label: 'Tamam',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     }
   }
 }
@@ -308,6 +348,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Kurumsal',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),
@@ -335,6 +376,7 @@ class _SelectRoleButtonState extends State<SelectRoleButton> {
                 'Bireysel',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Nunito',
                     color: !role ? Colors.white : Colors.grey.shade800,
                     fontWeight: FontWeight.w500,
                     fontSize: 12),

@@ -2,18 +2,25 @@ import 'package:deletedvgtv/pages/broadcast_page.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class MyHomePage extends StatefulWidget {
+class InterviewScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _InterviewScreenState createState() => _InterviewScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _InterviewScreenState extends State<InterviewScreen> {
   final _channelName = TextEditingController();
   String check = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+          title: Text(
+            'Mülakat Detayları',
+            style: TextStyle(fontFamily: 'Nunito'),
+          ),
+        ),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Center(
