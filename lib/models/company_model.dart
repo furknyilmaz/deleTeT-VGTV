@@ -23,18 +23,24 @@ class CompanyElement {
     required this.id,
     required this.title,
     required this.imageUri,
+    required this.date,
+    required this.department,
   });
 
   int userId;
   int id;
   String title;
   String imageUri;
+  String date;
+  String department;
 
   factory CompanyElement.fromJson(Map<String, dynamic> json) => CompanyElement(
         userId: json["userId"],
         id: json["id"],
         title: json["title"],
         imageUri: json["imageUri"],
+        date: json["date"],
+        department: json["department"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +48,7 @@ class CompanyElement {
         "id": id,
         "title": title,
         "imageUri": imageUri,
+        "date": date,
+        department: department
       };
 }
