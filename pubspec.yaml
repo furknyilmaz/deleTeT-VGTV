@@ -36,13 +36,11 @@ flutter:
         - asset: assets/fonts/NunitoSans-BoldItalic.ttf
         - asset: assets/fonts/NunitoSans-ExtraBold.ttf
         - asset: assets/fonts/NunitoSans-ExtraLight.ttf
-        
-        - asset: assets/fonts/NunitoSans-ExtraLigthItalic.ttf
+        - asset: assets/fonts/NunitoSans-ExtraLightItalic.ttf
         - asset: assets/fonts/NunitoSans-Light.ttf
         - asset: assets/fonts/NunitoSans-LightItalic.ttf
         - asset: assets/fonts/NunitoSans-SemiBold.ttf
         - asset: assets/fonts/NunitoSans-SemiBoldItalic.ttf
-          style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

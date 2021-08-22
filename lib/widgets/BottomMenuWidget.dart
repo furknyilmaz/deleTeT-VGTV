@@ -170,7 +170,7 @@ class _BottomMenuState extends State<BottomMenu> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InterviewListScreen(),
+                  builder: (context) => InretviewListScreen(),
                 ),
               );
             },
