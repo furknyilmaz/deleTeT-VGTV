@@ -14,6 +14,13 @@ class _InterviewScreenState extends State<InterviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+          title: Text(
+            'Mülakat Detayları',
+            style: TextStyle(fontFamily: 'Nunito'),
+          ),
+        ),
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         body: Center(

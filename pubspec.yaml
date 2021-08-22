@@ -14,6 +14,7 @@ dependencies:
   google_fonts: ^2.1.0
   cupertino_icons: ^1.0.2
   http: ^0.13.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -22,7 +23,6 @@ flutter:
   assets:
     - assets/logo.png
     - assets/vg.png
-    - lib/models/veri.json
   #- images/a_dot_ham.jpeg
 
   fonts:
@@ -36,13 +36,11 @@ flutter:
         - asset: assets/fonts/NunitoSans-BoldItalic.ttf
         - asset: assets/fonts/NunitoSans-ExtraBold.ttf
         - asset: assets/fonts/NunitoSans-ExtraLight.ttf
-        
-        - asset: assets/fonts/NunitoSans-ExtraLigthItalic.ttf
+        - asset: assets/fonts/NunitoSans-ExtraLightItalic.ttf
         - asset: assets/fonts/NunitoSans-Light.ttf
         - asset: assets/fonts/NunitoSans-LightItalic.ttf
         - asset: assets/fonts/NunitoSans-SemiBold.ttf
         - asset: assets/fonts/NunitoSans-SemiBoldItalic.ttf
-          style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

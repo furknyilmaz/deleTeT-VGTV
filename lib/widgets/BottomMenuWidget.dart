@@ -26,7 +26,7 @@ class _BottomMenuState extends State<BottomMenu> {
     AdvertScreen(),
     HomePageScreen(),
     ApplicationScreen(),
-    CompanyScreen()
+    CompanyScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -170,7 +170,7 @@ class _BottomMenuState extends State<BottomMenu> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InterviewListScreen(),
+                  builder: (context) => InretviewListScreen(),
                 ),
               );
             },
