@@ -1,3 +1,4 @@
+//burası bir sayfa
 import 'package:flutter/material.dart';
 
 class AdvertScreen extends StatelessWidget {
