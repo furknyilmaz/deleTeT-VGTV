@@ -37,7 +37,7 @@ flutter:
         - asset: assets/fonts/NunitoSans-ExtraBold.ttf
         - asset: assets/fonts/NunitoSans-ExtraLight.ttf
         
-        - asset: assets/fonts/NunitoSans-ExtraLigthItalic.ttf
+        #- asset: assets/fonts/NunitoSans-ExtraLigthItalic.ttf
         - asset: assets/fonts/NunitoSans-Light.ttf
         - asset: assets/fonts/NunitoSans-LightItalic.ttf
         - asset: assets/fonts/NunitoSans-SemiBold.ttf

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'AdvertsDetailScreen.dart';
+
 class AdvertScreen extends StatelessWidget {
   const AdvertScreen({Key? key}) : super(key: key);
 
@@ -32,7 +34,7 @@ class AdvertScreen extends StatelessWidget {
       "GENEL NİTELİKLER VE İŞ TANIMI",
     ];
 
-    final List<String> advertsdetails = <String>[
+    final List<String> advertsDetails = <String>[
       "Üniversitelerin Bilgisayar Mühendisliği ve benzeri bölümlerinin birinden mezunum, C#, Java, JavaScript dillerinden herhangi birini biliyorum...",
       "Yarışmaya takım adına sadece Takım Lideri başvuruda bulunabilecektir. Yarışmaya takım olarak katılmak zorunludur.  Her takım en az dört (4) en fazla on (10) kişi ve bir (1) danışmandan oluşmalıdır...",
       "Experience in one or more of the following: Wi-Fi, Bluetooth, 2G/3G/4G Cellular systems, GPS, or similar wireless technologies...",
@@ -90,29 +92,35 @@ class AdvertScreen extends StatelessWidget {
                                   height: 5,
                                 ),
                                 Text(
-                                  advertsdetails[index],
+                                  advertsDetails[index],
                                   style: TextStyle(fontSize: 11),
                                 ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.blue,
-                                    ),
-                                    margin: EdgeInsets.only(top: 10),
+                                GestureDetector(
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 1),
                                     width: width,
                                     height: 30,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Detaylı İncele",
-                                          style: TextStyle(color: Colors.white),
-                                        )
-                                      ],
-                                    ))
+                                    color: Colors.blue,
+                                    child: Text(
+                                      "Başvuruyu İncele",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AdvertsDetailScreen(
+                                                imageUri[index],
+                                                advertsDetails[index],
+                                                companyName[index],
+                                                advertstitleDetails[index],
+                                              )),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           )
