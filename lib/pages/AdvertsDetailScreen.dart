@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class AdvertsDetailScreen extends StatelessWidget {
   final String companyName;
-  final String imageUri;
-  final String advertsDetails;
-  final String advertstitleDetails;
+  final String companyLocaliton;
+  final String companyIcon;
+  final String companyDesc;
+  final String adversDate;
+  final String wayOfWorking;
+  final String adversAbout;
+  final String adversTitle;
+  final String adversDescription;
 
-  AdvertsDetailScreen(this.imageUri, this.advertsDetails, this.companyName,
-      this.advertstitleDetails);
+  AdvertsDetailScreen(
+      this.companyName,
+      this.companyLocaliton,
+      this.companyIcon,
+      this.companyDesc,
+      this.adversDate,
+      this.wayOfWorking,
+      this.adversAbout,
+      this.adversTitle,
+      this.adversDescription);
 
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
 
-    var color = const Color(0xffc1def8);
+    var color = const Color(0xffffffff);
 
     return Scaffold(
         appBar: AppBar(
@@ -43,13 +57,13 @@ class AdvertsDetailScreen extends StatelessWidget {
                                       width: 1, color: Colors.grey.shade300),
                                   image: new DecorationImage(
                                       fit: BoxFit.fitWidth,
-                                      image: new NetworkImage(imageUri)))),
+                                      image: new NetworkImage(companyIcon)))),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 20, left: 20, right: 20, bottom: 2),
                           child: Text(
-                            companyName,
+                            adversTitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 22,
@@ -61,7 +75,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               top: 0, left: 20, right: 20, bottom: 15),
                           child: Text(
-                            advertstitleDetails,
+                            companyName,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16,
@@ -73,7 +87,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 0, horizontal: 30),
                           child: Text(
-                            advertsDetails,
+                            adversDescription,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 12,
@@ -100,11 +114,31 @@ class AdvertsDetailScreen extends StatelessWidget {
                             ),
                           ),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 1),
-                                child: Text(advertsDetails),
+                              Html(data: adversAbout),
+                              Container(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 35.0,
+                                      width: width * 0.8,
+                                      color: Colors.blue,
+                                      child: Center(
+                                        child: Text(
+                                          'Başvur',
+                                          style: TextStyle(
+                                              fontFamily: 'Nunito',
+                                              color: Colors.white),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

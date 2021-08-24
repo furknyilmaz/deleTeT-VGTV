@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class ApplicationDetailScreen extends StatelessWidget {
   final String companyName;
@@ -14,11 +15,10 @@ class ApplicationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-
-    String message = "";
-    String messageDescription = "";
     var icon = const Icon(Icons.ac_unit);
     var color = const Color(0xffb74093);
+    String message = "";
+    String messageDescription = "";
 
     switch (statusState) {
       case "1":
@@ -138,18 +138,10 @@ class ApplicationDetailScreen extends StatelessWidget {
                                 color: Colors.black),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 30),
-                          child: Text(
-                            applicationDetails,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
-                          ),
+                        Column(
+                          children: [
+                            Html(data: applicationDetails),
+                          ],
                         ),
                       ],
                     ),

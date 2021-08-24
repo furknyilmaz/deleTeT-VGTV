@@ -1,3 +1,4 @@
+import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:deletedvgtv/models/interview_model.dart';
@@ -25,9 +26,8 @@ class UserAPIServices {
 }
 
 //Mülakatlar Listesi API bağlantısı
-Future<Interview> getInterview(urlx) async {
-  var url = Uri.parse(urlx);
-  var apiUrl = await http.get(url);
+Future<Interview> getInterview(url) async {
+  var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Interview.fromJson(response);
   print(data.toString());
@@ -35,29 +35,30 @@ Future<Interview> getInterview(urlx) async {
 }
 
 // Şirketler Listeis API bağlantısı
-Future<Company> getCompany(urlx) async {
-  var url = Uri.parse(urlx);
-  var apiUrl = await http.get(url);
+Future<Company> getCompany(url) async {
+  var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Company.fromJson(response);
-  print(data.toString());
   return data;
 }
 
-Future<Newsfeed> getFeedNews(urlx) async {
-  var url = Uri.parse(urlx);
-  var apiUrl = await http.get(url);
+Future<Newsfeed> getFeedNews(url) async {
+  var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Newsfeed.fromJson(response);
-  print(data.toString());
   return data;
 }
 
-Future<Application> getApplication(urlx) async {
-  var url = Uri.parse(urlx);
-  var apiUrl = await http.get(url);
+Future<Application> getApplication(url) async {
+  var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Application.fromJson(response);
-  print(data.toString());
+  return data;
+}
+
+Future<Advers> getAdvers(urlx) async {
+  var apiUrl = await http.get(Uri.parse(urlx));
+  var response = json.decode(utf8.decode(apiUrl.bodyBytes));
+  var data = Advers.fromJson(response);
   return data;
 }

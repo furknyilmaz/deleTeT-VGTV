@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 // ignore: must_be_immutable
 class CompanyDetail extends StatelessWidget {
@@ -17,19 +18,21 @@ class CompanyDetail extends StatelessWidget {
           backgroundColor: Color.fromRGBO(69, 123, 157, 1),
           title: Text('Firma Detayları'),
         ),
-        body: Container(
-          width: width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                child: Image.network(snapshot!.company[index].imageUrl),
-              ),
-              Text(snapshot!.company[index].title),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            width: width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 200,
+                  height: 200,
+                  child: Image.network(snapshot!.company[index].imageUrl),
+                ),
+                Html(data: snapshot!.company[index].about),
+              ],
+            ),
           ),
         ));
   }

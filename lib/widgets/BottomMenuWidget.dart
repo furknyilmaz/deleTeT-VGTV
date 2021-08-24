@@ -5,7 +5,6 @@ import 'package:deletedvgtv/pages/CompanyScreen.dart';
 import 'package:deletedvgtv/pages/ForumScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/pages/InterviewListScreen.dart';
-import 'package:deletedvgtv/pages/InterviewScreen.dart';
 import 'package:deletedvgtv/pages/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
