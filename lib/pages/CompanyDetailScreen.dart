@@ -1,4 +1,5 @@
 import 'package:deletedvgtv/models/company_model.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -28,7 +29,9 @@ class CompanyDetail extends StatelessWidget {
                 Container(
                   width: 200,
                   height: 200,
-                  child: Image.network(snapshot!.company[index].imageUrl),
+                  child: ImageCached(
+                    url: snapshot!.company[index].imageUrl,
+                  ),
                 ),
                 Html(data: snapshot!.company[index].about),
               ],

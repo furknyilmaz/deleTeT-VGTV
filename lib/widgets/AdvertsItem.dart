@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/pages/AdvertsDetailScreen.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -7,6 +8,7 @@ class AdvertsItem extends StatelessWidget {
   Advers? snapshot;
 
   AdvertsItem(this.snapshot);
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -22,21 +24,11 @@ class AdvertsItem extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AdvertsDetailScreen(
-                      snapshot!.advers[index].companyName,
-                      snapshot!.advers[index].companyLocaliton,
-                      snapshot!.advers[index].companyIcon,
-                      snapshot!.advers[index].companyDesc,
-                      snapshot!.advers[index].adversDate,
-                      snapshot!.advers[index].wayOfWorking,
-                      snapshot!.advers[index].adversAbout,
-                      snapshot!.advers[index].adversTitle,
-                      snapshot!.advers[index].adversDescription,
-                    ),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AdvertsDetailScreen(snapshot!.advers[index]),
+                    ));
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -45,12 +37,14 @@ class AdvertsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(0),
-                      color: Colors.white,
-                      width: width * 0.2,
-                      height: 80,
-                      child: Image.network(snapshot!.advers[index].companyIcon),
-                    ),
+                        padding: EdgeInsets.all(0),
+                        color: Colors.white,
+                        width: width * 0.2,
+                        height: 80,
+                        child: ImageCached(
+                            url: snapshot!.advers[index].companyIcon,
+                            width: width * 0.2,
+                            height: 80)),
                     Container(
                       width: width * 0.65,
                       padding: EdgeInsets.only(left: 10),

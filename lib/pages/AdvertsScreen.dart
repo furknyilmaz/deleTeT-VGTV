@@ -4,9 +4,14 @@ import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/AdvertsItem.dart';
 import 'package:flutter/material.dart';
 
-class AdvertScreen extends StatelessWidget {
+class AdvertScreen extends StatefulWidget {
   const AdvertScreen({Key? key}) : super(key: key);
 
+  @override
+  _AdvertScreenState createState() => _AdvertScreenState();
+}
+
+class _AdvertScreenState extends State<AdvertScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

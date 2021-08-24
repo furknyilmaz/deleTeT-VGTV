@@ -18,6 +18,7 @@ class Advers {
 
 class Adver {
   Adver({
+    required this.id,
     required this.userName,
     required this.companyName,
     required this.companyLocaliton,
@@ -29,7 +30,7 @@ class Adver {
     required this.adversTitle,
     required this.adversDescription,
   });
-
+  int id;
   String userName;
   String companyName;
   String companyLocaliton;
@@ -42,6 +43,7 @@ class Adver {
   String adversDescription;
 
   factory Adver.fromJson(Map<String, dynamic> json) => Adver(
+        id: json['id'],
         userName: json["userName"],
         companyName: json["companyName"],
         companyLocaliton: json["companyLocaliton"],
@@ -55,6 +57,7 @@ class Adver {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "userName": userName,
         "companyName": companyName,
         "companyLocaliton": companyLocaliton,

@@ -74,7 +74,7 @@ class _InterviewScreenState extends State<InterviewScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Oturuma Katıl    ',
+                      'Oturuma Katıl ',
                       style: TextStyle(fontSize: 20),
                     ),
                     Icon(Icons.live_tv)

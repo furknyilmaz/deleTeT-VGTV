@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:deletedvgtv/pages/CompanyDetailScreen.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -112,11 +113,10 @@ class CompanyItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Container(
-                      child: Image.network(
-                        snapshot!.company[index].imageUrl,
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
+                        child: ImageCached(
+                            width: itemWidth - 50,
+                            height: itemWidth - 50,
+                            url: snapshot!.company[index].imageUrl)),
                   ),
                 ),
               );

@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/models/interview_model.dart';
 import 'package:deletedvgtv/pages/InterviewScreen.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -8,7 +9,6 @@ class InterviewItem extends StatelessWidget {
 
   @override
   InterviewItem(this.snapshot);
-
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
@@ -35,11 +35,12 @@ class InterviewItem extends StatelessWidget {
                         },
                         child: Column(
                           children: [
-                            Image.network(
-                              snapshot!.interview[index].companyImage,
-                              fit: BoxFit.scaleDown,
+                            Container(
                               width: (width / 2) - 30,
                               height: (width / 2) - 40,
+                              child: ImageCached(
+                                url: snapshot!.interview[index].companyImage,
+                              ),
                             ),
                             Container(
                               padding: EdgeInsets.symmetric(

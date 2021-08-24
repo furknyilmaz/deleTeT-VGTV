@@ -1,27 +1,11 @@
+import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class AdvertsDetailScreen extends StatelessWidget {
-  final String companyName;
-  final String companyLocaliton;
-  final String companyIcon;
-  final String companyDesc;
-  final String adversDate;
-  final String wayOfWorking;
-  final String adversAbout;
-  final String adversTitle;
-  final String adversDescription;
+  final Adver advers;
 
-  AdvertsDetailScreen(
-      this.companyName,
-      this.companyLocaliton,
-      this.companyIcon,
-      this.companyDesc,
-      this.adversDate,
-      this.wayOfWorking,
-      this.adversAbout,
-      this.adversTitle,
-      this.adversDescription);
+  AdvertsDetailScreen(this.advers);
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +41,14 @@ class AdvertsDetailScreen extends StatelessWidget {
                                       width: 1, color: Colors.grey.shade300),
                                   image: new DecorationImage(
                                       fit: BoxFit.fitWidth,
-                                      image: new NetworkImage(companyIcon)))),
+                                      image: new NetworkImage(
+                                          advers.companyIcon)))),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 20, left: 20, right: 20, bottom: 2),
                           child: Text(
-                            adversTitle,
+                            advers.adversTitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 22,
@@ -75,7 +60,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               top: 0, left: 20, right: 20, bottom: 15),
                           child: Text(
-                            companyName,
+                            advers.companyName,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16,
@@ -87,7 +72,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 0, horizontal: 30),
                           child: Text(
-                            adversDescription,
+                            advers.adversDescription,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 12,
@@ -117,7 +102,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Html(data: adversAbout),
+                              Html(data: advers.adversAbout),
                               Container(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,

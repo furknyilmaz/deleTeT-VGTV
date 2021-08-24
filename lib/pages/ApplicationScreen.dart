@@ -2,6 +2,7 @@ import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/pages/ApplicationDetailScreen.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/utils/constants.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationScreen extends StatefulWidget {
@@ -82,18 +83,19 @@ class ApplicationItem extends StatelessWidget {
                               width: 80.0,
                               height: 80.0,
                               child: Container(
+                                  child: ImageCached(
+                                    width: 70,
+                                    height: 70,
+                                    url: snapshot!
+                                        .application[index].companyIcon,
+                                  ),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          width: 0.5,
-                                          color: Colors.grey.shade300),
-                                      borderRadius: BorderRadius.circular(6),
-                                      image: new DecorationImage(
-                                          fit: BoxFit.fitWidth,
-                                          image: new NetworkImage(
-                                            snapshot!
-                                                .application[index].companyIcon,
-                                          )))),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        width: 0.5,
+                                        color: Colors.grey.shade300),
+                                    borderRadius: BorderRadius.circular(6),
+                                  )),
                             ),
                             Container(
                               width: width * 0.65,

@@ -1,6 +1,7 @@
 import 'package:deletedvgtv/models/newsfeed_modal.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/utils/constants.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -96,7 +97,13 @@ class HomePageFeedItem extends StatelessWidget {
                       Container(
                         height: 20,
                       ),
-                      Image.network(snapshot!.newsfeed[index].imageUri),
+                      Container(
+                        width: 400,
+                        height: 220,
+                        child: ImageCached(
+                          url: snapshot!.newsfeed[index].imageUri,
+                        ),
+                      ),
                       Container(
                         height: 10,
                       ),
