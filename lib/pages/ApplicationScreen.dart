@@ -16,6 +16,15 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+        title: Text(
+          'Başvurularınız',
+          style: TextStyle(
+            fontFamily: 'Nunito',
+          ),
+        ),
+      ),
       backgroundColor: Colors.grey.shade200,
       body: FutureBuilder(
         future: getApplication(applicationAPI),

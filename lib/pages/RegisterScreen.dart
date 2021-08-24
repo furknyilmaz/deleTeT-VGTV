@@ -63,8 +63,8 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
                             width: 280,
-                            height: 100,
-                            child: Image.asset("assets/logo.png"),
+                            height: 90,
+                            child: Image.asset("assets/vgplus.png"),
                           ),
                         ),
                         Padding(

@@ -62,9 +62,9 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                         Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
-                            width: 280,
-                            height: 100,
-                            child: Image.asset("assets/logo.png"),
+                            width: 250,
+                            height: 90,
+                            child: Image.asset("assets/vgplus.png"),
                           ),
                         ),
                         Padding(

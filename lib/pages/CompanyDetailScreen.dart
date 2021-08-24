@@ -26,7 +26,7 @@ class CompanyDetail extends StatelessWidget {
               Container(
                 width: 200,
                 height: 200,
-                child: Image.network(snapshot!.company[index].imageUri),
+                child: Image.network(snapshot!.company[index].imageUrl),
               ),
               Text(snapshot!.company[index].title),
             ],

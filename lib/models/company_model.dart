@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final company = companyFromJson(jsonString);
+
 import 'dart:convert';
 
 Company companyFromJson(String str) => Company.fromJson(json.decode(str));
@@ -23,10 +27,8 @@ class Company {
 
 class CompanyElement {
   CompanyElement({
-    required this.userId,
-    required this.id,
     required this.title,
-    required this.imageUri,
+    required this.imageUrl,
     required this.department,
     required this.year,
     required this.personCount,
@@ -34,12 +36,11 @@ class CompanyElement {
     required this.phone,
     required this.about,
     required this.websites,
+    required this.currentDate,
   });
 
-  int userId;
-  int id;
   String title;
-  String imageUri;
+  String imageUrl;
   String department;
   String year;
   String personCount;
@@ -47,12 +48,11 @@ class CompanyElement {
   String phone;
   String about;
   String websites;
+  DateTime currentDate;
 
   factory CompanyElement.fromJson(Map<String, dynamic> json) => CompanyElement(
-        userId: json["userId"],
-        id: json["id"],
         title: json["title"],
-        imageUri: json["imageUri"],
+        imageUrl: json["imageUrl"],
         department: json["department"],
         year: json["year"],
         personCount: json["personCount"],
@@ -60,13 +60,12 @@ class CompanyElement {
         phone: json["phone"],
         about: json["about"],
         websites: json["websites"],
+        currentDate: DateTime.parse(json["currentDate"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "userId": userId,
-        "id": id,
         "title": title,
-        "imageUri": imageUri,
+        "imageUrl": imageUrl,
         "department": department,
         "year": year,
         "personCount": personCount,
@@ -74,5 +73,6 @@ class CompanyElement {
         "phone": phone,
         "about": about,
         "websites": websites,
+        "currentDate": currentDate.toIso8601String(),
       };
 }

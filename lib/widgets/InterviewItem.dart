@@ -18,11 +18,12 @@ class InterviewItem extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                 (context, index) => Container(
+                      margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border:
                             Border.all(width: 0.5, color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(0),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: GestureDetector(
                         onTap: () {

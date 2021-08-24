@@ -2,8 +2,10 @@ import 'package:deletedvgtv/main.dart';
 import 'package:deletedvgtv/pages/AdvertsScreen.dart';
 import 'package:deletedvgtv/pages/ApplicationScreen.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
+import 'package:deletedvgtv/pages/ForumScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/pages/InterviewListScreen.dart';
+import 'package:deletedvgtv/pages/InterviewScreen.dart';
 import 'package:deletedvgtv/pages/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +27,7 @@ class _BottomMenuState extends State<BottomMenu> {
     ProfileScreen("Hello World", "dec"),
     AdvertScreen(),
     HomePageScreen(),
-    ApplicationScreen(),
+    Forum(),
     CompanyScreen(),
   ];
 
@@ -161,27 +163,33 @@ class _BottomMenuState extends State<BottomMenu> {
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
         centerTitle: true,
         title: const Text(
-          'deletet Akademi',
-          style: TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.w500),
+          'Vizyoner Genç+',
+          style: TextStyle(
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.w600,
+              fontSize: 18.0),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => InretviewListScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => ApplicationScreen()),
               );
             },
-            icon: Icon(
-              Icons.record_voice_over,
-              size: 24,
-            ),
+            child: Icon(Icons.fact_check_outlined, size: 22),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => InretviewListScreen()),
+              );
+            },
+            child: Icon(Icons.record_voice_over, size: 24),
           ),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
         ],
       ),
       body: Center(
@@ -211,10 +219,10 @@ class _BottomMenuState extends State<BottomMenu> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.fact_check_outlined,
+              Icons.forum_outlined,
               size: 28.0,
             ),
-            label: 'Başvurular',
+            label: 'Forum',
           ),
           BottomNavigationBarItem(
             icon: Icon(

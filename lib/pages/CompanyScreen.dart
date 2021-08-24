@@ -15,6 +15,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: FutureBuilder(
         future: getCompany(companyAPI),
         builder: (context, AsyncSnapshot<Company> snapshot) {
@@ -23,7 +24,6 @@ class _CompanyScreenState extends State<CompanyScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            debugPrint(snapshot.data!.company[0].title);
             return CompanyItem(snapshot.data);
           } else {
             return Center(

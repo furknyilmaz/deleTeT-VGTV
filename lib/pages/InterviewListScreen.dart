@@ -24,6 +24,7 @@ class _InretviewListScreenState extends State<InretviewListScreen> {
           style: TextStyle(fontFamily: 'Nunito'),
         ),
       ),
+      backgroundColor: Colors.grey.shade100,
       body: FutureBuilder(
         future: getInterview(interviewAPI),
         builder: (context, AsyncSnapshot<Interview> snapshot) {
