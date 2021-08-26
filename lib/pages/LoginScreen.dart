@@ -69,7 +69,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: SelectRoleButton(),
+                          //child: SelectRoleButton(),
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 16, fontFamily: 'Nunito'),

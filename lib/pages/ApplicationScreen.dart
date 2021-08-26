@@ -115,8 +115,8 @@ class ApplicationItem extends StatelessWidget {
                                     height: 5,
                                   ),
                                   Text(
-                                    snapshot!
-                                        .application[index].adversDescription,
+                                    'Sizi aramızda görmekten mutluyuz. Aşağıda belirtilen tarih ve saatte sizinle kısa bir online görüşme yapmayı çok istiyoruz. Lütfen belirtilen zamandan en az 5 dakika önce burada hazır olunuz.',
+                                    // snapshot!.application[index].companyDesc,
                                     style: TextStyle(
                                         fontSize: 11, fontFamily: 'Nunito'),
                                   ),

@@ -1,32 +1,34 @@
-// To parse this JSON data, do
-//
-//     final company = companyFromJson(jsonString);
-
 import 'dart:convert';
+import 'dart:async';
+import 'package:deletedvgtv/utils/constants.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 
-Company companyFromJson(String str) => Company.fromJson(json.decode(str));
-
-String companyToJson(Company data) => json.encode(data.toJson());
-
-class Company {
-  Company({
-    required this.company,
-  });
-
-  List<CompanyElement> company;
-
-  factory Company.fromJson(Map<String, dynamic> json) => Company(
-        company: List<CompanyElement>.from(
-            json["company"].map((x) => CompanyElement.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "company": List<dynamic>.from(company.map((x) => x.toJson())),
-      };
+Future<List<Company>> fetchPhotos(http.Client client) async {
+  final response = await client.get(Uri.parse(companyAPI));
+  return compute(parsePhotos, response.body);
 }
 
-class CompanyElement {
-  CompanyElement({
+List<Company> parsePhotos(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Company>((json) => Company.fromJson(json)).toList();
+}
+
+class Company {
+  final int id;
+  final String title;
+  final String imageUrl;
+  final String department;
+  final String year;
+  final String personCount;
+  final String adress;
+  final String phone;
+  final String about;
+  final String websites;
+  final DateTime currentDate;
+
+  const Company({
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.department,
@@ -39,40 +41,19 @@ class CompanyElement {
     required this.currentDate,
   });
 
-  String title;
-  String imageUrl;
-  String department;
-  String year;
-  String personCount;
-  String adress;
-  String phone;
-  String about;
-  String websites;
-  DateTime currentDate;
-
-  factory CompanyElement.fromJson(Map<String, dynamic> json) => CompanyElement(
-        title: json["title"],
-        imageUrl: json["imageUrl"],
-        department: json["department"],
-        year: json["year"],
-        personCount: json["personCount"],
-        adress: json["adress"],
-        phone: json["phone"],
-        about: json["about"],
-        websites: json["websites"],
-        currentDate: DateTime.parse(json["currentDate"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "title": title,
-        "imageUrl": imageUrl,
-        "department": department,
-        "year": year,
-        "personCount": personCount,
-        "adress": adress,
-        "phone": phone,
-        "about": about,
-        "websites": websites,
-        "currentDate": currentDate.toIso8601String(),
-      };
+  factory Company.fromJson(Map<String, dynamic> json) {
+    return Company(
+      id: json["id"] as int,
+      title: json["title"] as String,
+      imageUrl: json["imageUrl"] as String,
+      department: json["department"] as String,
+      year: json["year"] as String,
+      personCount: json["personCount"] as String,
+      adress: json["adress"] as String,
+      phone: json["phone"] as String,
+      about: json["about"] as String,
+      websites: json["websites"] as String,
+      currentDate: DateTime.parse(json["currentDate"]) as DateTime,
+    );
+  }
 }

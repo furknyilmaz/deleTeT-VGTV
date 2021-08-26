@@ -1,8 +1,8 @@
 import 'package:deletedvgtv/models/company_model.dart';
-import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/CompanyItem.dart';
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
 
 class CompanyScreen extends StatefulWidget {
   @override
@@ -16,18 +16,18 @@ class _CompanyScreenState extends State<CompanyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      body: FutureBuilder(
-        future: getCompany(companyAPI),
-        builder: (context, AsyncSnapshot<Company> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
+      body: FutureBuilder<List<Company>>(
+        future: fetchPhotos(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('An error has occurred!'),
             );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            return CompanyItem(snapshot.data);
+          } else if (snapshot.hasData) {
+            return CompanyItem(data: snapshot.data!);
           } else {
-            return Center(
-              child: Text(snapshot.error.toString()),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
         },

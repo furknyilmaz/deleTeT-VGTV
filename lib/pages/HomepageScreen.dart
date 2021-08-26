@@ -46,6 +46,8 @@ class HomePageFeedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
     return Center(
         child: ListView.builder(
             padding: const EdgeInsets.all(8),
@@ -98,8 +100,8 @@ class HomePageFeedItem extends StatelessWidget {
                         height: 20,
                       ),
                       Container(
-                        width: 400,
-                        height: 220,
+                        width: width,
+                        height: width * (9 / 16),
                         child: ImageCached(
                           url: snapshot!.newsfeed[index].imageUri,
                         ),

@@ -31,7 +31,7 @@ class AdvertsItem extends StatelessWidget {
                     ));
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -40,13 +40,13 @@ class AdvertsItem extends StatelessWidget {
                         padding: EdgeInsets.all(0),
                         color: Colors.white,
                         width: width * 0.2,
-                        height: 80,
+                        height: 100,
                         child: ImageCached(
                             url: snapshot!.advers[index].companyIcon,
-                            width: width * 0.2,
-                            height: 80)),
+                            width: width * 0.3,
+                            height: 150)),
                     Container(
-                      width: width * 0.65,
+                      width: width * 0.70,
                       padding: EdgeInsets.only(left: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -99,9 +99,9 @@ class AdvertsItem extends StatelessWidget {
                           ),
                           Text(
                             snapshot!.advers[index].adversDescription.length >
-                                    120
+                                    100
                                 ? (snapshot!.advers[index].adversDescription
-                                        .substring(0, 120)) +
+                                        .substring(0, 100)) +
                                     '...'
                                 : (snapshot!.advers[index].adversDescription),
                             style:
