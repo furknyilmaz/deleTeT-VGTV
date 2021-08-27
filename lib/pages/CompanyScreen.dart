@@ -1,7 +1,7 @@
 import 'package:deletedvgtv/models/company_model.dart';
+import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/widgets/CompanyItem.dart';
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 
 class CompanyScreen extends StatefulWidget {
@@ -17,11 +17,31 @@ class _CompanyScreenState extends State<CompanyScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: FutureBuilder<List<Company>>(
-        future: fetchPhotos(http.Client()),
+        future: fetchCompany(
+          http.Client(),
+        ),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('An error has occurred!'),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    size: 60,
+                    color: Colors.grey.shade700,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      snapshot.error.toString(),
+                      style: TextStyle(fontFamily: 'Nunito'),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             );
           } else if (snapshot.hasData) {
             return CompanyItem(data: snapshot.data!);

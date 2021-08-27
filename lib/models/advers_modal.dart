@@ -1,23 +1,5 @@
-import 'dart:convert';
-
-Advers adversFromJson(String str) => Advers.fromJson(json.decode(str));
-String adversToJson(Advers data) => json.encode(data.toJson());
-
 class Advers {
-  Advers({required this.advers});
-  List<Adver> advers;
-
-  factory Advers.fromJson(Map<String, dynamic> json) => Advers(
-        advers: List<Adver>.from(json["advers"].map((x) => Adver.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "advers": List<dynamic>.from(advers.map((x) => x.toJson())),
-      };
-}
-
-class Adver {
-  Adver({
+  Advers({
     required this.id,
     required this.userName,
     required this.companyName,
@@ -42,31 +24,17 @@ class Adver {
   String adversTitle;
   String adversDescription;
 
-  factory Adver.fromJson(Map<String, dynamic> json) => Adver(
-        id: json['id'],
-        userName: json["userName"],
-        companyName: json["companyName"],
-        companyLocaliton: json["companyLocaliton"],
-        companyIcon: json["companyIcon"],
-        companyDesc: json["companyDesc"],
-        adversDate: json["adversDate"],
-        wayOfWorking: json["wayOfWorking"],
-        adversAbout: json["adversAbout"],
-        adversTitle: json["adversTitle"],
-        adversDescription: json["adversDescription"],
+  factory Advers.fromJson(Map<String, dynamic> json) => Advers(
+        id: json['id'] as int,
+        userName: json["userName"] as String,
+        companyName: json["companyName"] as String,
+        companyLocaliton: json["companyLocaliton"] as String,
+        companyIcon: json["companyIcon"] as String,
+        companyDesc: json["companyDesc"] as String,
+        adversDate: json["adversDate"] as String,
+        wayOfWorking: json["wayOfWorking"] as String,
+        adversAbout: json["adversAbout"] as String,
+        adversTitle: json["adversTitle"] as String,
+        adversDescription: json["adversDescription"] as String,
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "userName": userName,
-        "companyName": companyName,
-        "companyLocaliton": companyLocaliton,
-        "companyIcon": companyIcon,
-        "companyDesc": companyDesc,
-        "adversDate": adversDate,
-        "wayOfWorking": wayOfWorking,
-        "adversAbout": adversAbout,
-        "adversTitle": adversTitle,
-        "adversDescription": adversDescription,
-      };
 }

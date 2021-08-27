@@ -30,10 +30,10 @@ class CompanyDetail extends StatelessWidget {
                   width: 200,
                   height: 200,
                   child: ImageCached(
-                    url: snapshot!.imageUrl,
+                    url: snapshot!.companyUrl,
                   ),
                 ),
-                Html(data: snapshot!.about),
+                Html(data: snapshot!.companyAbout),
               ],
             ),
           ),

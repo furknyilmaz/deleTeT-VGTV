@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class AdvertsItem extends StatelessWidget {
-  Advers? snapshot;
-
-  AdvertsItem(this.snapshot);
+  const AdvertsItem({Key? key, required this.data}) : super(key: key);
+  final List<Advers> data;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class AdvertsItem extends StatelessWidget {
     return Center(
       child: ListView.builder(
         padding: const EdgeInsets.all(0.0),
-        itemCount: snapshot!.advers.length,
+        itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             margin: EdgeInsets.only(top: 3, left: 8, right: 8, bottom: 3),
@@ -26,44 +25,51 @@ class AdvertsItem extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          AdvertsDetailScreen(snapshot!.advers[index]),
+                      builder: (context) => AdvertsDetailScreen(data[index]),
                     ));
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              width: 0.5, color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                         padding: EdgeInsets.all(0),
-                        color: Colors.white,
-                        width: width * 0.2,
-                        height: 100,
+                        width: width * 0.22,
+                        height: width * 0.25,
                         child: ImageCached(
-                            url: snapshot!.advers[index].companyIcon,
+                            url: data[index].companyIcon,
                             width: width * 0.3,
-                            height: 150)),
+                            height: width * 0.3)),
                     Container(
                       width: width * 0.70,
-                      padding: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: 10, bottom: 5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            snapshot!.advers[index].adversTitle,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                fontFamily: 'Nunito'),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 2),
+                            child: Text(
+                              data[index].adversTitle,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  fontFamily: 'Nunito'),
+                            ),
                           ),
                           Row(
                             children: [
                               Icon(Icons.access_time_outlined, size: 12),
                               Text(
-                                snapshot!.advers[index].wayOfWorking,
+                                data[index].wayOfWorking,
                                 style: TextStyle(
                                     fontFamily: 'Nunito', fontSize: 12),
                               ),
@@ -73,12 +79,12 @@ class AdvertsItem extends StatelessWidget {
                             children: [
                               Icon(Icons.location_on_outlined, size: 12),
                               Text(
-                                snapshot!.advers[index].companyName + ' - ',
+                                data[index].companyName + ' - ',
                                 style: TextStyle(
                                     fontSize: 11, fontFamily: 'Nunito'),
                               ),
                               Text(
-                                snapshot!.advers[index].companyLocaliton,
+                                data[index].companyLocaliton,
                                 style: TextStyle(
                                     fontSize: 11, fontFamily: 'Nunito'),
                               )
@@ -88,7 +94,7 @@ class AdvertsItem extends StatelessWidget {
                             children: [
                               Icon(Icons.date_range_outlined, size: 12),
                               Text(
-                                snapshot!.advers[index].adversDate,
+                                data[index].adversDate,
                                 style: TextStyle(
                                     fontSize: 12, fontFamily: 'Nunito'),
                               ),
@@ -98,12 +104,12 @@ class AdvertsItem extends StatelessWidget {
                             height: 3,
                           ),
                           Text(
-                            snapshot!.advers[index].adversDescription.length >
-                                    100
-                                ? (snapshot!.advers[index].adversDescription
+                            data[index].adversDescription.length > 100
+                                ? (data[index]
+                                        .adversDescription
                                         .substring(0, 100)) +
                                     '...'
-                                : (snapshot!.advers[index].adversDescription),
+                                : (data[index].adversDescription),
                             style:
                                 TextStyle(fontSize: 11, fontFamily: 'Nunito'),
                           ),

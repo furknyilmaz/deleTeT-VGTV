@@ -3,6 +3,7 @@ import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/AdvertsItem.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class AdvertScreen extends StatefulWidget {
   const AdvertScreen({Key? key}) : super(key: key);
@@ -16,19 +17,23 @@ class _AdvertScreenState extends State<AdvertScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: FutureBuilder(
-        future: getAdvers(adversAPI),
-        builder: (context, AsyncSnapshot<Advers> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: FutureBuilder<List<Advers>>(
+        future: fetchAdvers(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                children: [
+                  Icon(Icons.dangerous),
+                  Text('Bir hata ile karşılaşıldı'),
+                ],
+              ),
             );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            debugPrint(snapshot.data!.advers[0].adversAbout);
-            return AdvertsItem(snapshot.data);
+          } else if (snapshot.hasData) {
+            return AdvertsItem(data: snapshot.data!);
           } else {
-            return Center(
-              child: Text(snapshot.error.toString()),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
         },
@@ -36,6 +41,11 @@ class _AdvertScreenState extends State<AdvertScreen> {
     );
   }
 }
+
+
+
+
+
 
 
 /*

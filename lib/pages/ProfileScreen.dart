@@ -207,6 +207,8 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.school_outlined, size: 22),
                             Text(
@@ -219,10 +221,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(Icons.add_circle_outline_outlined),
-                        )
+                        UniverstyInfoModal(),
                       ],
                     ),
                   ),
@@ -325,10 +324,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(Icons.add_circle_outline_outlined),
-                        )
+                        ExperienceModal(),
                       ],
                     ),
                   ),
@@ -431,7 +427,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Icon(Icons.add_circle_outline_outlined, size: 22),
+                        ContactModal(),
                       ],
                     ),
                   ),
@@ -554,7 +550,6 @@ class ProfileScreen extends StatelessWidget {
 
 class CvFile extends StatelessWidget {
   const CvFile({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -603,6 +598,99 @@ class CvFile extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UniverstyInfoModal extends StatelessWidget {
+  const UniverstyInfoModal({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+    return GestureDetector(
+      onTap: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Üniversite Ekle'),
+          content: const Text(
+            'Version 2.0',
+            style: TextStyle(fontFamily: 'Nunito'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('Tamam'),
+            ),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: Icon(Icons.add_circle_outline_outlined),
+      ),
+    );
+  }
+}
+
+class ExperienceModal extends StatelessWidget {
+  const ExperienceModal({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+    return GestureDetector(
+      onTap: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Deneyim Ekle'),
+          content: const Text(
+            'Version 2.0',
+            style: TextStyle(fontFamily: 'Nunito'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('Tamam'),
+            ),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: Icon(Icons.add_circle_outline_outlined),
+      ),
+    );
+  }
+}
+
+class ContactModal extends StatelessWidget {
+  const ContactModal({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+    return GestureDetector(
+      onTap: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('İletişim Bilgisi Ekle'),
+          content: const Text(
+            'Version 2.0',
+            style: TextStyle(fontFamily: 'Nunito'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('Tamam'),
+            ),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: Icon(Icons.add_circle_outline_outlined),
       ),
     );
   }

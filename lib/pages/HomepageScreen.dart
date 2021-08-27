@@ -38,11 +38,20 @@ class _HomePageScreenState extends State<HomePageScreen> {
 }
 
 // ignore: must_be_immutable
-class HomePageFeedItem extends StatelessWidget {
+class HomePageFeedItem extends StatefulWidget {
   Newsfeed? snapshot;
 
   @override
   HomePageFeedItem(this.snapshot);
+
+  @override
+  _HomePageFeedItemState createState() => _HomePageFeedItemState();
+}
+
+class _HomePageFeedItemState extends State<HomePageFeedItem> {
+  bool readMore = true;
+  String text =
+      'TUSAŞ İnsan Kaynakları ekibi, TR Eğitim ve Teknoloji A.Ş. Yönetim Kurulu Başkanı ve Genel Müdürü Çağlar Demirkan ve Vizyoner Genç ekibini ziyaret etti.Ziyaret sırasında gerçekleştirilebilecek projeler üzerine fikir alışverişi yapıldı ve olası projeler ile ilgili görüşmeler gerçekleştirildi.';
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +60,7 @@ class HomePageFeedItem extends StatelessWidget {
     return Center(
         child: ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: snapshot!.newsfeed.length,
+            itemCount: widget.snapshot!.newsfeed.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 color: Colors.white,
@@ -78,7 +87,8 @@ class HomePageFeedItem extends StatelessWidget {
                                     fontFamily: 'Nunito'),
                               ),
                               Text(
-                                "   " + snapshot!.newsfeed[index].timeAgo,
+                                "   " +
+                                    widget.snapshot!.newsfeed[index].timeAgo,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 12,
@@ -92,9 +102,29 @@ class HomePageFeedItem extends StatelessWidget {
                       Container(
                         height: 20,
                       ),
-                      Text(
-                        snapshot!.newsfeed[index].title,
-                        style: TextStyle(fontFamily: 'Nunito'),
+                      readMore
+                          ? Text(
+                              text.length > 150
+                                  ? text.substring(0, 150) + '...'
+                                  : text,
+                              style: TextStyle(fontFamily: 'Nunito'),
+                            )
+                          : Text(
+                              text,
+                              style: TextStyle(fontFamily: 'Nunito'),
+                            ),
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              readMore = !readMore;
+                            });
+                          },
+                          child: Text(
+                            readMore ? 'Devamını Oku...' : 'Küçült',
+                          ),
+                        ),
                       ),
                       Container(
                         height: 20,
@@ -103,7 +133,7 @@ class HomePageFeedItem extends StatelessWidget {
                         width: width,
                         height: width * (9 / 16),
                         child: ImageCached(
-                          url: snapshot!.newsfeed[index].imageUri,
+                          url: widget.snapshot!.newsfeed[index].imageUri,
                         ),
                       ),
                       Container(
@@ -122,12 +152,12 @@ class HomePageFeedItem extends StatelessWidget {
                                   color: Colors.red[800],
                                 ),
                                 Text(
-                                  '${snapshot!.newsfeed[index].likeCount} beğeni',
+                                  '${widget.snapshot!.newsfeed[index].likeCount} beğeni',
                                 )
                               ],
                             ),
                             Text(
-                              '  ${snapshot!.newsfeed[index].commentCount} yorum',
+                              '  ${widget.snapshot!.newsfeed[index].commentCount} yorum',
                             )
                           ],
                         ),

@@ -44,7 +44,7 @@ class CompanyItem extends StatelessWidget {
                     child: ImageCached(
                         width: itemWidth - 50,
                         height: itemWidth - 50,
-                        url: data[index].imageUrl)),
+                        url: data[index].companyUrl)),
               ),
             ),
           );
