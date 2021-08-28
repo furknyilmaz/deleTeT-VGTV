@@ -1,11 +1,3 @@
-import 'dart:convert';
-
-List<Company> companyFromJson(String str) =>
-    List<Company>.from(json.decode(str).map((x) => Company.fromJson(x)));
-
-String companyToJson(List<Company> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class Company {
   Company({
     required this.id,
@@ -43,17 +35,4 @@ class Company {
         website: json["website"] as String,
         companyAbout: json["companyAbout"] as String,
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "companyName": companyName,
-        "companyUrl": companyUrl,
-        "companyDepartment": companyDepartment,
-        "establishment": establishment,
-        "employeeCount": employeeCount,
-        "address": address,
-        "contact": contact,
-        "website": website,
-        "companyAbout": companyAbout,
-      };
 }

@@ -31,16 +31,16 @@ class AdvertsDetailScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: 120.0,
-                          height: 120.0,
+                          width: 150.0,
+                          height: 150.0,
                           child: Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(75),
+                                  borderRadius: BorderRadius.circular(50),
                                   color: Colors.white,
                                   border: Border.all(
                                       width: 1, color: Colors.grey.shade300),
                                   image: new DecorationImage(
-                                      fit: BoxFit.fitWidth,
+                                      fit: BoxFit.contain,
                                       image: new NetworkImage(
                                           advers.companyIcon)))),
                         ),
@@ -48,12 +48,13 @@ class AdvertsDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               top: 20, left: 20, right: 20, bottom: 2),
                           child: Text(
-                            advers.adversTitle,
+                            advers.advertsTitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black),
+                                color: Colors.black,
+                                fontFamily: 'Nunito'),
                           ),
                         ),
                         Padding(
@@ -65,19 +66,21 @@ class AdvertsDetailScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black),
+                                color: Colors.black,
+                                fontFamily: 'Nunito'),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 0, horizontal: 30),
                           child: Text(
-                            advers.adversDescription,
+                            advers.advertsDescription,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black),
+                                color: Colors.black,
+                                fontFamily: 'Nunito'),
                           ),
                         ),
                       ],
@@ -102,7 +105,7 @@ class AdvertsDetailScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Html(data: advers.adversAbout),
+                              Html(data: advers.advertsAbout),
                               Container(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,

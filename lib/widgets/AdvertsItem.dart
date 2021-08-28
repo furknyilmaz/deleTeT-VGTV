@@ -18,8 +18,12 @@ class AdvertsItem extends StatelessWidget {
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            margin: EdgeInsets.only(top: 3, left: 8, right: 8, bottom: 3),
-            color: Colors.white,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(width: 0.5, color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            margin: EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 2),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -58,7 +62,7 @@ class AdvertsItem extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 2),
                             child: Text(
-                              data[index].adversTitle,
+                              data[index].advertsTitle,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -69,22 +73,12 @@ class AdvertsItem extends StatelessWidget {
                             children: [
                               Icon(Icons.access_time_outlined, size: 12),
                               Text(
-                                data[index].wayOfWorking,
+                                data[index].wayOfWorking + ' - ',
                                 style: TextStyle(
                                     fontFamily: 'Nunito', fontSize: 12),
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on_outlined, size: 12),
                               Text(
-                                data[index].companyName + ' - ',
-                                style: TextStyle(
-                                    fontSize: 11, fontFamily: 'Nunito'),
-                              ),
-                              Text(
-                                data[index].companyLocaliton,
+                                data[index].companyLocation,
                                 style: TextStyle(
                                     fontSize: 11, fontFamily: 'Nunito'),
                               )
@@ -92,26 +86,29 @@ class AdvertsItem extends StatelessWidget {
                           ),
                           Row(
                             children: [
+                              Icon(Icons.location_on_outlined, size: 12),
+                              Container(
+                                width: width * 0.6,
+                                child: Text(
+                                  data[index].companyName,
+                                  style: TextStyle(
+                                      fontSize: 11, fontFamily: 'Nunito'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
                               Icon(Icons.date_range_outlined, size: 12),
                               Text(
-                                data[index].adversDate,
+                                data[index].advertsDate,
                                 style: TextStyle(
-                                    fontSize: 12, fontFamily: 'Nunito'),
+                                    fontSize: 11, fontFamily: 'Nunito'),
                               ),
                             ],
                           ),
                           Container(
                             height: 3,
-                          ),
-                          Text(
-                            data[index].adversDescription.length > 100
-                                ? (data[index]
-                                        .adversDescription
-                                        .substring(0, 100)) +
-                                    '...'
-                                : (data[index].adversDescription),
-                            style:
-                                TextStyle(fontSize: 11, fontFamily: 'Nunito'),
                           ),
                           //Button
                         ],
@@ -127,12 +124,3 @@ class AdvertsItem extends StatelessWidget {
     );
   }
 }
-/* 
-
- snapshot!.advers[index].adversAbout.length > 140
-                                ? (snapshot!.advers[index].adversAbout
-                                        .substring(0, 140)) +
-                                    '...'
-                                : (snapshot!.advers[index].adversAbout),*/
-
-                                

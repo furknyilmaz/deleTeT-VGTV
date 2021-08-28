@@ -29,19 +29,22 @@ class CompanyItem extends StatelessWidget {
                 ),
               );
             },
-            child: Center(
-              child: Container(
-                width: itemWidth,
-                height: itemWidth,
-                margin: EdgeInsets.all(3),
-                padding: EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(width: 0.4, color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
+            child: Tooltip(
+              message: data[index].companyName,
+              child: Center(
+                child: Container(
+                  width: itemWidth,
+                  height: itemWidth,
+                  margin: EdgeInsets.all(3),
+                  padding: EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(width: 0.4, color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Container(
+                      child: ImageCached(url: data[index].companyUrl)),
                 ),
-                child:
-                    Container(child: ImageCached(url: data[index].companyUrl)),
               ),
             ),
           );

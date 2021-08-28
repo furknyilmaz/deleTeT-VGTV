@@ -1,40 +1,43 @@
 class Advers {
   Advers({
-    required this.id,
-    required this.userName,
+    required this.categoryId,
     required this.companyName,
-    required this.companyLocaliton,
+    required this.companyLocation,
     required this.companyIcon,
     required this.companyDesc,
-    required this.adversDate,
+    required this.advertsDate,
     required this.wayOfWorking,
-    required this.adversAbout,
-    required this.adversTitle,
-    required this.adversDescription,
+    required this.advertsAbout,
+    required this.advertsTitle,
+    required this.advertsDescription,
   });
-  int id;
-  String userName;
+  int categoryId;
   String companyName;
-  String companyLocaliton;
+  String companyLocation;
   String companyIcon;
   String companyDesc;
-  String adversDate;
+  String advertsDate;
   String wayOfWorking;
-  String adversAbout;
-  String adversTitle;
-  String adversDescription;
+  String advertsAbout;
+  String advertsTitle;
+  String advertsDescription;
 
   factory Advers.fromJson(Map<String, dynamic> json) => Advers(
-        id: json['id'] as int,
-        userName: json["userName"] as String,
-        companyName: json["companyName"] as String,
-        companyLocaliton: json["companyLocaliton"] as String,
-        companyIcon: json["companyIcon"] as String,
-        companyDesc: json["companyDesc"] as String,
-        adversDate: json["adversDate"] as String,
-        wayOfWorking: json["wayOfWorking"] as String,
-        adversAbout: json["adversAbout"] as String,
-        adversTitle: json["adversTitle"] as String,
-        adversDescription: json["adversDescription"] as String,
+        categoryId: json['categoryId'] == null ? null : json['categoryId'],
+        companyName: json["companyName"] == null ? null : json["companyName"],
+        companyLocation:
+            json["companyLocation"] == null ? null : json["companyLocation"],
+        companyIcon: json["companyIcon"] == null ? null : json["companyIcon"],
+        companyDesc: json["companyDesc"] == null ? null : json["companyDesc"],
+        advertsDate: json["advertsDate"] == null ? null : json["advertsDate"],
+        wayOfWorking:
+            json["wayOfWorking"] == null ? null : json["wayOfWorking"],
+        advertsAbout:
+            json["advertsAbout"] == null ? null : json["advertsAbout"],
+        advertsTitle:
+            json["advertsTitle"] == null ? null : json["advertsTitle"],
+        advertsDescription: json["advertsDescription"] == null
+            ? null
+            : json["advertsDescription"],
       );
 }

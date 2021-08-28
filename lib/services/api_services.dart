@@ -23,18 +23,8 @@ class UserAPIServices {
   register(RegisterRequestModal requestModal, localUrl) async {
     var url = Uri.parse(localUrl);
     final response = await http.post(url, body: requestModal.toJson());
-    print(response.statusCode);
     return response;
   }
-}
-
-//Mülakatlar Listesi API bağlantısı
-Future<Interview> getInterview(url) async {
-  var apiUrl = await http.get(Uri.parse(url));
-  var response = json.decode(utf8.decode(apiUrl.bodyBytes));
-  var data = Interview.fromJson(response);
-  print(data.toString());
-  return data;
 }
 
 // Şirketler Listeis API bağlantısı
@@ -46,6 +36,25 @@ Future<List<Company>> fetchCompany(http.Client client) async {
 List<Company> parseCompany(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Company>((json) => Company.fromJson(json)).toList();
+}
+
+/// İlanlar API bapantısı
+Future<List<Advers>> fetchAdvers(http.Client client) async {
+  final response = await client.get(Uri.parse(adversAPI));
+  return compute(parseAdvers, utf8.decode(response.bodyBytes));
+}
+
+List<Advers> parseAdvers(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Advers>((json) => Advers.fromJson(json)).toList();
+}
+
+//Mülakatlar Listesi API bağlantısı
+Future<Interview> getInterview(url) async {
+  var apiUrl = await http.get(Uri.parse(url));
+  var response = json.decode(utf8.decode(apiUrl.bodyBytes));
+  var data = Interview.fromJson(response);
+  return data;
 }
 
 Future<Newsfeed> getFeedNews(url) async {
@@ -60,24 +69,4 @@ Future<Application> getApplication(url) async {
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
   var data = Application.fromJson(response);
   return data;
-}
-
-// Future<Advers> getAdvers(urlx) async {
-// Başvurular eski API bağlantısı
-//   var apiUrl = await http.get(Uri.parse(urlx));
-//   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
-//   var data = Advers.fromJson(response);
-//   return data;
-// }
-
-/// Başvurular API bağlantısı
-Future<List<Advers>> fetchAdvers(http.Client client) async {
-  final response = await client.get(Uri.parse(adversAPI));
-  json.decode(utf8.decode(response.bodyBytes));
-  return compute(parseAdvers, response.body);
-}
-
-List<Advers> parseAdvers(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Advers>((json) => Advers.fromJson(json)).toList();
 }

@@ -55,6 +55,7 @@ class Photo {
       phone: json["phone"] as String,
       about: json["about"] as String,
       websites: json["websites"] as String,
+      // ignore: unnecessary_cast
       currentDate: DateTime.parse(json["currentDate"]) as DateTime,
     );
   }

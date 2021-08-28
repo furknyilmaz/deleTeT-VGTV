@@ -12,7 +12,6 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    final double itemWidth = (width / 2) - 25;
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -608,8 +607,6 @@ class UniverstyInfoModal extends StatelessWidget {
   const UniverstyInfoModal({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double width = screen.size.width;
     return GestureDetector(
       onTap: () => showDialog<String>(
         context: context,
@@ -639,8 +636,6 @@ class ExperienceModal extends StatelessWidget {
   const ExperienceModal({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double width = screen.size.width;
     return GestureDetector(
       onTap: () => showDialog<String>(
         context: context,
@@ -670,8 +665,6 @@ class ContactModal extends StatelessWidget {
   const ContactModal({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double width = screen.size.width;
     return GestureDetector(
       onTap: () => showDialog<String>(
         context: context,

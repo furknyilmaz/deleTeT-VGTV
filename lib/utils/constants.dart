@@ -6,4 +6,4 @@ const companyAPI = 'http://89.252.131.149:8080/api/deletet/company/readAll';
 const interviewAPI = BASE_URL + '/interview.json';
 const newsfeedAPI = BASE_URL + '/newsfeed.json';
 const applicationAPI = BASE_URL + '/application.json';
-const adversAPI = 'https://dgsbilgim.com/api/advers';
+const adversAPI = 'http://89.252.131.149:8080/api/deletet/adverts/readAll';

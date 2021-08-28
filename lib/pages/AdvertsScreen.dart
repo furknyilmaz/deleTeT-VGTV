@@ -1,6 +1,5 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/AdvertsItem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +19,7 @@ class _AdvertScreenState extends State<AdvertScreen> {
       body: FutureBuilder<List<Advers>>(
         future: fetchAdvers(http.Client()),
         builder: (context, snapshot) {
+          print(snapshot.error);
           if (snapshot.hasError) {
             return Center(
               child: Column(
@@ -30,7 +30,10 @@ class _AdvertScreenState extends State<AdvertScreen> {
               ),
             );
           } else if (snapshot.hasData) {
-            return AdvertsItem(data: snapshot.data!);
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: AdvertsItem(data: snapshot.data!),
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),
