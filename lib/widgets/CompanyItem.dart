@@ -12,7 +12,7 @@ class CompanyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    final double itemWidth = (width / 2) - 25;
+    final double itemWidth = (width / 2) - 15;
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -33,18 +33,15 @@ class CompanyItem extends StatelessWidget {
               child: Container(
                 width: itemWidth,
                 height: itemWidth,
-                margin: EdgeInsets.all(5),
-                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(3),
+                padding: EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(width: 0.6, color: Colors.grey.shade300),
+                  border: Border.all(width: 0.4, color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Container(
-                    child: ImageCached(
-                        width: itemWidth - 50,
-                        height: itemWidth - 50,
-                        url: data[index].companyUrl)),
+                child:
+                    Container(child: ImageCached(url: data[index].companyUrl)),
               ),
             ),
           );

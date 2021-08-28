@@ -16,41 +16,44 @@ class _CompanyScreenState extends State<CompanyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      body: FutureBuilder<List<Company>>(
-        future: fetchCompany(
-          http.Client(),
-        ),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    size: 60,
-                    color: Colors.grey.shade700,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      snapshot.error.toString(),
-                      style: TextStyle(fontFamily: 'Nunito'),
-                      textAlign: TextAlign.center,
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: FutureBuilder<List<Company>>(
+          future: fetchCompany(
+            http.Client(),
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 60,
+                      color: Colors.grey.shade700,
                     ),
-                  ),
-                ],
-              ),
-            );
-          } else if (snapshot.hasData) {
-            return CompanyItem(data: snapshot.data!);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        'deneme',
+                        style: TextStyle(fontFamily: 'Nunito'),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else if (snapshot.hasData) {
+              return CompanyItem(data: snapshot.data!);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

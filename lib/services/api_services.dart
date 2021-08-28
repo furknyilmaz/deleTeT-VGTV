@@ -40,7 +40,7 @@ Future<Interview> getInterview(url) async {
 // Şirketler Listeis API bağlantısı
 Future<List<Company>> fetchCompany(http.Client client) async {
   final response = await client.get(Uri.parse(companyAPI));
-  return compute(parseCompany, response.body);
+  return compute(parseCompany, utf8.decode(response.bodyBytes));
 }
 
 List<Company> parseCompany(String responseBody) {
