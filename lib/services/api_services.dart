@@ -1,4 +1,5 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
+import 'package:deletedvgtv/models/application_add_modal.dart';
 import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:deletedvgtv/models/interview_model.dart';
@@ -19,6 +20,20 @@ class UserAPIServices {
     final response = await http.post(
       url,
       body: json.encode(requestModal),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+    print(response.body);
+    return response;
+  }
+
+  applicationAdd(ApplicationAddModal applicationModal, localUrl) async {
+    print(applicationModal.toString());
+    var url = Uri.parse(applicationAPI + 'create');
+    final response = await http.post(
+      url,
+      body: json.encode(applicationModal),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -89,7 +104,8 @@ List<Newsfeed> parseNewFeed(String responseBody) {
 Future<List<Application>> fetchApplication(http.Client client) async {
   var sp = await SharedPreferences.getInstance();
   String? userID = sp.getString("user_id");
-  final response = await client.get(Uri.parse(applicationAPI + userID!));
+  var deneme = applicationAPI + userID.toString();
+  final response = await client.get(Uri.parse(deneme));
   print(response.body);
   return compute(parseApplication, utf8.decode(response.bodyBytes));
 }

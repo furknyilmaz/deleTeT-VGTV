@@ -16,7 +16,9 @@ class _MainDraverState extends State<MainDraver> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreenPage()),
+      MaterialPageRoute(
+          builder: (context) =>
+              LoginScreenPage(info: "Hesaptan başarıyla çıkış yapıldı")),
     );
   }
 

@@ -56,6 +56,19 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
               ),
             );
           } else if (snapshot.hasData) {
+            if (snapshot.data!.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.info_outlined, size: 70, color: Colors.black45),
+                    Text('Şuana kadar hiç başvuru yapmadınız.',
+                        style: TextStyle(fontFamily: 'Nunito')),
+                  ],
+                ),
+              );
+            }
             return ApplicationItem(data: snapshot.data!);
           } else {
             return const Center(

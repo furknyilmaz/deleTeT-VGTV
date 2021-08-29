@@ -5,7 +5,9 @@ import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreenPage extends StatefulWidget {
-  const LoginScreenPage({Key? key}) : super(key: key);
+  String info = "selam";
+
+  LoginScreenPage({required this.info});
 
   @override
   _LoginScreenPAgeState createState() => _LoginScreenPAgeState();
@@ -67,6 +69,25 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             child: Image.asset("assets/vgplus.png"),
                           ),
                         ),
+                        widget.info.length > 0
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  border: Border.all(
+                                      width: 0.4, color: Colors.grey.shade300),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 30),
+                                child: Text(
+                                  widget.info,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Nunito'),
+                                ),
+                              )
+                            : Text(""),
                         Padding(
                           padding: EdgeInsets.all(10),
                           //child: SelectRoleButton(),

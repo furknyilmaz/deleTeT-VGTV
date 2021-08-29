@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             bool? ok = snapshot.data;
-            return ok == true ? BottomMenu() : LoginScreenPage();
+            return ok == true ? BottomMenu() : LoginScreenPage(info: '');
           } else {
             return Container();
           }

@@ -387,7 +387,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginScreenPage(),
+                                builder: (context) => LoginScreenPage(info: ""),
                               ),
                             );
                           },

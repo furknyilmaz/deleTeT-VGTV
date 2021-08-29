@@ -1,14 +1,13 @@
-import 'package:deletedvgtv/pages/LoginScreen.dart';
 import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
+import 'package:deletedvgtv/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-Future<void> userRegister(requestModal, context) async {
+Future<void> setApplicationAdd(applicationModal, context) async {
   UserAPIServices apiServices = new UserAPIServices();
   apiServices
-      .register(
-    requestModal,
-    'http://89.252.131.149:8080/api/deletet/register',
+      .applicationAdd(
+    applicationModal,
+    applicationAPI + 'create',
   )
       .then((response) async {
     print('ResponseCode: ' + response.statusCode.toString());
@@ -18,18 +17,25 @@ Future<void> userRegister(requestModal, context) async {
       //sp.setString("name", data.name.toString());
       // sp.setString("user_email", data.email.toString());
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginScreenPage(
-              info: "Kaydınız başarıyla oluşturuldu.  Giriş yapabilirsiniz."),
+      final snackBar = SnackBar(
+        backgroundColor: Colors.green,
+        content: Text(
+          "Bu ilan için başvurunuz alındı. Detayları Başvurularım sayfasından görebilirsiniz.",
+          style: TextStyle(fontFamily: 'Nunito'),
+        ),
+        action: SnackBarAction(
+          textColor: Color(0xffffffff),
+          label: 'Tamam',
+          onPressed: () {
+            // Some code to undo the change.
+          },
         ),
       );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       final snackBar = SnackBar(
-        backgroundColor: Color(0xffE63946),
-        content: Text(
-            'Kullanıcı adı veya şifreyi hatalı girdiniz. Lütfen kontrol ediniz.'),
+        backgroundColor: Colors.red,
+        content: Text('İlana Başvuru sırasında bir hata oluştu'),
         action: SnackBarAction(
           textColor: Color(0xffffffff),
           label: 'Tamam',

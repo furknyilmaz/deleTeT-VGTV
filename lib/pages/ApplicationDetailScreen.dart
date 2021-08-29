@@ -132,16 +132,11 @@ class ApplicationDetailScreen extends StatelessWidget {
                             program,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                           ),
-                        ),
-                        Column(
-                          children: [
-                            Html(data: applicationDetails),
-                          ],
                         ),
                       ],
                     ),
