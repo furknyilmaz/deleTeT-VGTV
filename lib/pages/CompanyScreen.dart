@@ -16,8 +16,8 @@ class _CompanyScreenState extends State<CompanyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
         child: FutureBuilder<List<Company>>(
           future: fetchCompany(
             http.Client(),

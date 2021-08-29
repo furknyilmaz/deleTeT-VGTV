@@ -23,7 +23,7 @@ class CompanyDetail extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(5.0),
             child: Container(
               width: width,
               child: Column(
@@ -40,6 +40,7 @@ class CompanyDetail extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         width: width,
+                        margin: EdgeInsets.symmetric(horizontal: 3),
                         padding: EdgeInsets.all(5),
                         child: Container(
                           padding: EdgeInsets.all(20),
@@ -56,7 +57,8 @@ class CompanyDetail extends StatelessWidget {
                               width: 0.4, color: Colors.grey.shade300),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        margin: EdgeInsets.all(10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                         padding: EdgeInsets.all(15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

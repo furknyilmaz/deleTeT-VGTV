@@ -10,15 +10,15 @@ Future<void> userRegister(requestModal, context) async {
   apiServices
       .register(
     requestModal,
-    'https://dgsbilgim.com/api/register',
+    'http://89.252.131.149:8080/api/deletet/register',
   )
       .then((response) async {
     print('ResponseCode: ' + response.statusCode.toString());
     if (response.statusCode == 200) {
-      var data = RegisterResponseModal.fromJson(json.decode(response.body));
-      var sp = await SharedPreferences.getInstance();
-      sp.setString("name", data.name.toString());
-      sp.setString("user_email", data.email.toString());
+      // var data = RegisterResponseModal.fromJson(json.decode(response.bodt));
+      // var sp = await SharedPreferences.getInstance();
+      //sp.setString("name", data.name.toString());
+      // sp.setString("user_email", data.email.toString());
 
       Navigator.pushReplacement(
         context,

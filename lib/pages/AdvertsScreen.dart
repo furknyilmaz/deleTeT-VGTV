@@ -1,6 +1,7 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/widgets/AdvertsItem.dart';
+import 'package:deletedvgtv/widgets/SearchWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,7 +16,7 @@ class _AdvertScreenState extends State<AdvertScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.grey.shade100,
       body: FutureBuilder<List<Advers>>(
         future: fetchAdvers(http.Client()),
         builder: (context, snapshot) {

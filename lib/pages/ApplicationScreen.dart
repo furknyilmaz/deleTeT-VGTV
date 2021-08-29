@@ -1,9 +1,9 @@
 import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/pages/ApplicationDetailScreen.dart';
 import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ApplicationScreen extends StatefulWidget {
   const ApplicationScreen({Key? key}) : super(key: key);
@@ -18,6 +18,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 50.0,
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
         title: Text(
           'Başvurularınız',
@@ -27,19 +28,38 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
         ),
       ),
       backgroundColor: Colors.grey.shade200,
-      body: FutureBuilder(
-        future: getApplication(applicationAPI),
-        builder: (context, AsyncSnapshot<Application> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: FutureBuilder<List<Application>>(
+        future: fetchApplication(
+          http.Client(),
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    size: 60,
+                    color: Colors.grey.shade700,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      snapshot.error.toString(),
+                      style: TextStyle(fontFamily: 'Nunito'),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            debugPrint(snapshot.data!.application[0].companyName);
-            return ApplicationItem(snapshot.data);
+          } else if (snapshot.hasData) {
+            return ApplicationItem(data: snapshot.data!);
           } else {
-            return Center(
-              child: Text(snapshot.error.toString()),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
         },
@@ -50,9 +70,8 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
 
 // ignore: must_be_immutable
 class ApplicationItem extends StatelessWidget {
-  Application? snapshot;
-
-  ApplicationItem(this.snapshot);
+  const ApplicationItem({Key? key, required this.data}) : super(key: key);
+  final List<Application> data;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +80,7 @@ class ApplicationItem extends StatelessWidget {
     return Center(
         child: ListView.builder(
             padding: const EdgeInsets.all(0),
-            itemCount: snapshot!.application.length,
+            itemCount: data.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 decoration: BoxDecoration(
@@ -84,11 +103,9 @@ class ApplicationItem extends StatelessWidget {
                               height: 80.0,
                               child: Container(
                                   child: ImageCached(
-                                    width: 70,
-                                    height: 70,
-                                    url: snapshot!
-                                        .application[index].companyIcon,
-                                  ),
+                                      width: 70,
+                                      height: 70,
+                                      url: data[index].companyIcon),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
@@ -105,7 +122,7 @@ class ApplicationItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    snapshot!.application[index].adversTitle,
+                                    data[index].advertsTitle,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
@@ -144,9 +161,7 @@ class ApplicationItem extends StatelessWidget {
                                       size: 16,
                                     ),
                                     Text(
-                                      ' ' +
-                                          snapshot!
-                                              .application[index].adversTime,
+                                      ' ' + data[index].applicationDate,
                                       style: TextStyle(
                                           fontSize: 12, fontFamily: 'Nunito'),
                                     ),
@@ -159,23 +174,16 @@ class ApplicationItem extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               ApplicationDetailScreen(
-                                                snapshot!.application[index]
-                                                    .companyIcon,
-                                                snapshot!.application[index]
-                                                    .adversDescription,
-                                                snapshot!.application[index]
-                                                    .adversTitle,
-                                                snapshot!.application[index]
-                                                    .companyDesc,
-                                                snapshot!
-                                                    .application[index].status
-                                                    .toString(),
+                                                data[index].companyIcon,
+                                                data[index].advertsDescription,
+                                                data[index].advertsTitle,
+                                                data[index].companyDesc,
+                                                data[index].status.toString(),
                                               )),
                                     );
                                   },
                                   child: Status(
-                                    snapshot!.application[index].status
-                                        .toString(),
+                                    data[index].status.toString(),
                                   ),
                                 ),
                               ],

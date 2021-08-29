@@ -20,8 +20,8 @@ class AdvertsItem extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(width: 0.5, color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(8),
+              border: Border.all(width: 0.5, color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(5),
             ),
             margin: EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 2),
             child: GestureDetector(
@@ -39,19 +39,13 @@ class AdvertsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              width: 0.5, color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
                         padding: EdgeInsets.all(0),
-                        width: width * 0.22,
-                        height: width * 0.25,
+                        width: width * 0.20,
+                        height: width * 0.20,
                         child: ImageCached(
                             url: data[index].companyIcon,
-                            width: width * 0.3,
-                            height: width * 0.3)),
+                            width: width * 0.4,
+                            height: width * 0.4)),
                     Container(
                       width: width * 0.70,
                       padding: EdgeInsets.only(left: 10, bottom: 5),
@@ -64,8 +58,8 @@ class AdvertsItem extends StatelessWidget {
                             child: Text(
                               data[index].advertsTitle,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
                                   fontFamily: 'Nunito'),
                             ),
                           ),

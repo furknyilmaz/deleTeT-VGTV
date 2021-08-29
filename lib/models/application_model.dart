@@ -1,80 +1,47 @@
-// To parse this JSON data, do
-//
-//     final application = applicationFromJson(jsonString);
-
-import 'dart:convert';
-
-Application applicationFromJson(String str) =>
-    Application.fromJson(json.decode(str));
-
-String applicationToJson(Application data) => json.encode(data.toJson());
-
 class Application {
   Application({
-    required this.application,
-  });
-
-  List<ApplicationElement> application;
-
-  factory Application.fromJson(Map<String, dynamic> json) => Application(
-        application: List<ApplicationElement>.from(
-            json["application"].map((x) => ApplicationElement.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "application": List<dynamic>.from(application.map((x) => x.toJson())),
-      };
-}
-
-class ApplicationElement {
-  ApplicationElement({
     required this.id,
-    required this.userId,
-    required this.userName,
+    required this.applicantId,
     required this.companyName,
+    required this.companyLocation,
     required this.companyIcon,
     required this.companyDesc,
-    required this.adversTime,
-    required this.adversTitle,
-    required this.adversDescription,
+    required this.applicationDate,
+    required this.wayOfWorking,
+    required this.advertsTitle,
+    required this.advertsDescription,
     required this.status,
   });
 
   int id;
-  int userId;
-  String userName;
+  int applicantId;
   String companyName;
+  String companyLocation;
   String companyIcon;
   String companyDesc;
-  String adversTime;
-  String adversTitle;
-  String adversDescription;
+  String applicationDate;
+  String wayOfWorking;
+  String advertsTitle;
+  String advertsDescription;
   int status;
 
-  factory ApplicationElement.fromJson(Map<String, dynamic> json) =>
-      ApplicationElement(
-        id: json["id"],
-        userId: json["userID"],
-        userName: json["userName"],
-        companyName: json["companyName"],
-        companyIcon: json["companyIcon"],
-        companyDesc: json["companyDesc"],
-        adversTime: json["adversTime"],
-        adversTitle: json["adversTitle"],
-        adversDescription: json["adversDescription"],
-        status: json["status"],
+  factory Application.fromJson(Map<String, dynamic> json) => Application(
+        id: json["id"] == null ? null : json["id"],
+        applicantId: json["applicantId"] == null ? null : json["applicantId"],
+        companyName: json["companyName"] == null ? null : json["companyName"],
+        companyLocation:
+            json["companyLocation"] == null ? null : json["companyLocation"],
+        companyIcon: json["companyIcon"] == null ? null : json["companyIcon"],
+        companyDesc: json["companyDesc"] == null ? null : json["companyDesc"],
+        applicationDate:
+            json["applicationDate"] == null ? null : json["applicationDate"],
+        wayOfWorking:
+            json["wayOfWorking"] == null ? null : json["wayOfWorking"],
+        advertsTitle:
+            json["advertsTitle"] == null ? null : json["advertsTitle"],
+        advertsDescription: json["advertsDescription"] == null
+            ? null
+            : json["advertsDescription"],
+        status: json["status"] == null ? null : json["status"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "userID": userId,
-        "userName": userName,
-        "companyName": companyName,
-        "companyIcon": companyIcon,
-        "companyDesc": companyDesc,
-        "adversTime": adversTime,
-        "adversTitle": adversTitle,
-        "adversDescription": adversDescription,
-        "status": status,
-      };
 }

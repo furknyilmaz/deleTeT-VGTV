@@ -1,27 +1,27 @@
 class LoginResponseModal {
   int? id;
-  String? name;
+  String? firstName;
+  String? lastName;
   String? email;
-  String? emailVerifiedAt;
-  String? createdAt;
-  String? updatedAt;
+  String? password;
+  String? appUserRole;
 
-  LoginResponseModal({
-    this.id,
-    this.name,
-    this.email,
-    this.emailVerifiedAt,
-    this.createdAt,
-    this.updatedAt,
-  });
+  LoginResponseModal(
+      {this.id,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.password,
+      this.appUserRole});
 
   factory LoginResponseModal.fromJson(Map<String, dynamic> json) {
     return LoginResponseModal(
       id: json['id'] as int,
-      name: json['name'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'],
       email: json['email'] as String,
-      createdAt: json['created_at'] as String,
-      updatedAt: json['updated_at'] as String,
+      password: json['password'] as String,
+      appUserRole: json['appUserRole'] as String,
     );
   }
 }
@@ -42,17 +42,22 @@ class LoginRequestModal {
 }
 
 class RegisterRequestModal {
-  String? name;
+  String? firstName;
+  String? lastName;
   String? email;
   String? password;
+  int? role;
 
-  RegisterRequestModal({this.name, this.email, this.password});
+  RegisterRequestModal(
+      {this.firstName, this.lastName, this.email, this.password, this.role});
 
   Map<String, dynamic>? toJson() {
     Map<String, dynamic> map = {
-      'name': name?.trim(),
+      'firstName': firstName?.trim(),
+      'lastName': lastName?.trim(),
       'email': email?.trim(),
       'password': password?.trim(),
+      'role': role,
     };
     return map;
   }
