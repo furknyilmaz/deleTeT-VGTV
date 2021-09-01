@@ -1,5 +1,3 @@
-import 'package:deletedvgtv/main.dart';
-import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/pages/AdvertsScreen.dart';
 import 'package:deletedvgtv/pages/ApplicationScreen.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
@@ -28,7 +26,7 @@ class _BottomMenuState extends State<BottomMenu> {
     ProfileScreen(),
     AdvertScreen(),
     HomePageScreen(),
-    Forum(),
+    ForumScreen(),
     CompanyScreen(),
   ];
 

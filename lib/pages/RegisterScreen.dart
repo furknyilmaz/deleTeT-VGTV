@@ -158,7 +158,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: width / 2 - 45,
+                              width: width - 80,
                               child: new TextFormField(
                                 style: TextStyle(
                                   fontSize: 12,
@@ -169,7 +169,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                     : null,
                                 keyboardType: TextInputType.name,
                                 onSaved: (input) =>
-                                    requestModal.firstName = input,
+                                    requestModal.fullName = input,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: (BorderSide(
@@ -182,50 +182,6 @@ class _RegisterPageeState extends State<RegisterScreen> {
                                   ),
                                   contentPadding: EdgeInsets.only(left: 15.0),
                                   hintText: 'Adınız',
-                                  hintStyle: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Nunito',
-                                  ),
-                                  errorStyle: TextStyle(color: Colors.green),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                  prefixIcon: const Icon(
-                                    Icons.person_rounded,
-                                    color: Colors.green,
-                                    size: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: width / 2 - 45,
-                              child: new TextFormField(
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: 'Nunito',
-                                ),
-                                validator: (input) => input!.length < 2
-                                    ? "Lütfen soyadınızı giriniz!"
-                                    : null,
-                                keyboardType: TextInputType.name,
-                                onSaved: (input) =>
-                                    requestModal.lastName = input,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: (BorderSide(
-                                      color: Colors.green,
-                                    )),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 0.5),
-                                  ),
-                                  contentPadding: EdgeInsets.only(left: 15.0),
-                                  hintText: 'Soyadınız',
                                   hintStyle: TextStyle(
                                     fontSize: 12,
                                     fontFamily: 'Nunito',

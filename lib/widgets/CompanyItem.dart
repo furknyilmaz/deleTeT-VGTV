@@ -12,12 +12,13 @@ class CompanyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    final double itemWidth = (width / 2) - 15;
+    final double itemWidth = (width / 2.3);
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
         itemCount: data.length,
+        padding: EdgeInsets.only(top: 12),
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
@@ -36,7 +37,7 @@ class CompanyItem extends StatelessWidget {
                   width: itemWidth,
                   height: itemWidth,
                   margin: EdgeInsets.all(3),
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(width: 0.4, color: Colors.grey.shade300),

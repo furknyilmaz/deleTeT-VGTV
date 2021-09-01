@@ -19,7 +19,7 @@ Future<void> userLogin(requestModal, context) async {
       var sp = await SharedPreferences.getInstance();
       sp.setString("user_id", data.id.toString());
       sp.setString("user_email", data.email.toString());
-      sp.setString("name", data.firstName.toString());
+      //sp.setString("name", data.firstName.toString());
 
       Navigator.pushReplacement(
         context,

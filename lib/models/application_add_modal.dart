@@ -1,5 +1,7 @@
 class ApplicationAddModal {
-  String? applicantId;
+  int? applicantId;
+  int? companyid;
+  int? advertId;
   String? companyName;
   String? companyLocation;
   String? companyIcon;
@@ -12,6 +14,8 @@ class ApplicationAddModal {
 
   ApplicationAddModal({
     this.applicantId,
+    this.companyid,
+    this.advertId,
     this.companyName,
     this.companyLocation,
     this.companyIcon,
@@ -25,7 +29,9 @@ class ApplicationAddModal {
 
   Map<String, dynamic>? toJson() {
     Map<String, dynamic> map = {
-      'applicantId': applicantId?.trim(),
+      'applicantId': applicantId,
+      'companyId': companyid,
+      'advertId': advertId,
       'companyName': companyName?.trim(),
       'companyLocation': companyLocation?.trim(),
       'companyIcon': companyIcon?.trim(),

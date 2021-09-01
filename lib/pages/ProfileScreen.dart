@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<Profile> fetchProfile() async {
   var sp = await SharedPreferences.getInstance();
   String? userID = sp.getString("user_id");
+  if (userID != null) {}
   final response = await http.get(Uri.parse('${profileAPI + userID!}'));
   if (response.statusCode == 200) {
     final jsonresponse = json.decode(utf8.decode(response.bodyBytes));

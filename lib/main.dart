@@ -1,5 +1,4 @@
 import 'package:deletedvgtv/pages/LoginScreen.dart';
-import 'package:deletedvgtv/pages/RegisterScreen.dart';
 import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

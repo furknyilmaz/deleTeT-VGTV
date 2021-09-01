@@ -24,21 +24,6 @@ class UserAPIServices {
         'Content-Type': 'application/json',
       },
     );
-    print(response.body);
-    return response;
-  }
-
-  applicationAdd(ApplicationAddModal applicationModal, localUrl) async {
-    print(applicationModal.toString());
-    var url = Uri.parse(applicationAPI + 'create');
-    final response = await http.post(
-      url,
-      body: json.encode(applicationModal),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-    );
-    print(response.body);
     return response;
   }
 
@@ -56,10 +41,25 @@ class UserAPIServices {
     );
     return response;
   }
+
+  // Başvuru ekle API bağlantısı
+  applicationAdd(ApplicationAddModal applicationModal, localUrl) async {
+    print(applicationModal.toString());
+    var url = Uri.parse(applicationAPI + 'create');
+    final response = await http.post(
+      url,
+      body: json.encode(applicationModal),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+    return response;
+  }
 }
 
 // Şirketler Listeis API bağlantısı
 Future<List<Company>> fetchCompany(http.Client client) async {
+  await Future.delayed(Duration(milliseconds: 500));
   final response = await client.get(Uri.parse(companyAPI));
   return compute(parseCompany, utf8.decode(response.bodyBytes));
 }
@@ -69,6 +69,7 @@ List<Company> parseCompany(String responseBody) {
   return parsed.map<Company>((json) => Company.fromJson(json)).toList();
 }
 
+//Profile API bağlantısı
 Future<List<Profile>> fetchCProfile(http.Client client) async {
   final response = await client.get(Uri.parse(profileAPI));
   return compute(parseProfile, utf8.decode(response.bodyBytes));
@@ -90,9 +91,9 @@ List<Advers> parseAdvers(String responseBody) {
   return parsed.map<Advers>((json) => Advers.fromJson(json)).toList();
 }
 
+// Anasayfa Haberler API Bağlantısı
 Future<List<Newsfeed>> fetchNewfeed(http.Client client) async {
   final response = await client.get(Uri.parse(newsfeedAPI));
-  print(response.body);
   return compute(parseNewFeed, utf8.decode(response.bodyBytes));
 }
 
@@ -101,12 +102,12 @@ List<Newsfeed> parseNewFeed(String responseBody) {
   return parsed.map<Newsfeed>((json) => Newsfeed.fromJson(json)).toList();
 }
 
+// Başvurular API bağlantısı
 Future<List<Application>> fetchApplication(http.Client client) async {
   var sp = await SharedPreferences.getInstance();
   String? userID = sp.getString("user_id");
   var deneme = applicationAPI + userID.toString();
   final response = await client.get(Uri.parse(deneme));
-  print(response.body);
   return compute(parseApplication, utf8.decode(response.bodyBytes));
 }
 
@@ -115,7 +116,7 @@ List<Application> parseApplication(String responseBody) {
   return parsed.map<Application>((json) => Application.fromJson(json)).toList();
 }
 
-//Mülakatlar Listesi API bağlantısı
+// Mülakatlar Listesi API bağlantısı
 Future<Interview> getInterview(url) async {
   var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));
@@ -123,6 +124,7 @@ Future<Interview> getInterview(url) async {
   return data;
 }
 
+/////////////////////// Eski tip bağlantılar///////////////////////////////////
 Future<Newsfeed> getFeedNews(url) async {
   var apiUrl = await http.get(Uri.parse(url));
   var response = json.decode(utf8.decode(apiUrl.bodyBytes));

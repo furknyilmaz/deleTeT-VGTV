@@ -14,7 +14,7 @@ class AdvertsItem extends StatelessWidget {
     final double width = screen.size.width;
     return Center(
       child: ListView.builder(
-        padding: const EdgeInsets.all(0.0),
+        padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
@@ -47,7 +47,7 @@ class AdvertsItem extends StatelessWidget {
                             width: width * 0.4,
                             height: width * 0.4)),
                     Container(
-                      width: width * 0.70,
+                      width: width * 0.68,
                       padding: EdgeInsets.only(left: 10, bottom: 5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -87,6 +87,8 @@ class AdvertsItem extends StatelessWidget {
                                   data[index].companyName,
                                   style: TextStyle(
                                       fontSize: 11, fontFamily: 'Nunito'),
+                                  maxLines: 1,
+                                  softWrap: false,
                                 ),
                               ),
                             ],

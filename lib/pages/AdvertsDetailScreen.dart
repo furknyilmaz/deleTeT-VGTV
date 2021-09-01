@@ -1,9 +1,12 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
 import 'package:deletedvgtv/utils/applicationAdd.dart';
+import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AdvertsDetailScreen extends StatefulWidget {
   final Advers advers;
@@ -16,11 +19,15 @@ class AdvertsDetailScreen extends StatefulWidget {
 
 class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
   late ApplicationAddModal applicationModal;
+  bool status = true;
   @override
   void initState() {
     super.initState();
     setUserId();
+
     applicationModal = new ApplicationAddModal();
+    applicationModal.companyid = widget.advers.companyId;
+    applicationModal.advertId = widget.advers.id;
     applicationModal.companyName = widget.advers.companyName;
     applicationModal.companyLocation = widget.advers.companyLocation;
     applicationModal.companyIcon = widget.advers.companyIcon;
@@ -30,25 +37,40 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
     applicationModal.advertsTitle = widget.advers.advertsTitle;
     applicationModal.advertsDescription = widget.advers.advertsDescription;
     applicationModal.status = 1;
-    print(applicationModal.advertsTitle.toString());
   }
 
   void setUserId() async {
     var sp = await SharedPreferences.getInstance();
     String? userID = sp.getString("user_id");
-    applicationModal.applicantId = userID;
-    print(applicationModal.applicantId.toString());
+    var id = int.parse(userID!);
+    assert(id is int);
+    applicationModal.applicantId = id;
+    control(id);
   }
 
-  Future<void> fetchApplicationAdd() async {
-    setApplicationAdd(applicationModal, context);
+  void control(id) async {
+    final response = await http.post(
+      Uri.parse("http://89.252.131.149:8080/api/deletet/adverts/check"),
+      body: json.encode({"userid": id, "advertid": widget.advers.id}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.body == 'true') {
+      setState(() {
+        status = false;
+      });
+    } else {
+      setState(() {
+        status = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    var color = const Color(0xffffffff);
 
     print(widget.advers);
     return Scaffold(
@@ -77,19 +99,22 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                           EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                       child: Column(
                         children: [
-                          Container(
-                            width: 150.0,
-                            height: 150.0,
+                          Center(
                             child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        width: 1, color: Colors.grey.shade300),
-                                    image: new DecorationImage(
-                                        fit: BoxFit.contain,
-                                        image: new NetworkImage(
-                                            widget.advers.companyIcon)))),
+                              width: 150,
+                              height: 150,
+                              margin: EdgeInsets.all(0),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 0.5, color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Container(
+                                  child: ImageCached(
+                                      url: widget.advers.companyIcon)),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -130,9 +155,22 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                                   fontFamily: 'Nunito'),
                             ),
                           ),
-                          Row(
-                            children: [],
-                          )
+                          Container(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                !status
+                                    ? OkApplicationButton()
+                                    : ApplicationAdd(
+                                        company: widget.advers.companyName,
+                                        adversTitle: widget.advers.advertsTitle,
+                                        image: widget.advers.companyIcon,
+                                        applicationModal: applicationModal,
+                                        status: status)
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -167,38 +205,26 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                                 },
                               ),
                               Container(
+                                width: width,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 0.6, color: Colors.grey.shade300),
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                padding: EdgeInsets.all(10),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        fetchApplicationAdd();
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.blue,
-                                        ),
-                                        height: 35.0,
-                                        width: width * 0.8,
-                                        child: Center(
-                                          child: Text(
-                                            'İlana Başvur',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 16.0,
-                                                fontFamily: 'Nunito',
-                                                color: Colors.white),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
+                                    Icon(Icons.navigate_next_outlined),
+                                    Text(
+                                      "Firma sayfasını ziyaret et",
+                                      style: TextStyle(fontFamily: 'Nunito'),
                                     ),
                                   ],
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -213,9 +239,138 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
   }
 }
 
+class OkApplicationButton extends StatelessWidget {
+  const OkApplicationButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        width: width * 0.8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.6, color: Colors.green),
+                color: Colors.green,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              width: width * 0.8,
+              height: 40,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.thumb_up_outlined,
+                        color: Colors.white, size: 18),
+                    Text(
+                      ' İlana Başvuruldu',
+                      style:
+                          TextStyle(fontFamily: 'Nunito', color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /* 
  child: Text(day.toString() +
               ' Gün ' +
               time.toString() +
               ' saat sonra katılabilirisiniz'),
 */
+
+// ignore: must_be_immutable
+class ApplicationAdd extends StatelessWidget {
+  String? company;
+  String? adversTitle;
+  String? image;
+  bool status;
+  late ApplicationAddModal applicationModal;
+  ApplicationAdd({
+    this.company,
+    this.adversTitle,
+    this.image,
+    required this.applicationModal,
+    required this.status,
+  });
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+    return TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(
+              // ignore: unnecessary_brace_in_string_interps
+              '${company} şirketi tarafından yayınlanan ${adversTitle} ilanına başvurmak istediğinize emin misiniz?',
+              style: TextStyle(fontFamily: 'Nunito'),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(
+                context,
+                'OK',
+              ),
+              child: const Text('İptal'),
+            ),
+            TextButton(
+              onPressed: () => {
+                Navigator.pop(context, 'OK'),
+                setApplicationAdd(applicationModal, context)
+              },
+              child: const Text('Başvur'),
+            ),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Container(
+          width: width * 0.8,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.6, color: Colors.green),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                width: width * 0.8,
+                height: 40,
+                child: Center(
+                  child: Text(
+                    status ? 'İlana Başvur' : 'İlana Başvuruldu',
+                    style: TextStyle(fontFamily: 'Nunito', color: Colors.black),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  fetchApplicationAdd() {}
+}

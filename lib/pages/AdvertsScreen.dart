@@ -1,7 +1,6 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/widgets/AdvertsItem.dart';
-import 'package:deletedvgtv/widgets/SearchWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,7 +31,7 @@ class _AdvertScreenState extends State<AdvertScreen> {
             );
           } else if (snapshot.hasData) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 0),
               child: AdvertsItem(data: snapshot.data!),
             );
           } else {

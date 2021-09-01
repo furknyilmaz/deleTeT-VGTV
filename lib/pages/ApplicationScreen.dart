@@ -90,123 +90,136 @@ class ApplicationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    return Center(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemCount: data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(width: 0.5, color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                margin: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
-                child: Padding(
-                    padding: EdgeInsets.only(
-                        top: 15, left: 10, right: 10, bottom: 0),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+    return SafeArea(
+      child: Center(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(0),
+              itemCount: data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                          Border.all(width: 0.5, color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    margin:
+                        EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 15, left: 10, right: 10, bottom: 0),
+                        child: Column(
                           children: [
-                            Container(
-                              width: 80.0,
-                              height: 80.0,
-                              child: Container(
-                                  child: ImageCached(
-                                      width: 70,
-                                      height: 70,
-                                      url: data[index].companyIcon),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        width: 0.5,
-                                        color: Colors.grey.shade300),
-                                    borderRadius: BorderRadius.circular(6),
-                                  )),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 80.0,
+                                  height: 80.0,
+                                  child: Container(
+                                      child: ImageCached(
+                                          width: 70,
+                                          height: 70,
+                                          url: data[index].companyIcon),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            width: 0.5,
+                                            color: Colors.grey.shade300),
+                                        borderRadius: BorderRadius.circular(6),
+                                      )),
+                                ),
+                                Container(
+                                  width: width * 0.65,
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data[index].advertsTitle,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            fontFamily: 'Nunito'),
+                                      ),
+                                      Text(
+                                        data[index].companyName,
+                                        // snapshot!.application[index].companyDesc,
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        data[index].companyDesc.length > 151
+                                            ? data[index]
+                                                    .companyDesc
+                                                    .substring(0, 150) +
+                                                '...'
+                                            : data[index].companyDesc,
+                                        style: TextStyle(
+                                            fontSize: 10, fontFamily: 'Nunito'),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                             Container(
-                              width: width * 0.65,
-                              padding: EdgeInsets.only(left: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    data[index].advertsTitle,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                        fontFamily: 'Nunito'),
-                                  ),
-                                  Container(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'Sizi aramızda görmekten mutluyuz. Aşağıda belirtilen tarih ve saatte sizinle kısa bir online görüşme yapmayı çok istiyoruz. Lütfen belirtilen zamandan en az 5 dakika önce burada hazır olunuz.',
-                                    // snapshot!.application[index].companyDesc,
-                                    style: TextStyle(
-                                        fontSize: 11, fontFamily: 'Nunito'),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.grey.shade200,
-                          margin: EdgeInsets.only(top: 10),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
+                              height: 1,
+                              color: Colors.grey.shade200,
+                              margin: EdgeInsets.only(top: 10),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.date_range,
-                                      size: 16,
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.date_range,
+                                          size: 16,
+                                        ),
+                                        Text(
+                                          ' ' + data[index].applicationDate,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily: 'Nunito'),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      ' ' + data[index].applicationDate,
-                                      style: TextStyle(
-                                          fontSize: 12, fontFamily: 'Nunito'),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ApplicationDetailScreen(
+                                                      data[index])),
+                                        );
+                                      },
+                                      child: Status(
+                                        data[index].status.toString(),
+                                      ),
                                     ),
                                   ],
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ApplicationDetailScreen(
-                                                data[index].companyIcon,
-                                                data[index].advertsDescription,
-                                                data[index].advertsTitle,
-                                                data[index].companyDesc,
-                                                data[index].status.toString(),
-                                              )),
-                                    );
-                                  },
-                                  child: Status(
-                                    data[index].status.toString(),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )),
-              );
-            }));
+                          ],
+                        )),
+                  ),
+                );
+              })),
+    );
   }
 }
 

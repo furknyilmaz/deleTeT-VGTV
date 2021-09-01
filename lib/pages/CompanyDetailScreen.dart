@@ -1,10 +1,12 @@
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 // ignore: must_be_immutable
 class CompanyDetail extends StatelessWidget {
   Company? snapshot;
   int index;
+
   @override
   CompanyDetail(this.snapshot, this.index);
 
@@ -103,7 +105,7 @@ class CompanyDetail extends StatelessWidget {
                           Container(
                             width: width,
                             padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 10),
+                                vertical: 5, horizontal: 15),
                             child: Text(
                               snapshot!.companyName,
                               style: TextStyle(
@@ -116,7 +118,18 @@ class CompanyDetail extends StatelessWidget {
                             width: width,
                             padding: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10),
-                            child: Text(
+                            child: Html(
+                              data: snapshot!.companyAbout,
+                              style: {
+                                "body": Style(
+                                  fontFamily: 'Nunito',
+                                  fontSize: FontSize(14.0),
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              },
+                            ),
+                            /*
+                            Text(
                               snapshot!.contact +
                                   snapshot!.contact +
                                   snapshot!.contact +
@@ -125,7 +138,7 @@ class CompanyDetail extends StatelessWidget {
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   fontFamily: 'Nunito'),
-                            ),
+                            ), */
                           ),
                           Container(
                             padding:
@@ -226,7 +239,7 @@ class CompanyDetail extends StatelessWidget {
                                         padding: EdgeInsets.only(left: 8),
                                         width: width * 0.75,
                                         child: Text(
-                                          snapshot!.companyAbout,
+                                          snapshot!.contact,
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w400,

@@ -1,6 +1,8 @@
 class Advers {
   Advers({
+    required this.id,
     required this.categoryId,
+    required this.companyId,
     required this.companyName,
     required this.companyLocation,
     required this.companyIcon,
@@ -11,7 +13,9 @@ class Advers {
     required this.advertsTitle,
     required this.advertsDescription,
   });
+  int id;
   int categoryId;
+  int companyId;
   String companyName;
   String companyLocation;
   String companyIcon;
@@ -23,6 +27,8 @@ class Advers {
   String advertsDescription;
 
   factory Advers.fromJson(Map<String, dynamic> json) => Advers(
+        id: json['id'] == null ? 1 : json['id'],
+        companyId: json['companyId'] == null ? 1 : json['companyId'],
         categoryId: json['categoryId'] == null ? null : json['categoryId'],
         companyName: json["companyName"] == null ? null : json["companyName"],
         companyLocation:
