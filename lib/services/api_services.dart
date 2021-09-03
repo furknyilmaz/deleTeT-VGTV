@@ -102,12 +102,27 @@ List<Newsfeed> parseNewFeed(String responseBody) {
   return parsed.map<Newsfeed>((json) => Newsfeed.fromJson(json)).toList();
 }
 
+// Mülakatlar Haberler API Bağlantısı
+Future<List<Interview>> fetchInterview(http.Client client) async {
+  var sp = await SharedPreferences.getInstance();
+  var id = (sp.getString("user_id")!);
+  final response = await client.get(Uri.parse(interviewAPI + id));
+  print(response.body);
+
+  return compute(parseInterview, utf8.decode(response.bodyBytes));
+}
+
+List<Interview> parseInterview(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Interview>((json) => Interview.fromJson(json)).toList();
+}
+
 // Başvurular API bağlantısı
 Future<List<Application>> fetchApplication(http.Client client) async {
   var sp = await SharedPreferences.getInstance();
-  String? userID = sp.getString("user_id");
-  var deneme = applicationAPI + userID.toString();
-  final response = await client.get(Uri.parse(deneme));
+  String? id = sp.getString("user_id");
+  var url = applicationAPI + id.toString();
+  final response = await client.get(Uri.parse(url));
   return compute(parseApplication, utf8.decode(response.bodyBytes));
 }
 
@@ -115,6 +130,58 @@ List<Application> parseApplication(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Application>((json) => Application.fromJson(json)).toList();
 }
+
+//
+//
+//
+//
+//
+// İlanlar Firma API bağlantısı
+Future<List<Advers>> fetchCompanyAdverts(http.Client client) async {
+  var sp = await SharedPreferences.getInstance();
+  String? id = sp.getString("user_id");
+  var url = adversCompanyAPI + id.toString();
+  print(id.toString());
+  final response = await client.get(Uri.parse(url));
+  return compute(parseCompanyAdverts, utf8.decode(response.bodyBytes));
+}
+
+List<Advers> parseCompanyAdverts(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Advers>((json) => Advers.fromJson(json)).toList();
+}
+
+//
+//
+//
+//
+//
+
+//
+//
+//
+//
+//
+// Başvurular Firma API bağlantısı
+Future<List<Application>> fetchCompanyApplication(http.Client client) async {
+  var sp = await SharedPreferences.getInstance();
+  String? id = sp.getString("user_id");
+  var url = applicationCompanyAPI + id.toString();
+  print(id.toString());
+  final response = await client.get(Uri.parse(url));
+  return compute(parseCompanyApplication, utf8.decode(response.bodyBytes));
+}
+
+List<Application> parseCompanyApplication(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Application>((json) => Application.fromJson(json)).toList();
+}
+
+//
+//
+//
+//
+//
 
 // Mülakatlar Listesi API bağlantısı
 Future<Interview> getInterview(url) async {

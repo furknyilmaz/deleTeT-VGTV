@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
+import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/utils/applicationAdd.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
@@ -8,56 +9,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class AdvertsDetailScreen extends StatefulWidget {
+class CompanyAdverts extends StatefulWidget {
   final Advers advers;
 
-  AdvertsDetailScreen(this.advers);
+  CompanyAdverts(this.advers);
 
   @override
-  _AdvertsDetailScreenState createState() => _AdvertsDetailScreenState();
+  _CompanyAdvertsState createState() => _CompanyAdvertsState();
 }
 
-class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
-  late ApplicationAddModal applicationModal;
+class _CompanyAdvertsState extends State<CompanyAdverts> {
   bool status = true;
   @override
-  void initState() {
-    super.initState();
-    setUserId();
-
-    applicationModal = new ApplicationAddModal();
-    applicationModal.companyid = widget.advers.companyId;
-    applicationModal.advertId = widget.advers.id;
-    applicationModal.status = 1;
-  }
-
-  void setUserId() async {
-    var sp = await SharedPreferences.getInstance();
-    var id = int.parse(sp.getString("user_id")!);
-    applicationModal.applicantId = id;
-    control(id);
-  }
-
-  void control(id) async {
-    final response = await http.post(
-      Uri.parse("http://89.252.131.149:8080/api/deletet/adverts/check"),
-      body: json.encode({"userid": id, "advertid": widget.advers.id}),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
-    print(response.body);
-    if (response.body == 'true') {
-      setState(() {
-        status = false;
-      });
-    } else {
-      setState(() {
-        status = true;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -146,22 +109,7 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                                   fontFamily: 'Nunito'),
                             ),
                           ),
-                          Container(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                !status
-                                    ? OkApplicationButton()
-                                    : ApplicationAdd(
-                                        company: widget.advers.companyName,
-                                        adversTitle: widget.advers.advertsTitle,
-                                        image: widget.advers.companyIcon,
-                                        applicationModal: applicationModal,
-                                        status: status)
-                              ],
-                            ),
-                          ),
+                          Container(),
                         ],
                       ),
                     ),
@@ -186,7 +134,7 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Html(
-                                data: widget.advers.advertsAbout,
+                                data: widget.advers.advertsTitle,
                                 style: {
                                   "body": Style(
                                     fontFamily: 'Nunito',

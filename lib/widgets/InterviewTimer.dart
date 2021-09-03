@@ -11,7 +11,7 @@ class InterviewTimer extends StatefulWidget {
   _InterviewTimerState createState() => _InterviewTimerState();
 }
 
-bool inputStatu = true;
+String? inputStatu = "online";
 
 class _InterviewTimerState extends State<InterviewTimer> {
   @override
@@ -19,10 +19,15 @@ class _InterviewTimerState extends State<InterviewTimer> {
     // TODO: implement initState
     super.initState();
     if (widget.time < 0) {
-      inputStatu = false;
+      if (widget.time < 100000) {
+        inputStatu = "timeout";
+      } else {
+        inputStatu = "companyWait";
+      }
+
       print(widget.time);
     } else {
-      inputStatu = true;
+      inputStatu = 'dateWait';
     }
   }
 
@@ -33,7 +38,7 @@ class _InterviewTimerState extends State<InterviewTimer> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          inputStatu
+          inputStatu == 'dateWait'
               ? SlideCountdown(
                   decoration: BoxDecoration(),
                   textStyle: const TextStyle(
@@ -47,23 +52,37 @@ class _InterviewTimerState extends State<InterviewTimer> {
                   separatorType: SeparatorType.title,
                   onDone: () {
                     setState(() {
-                      inputStatu = false;
+                      inputStatu = 'companyWait';
                     });
                   },
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'Lütfen birkaç dakika daha bekleyin',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
+              : inputStatu == 'companyWait'
+                  ? Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Mülakat zamanı geldi \n Firmanın oturumu başlatması bekleniyor.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Mülakat saati geçti',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
         ],
       ),
     );

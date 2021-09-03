@@ -1,14 +1,17 @@
+import 'package:deletedvgtv/models/interview_model.dart';
 import 'package:deletedvgtv/widgets/InterviewButton.dart';
 import 'package:flutter/material.dart';
 
 class InterviewScreen extends StatelessWidget {
+  final Interview data;
+  InterviewScreen(this.data);
+
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
-    var moonLanding = DateTime.parse("2021-09-01 23:45:00Z");
+    var moonLanding = DateTime.parse(data.interDate);
     var milisec =
-        (moonLanding.microsecondsSinceEpoch - now.microsecondsSinceEpoch) -
-            10800000000;
+        (moonLanding.microsecondsSinceEpoch - now.microsecondsSinceEpoch);
 
     return Scaffold(
         appBar: AppBar(
@@ -35,17 +38,20 @@ class InterviewScreen extends StatelessWidget {
                   margin: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      UsersTable(), //////////////////////////////////////////////////
+                      UsersTable(
+                          data), //////////////////////////////////////////////////
                       Container(
                         height: 1,
                         color: Colors.grey.shade200,
                         margin: EdgeInsets.all(10),
                       ),
-                      ApplicationInfo(), //////////////////////////////////////////////////
+                      ApplicationInfo(
+                          data), //////////////////////////////////////////////////
                     ],
                   ),
                 ),
-                InterviewInfo(), //////////////////////////////////////////////////
+                InterviewInfo(
+                    data), //////////////////////////////////////////////////
                 Container(
                   margin: EdgeInsets.only(left: 15, right: 15, top: 5),
                   padding: EdgeInsets.all(10),
@@ -56,7 +62,11 @@ class InterviewScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      InterviewButton(channelName: 'vgtv', time: milisec),
+                      InterviewButton(
+                          channelName: 'vgtv',
+                          time: milisec,
+                          interId: data.id,
+                          applicantId: data.applicantId),
                     ],
                   ),
                 ),
@@ -71,7 +81,8 @@ class InterviewScreen extends StatelessWidget {
 }
 
 class UsersTable extends StatelessWidget {
-  const UsersTable({Key? key}) : super(key: key);
+  final Interview data;
+  UsersTable(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -93,11 +104,10 @@ class UsersTable extends StatelessWidget {
                 SizedBox(
                   width: 80,
                   height: 75,
-                  child: Image.network(
-                      "https://vizyonergenc.com/v2/images/logo.png"),
+                  child: Image.network(data.companyIcon),
                 ),
                 Text(
-                  'Vizyoner Genç',
+                  data.companyName,
                   style: TextStyle(
                       fontFamily: 'Nunito', fontWeight: FontWeight.w700),
                 ),
@@ -125,14 +135,13 @@ class UsersTable extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                       image: new DecorationImage(
                         fit: BoxFit.fitWidth,
-                        image: new NetworkImage(
-                            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                        image: new NetworkImage(data.applicantIcon),
                       )),
                   width: 75,
                   height: 75,
                 ),
                 Text(
-                  'Barış Güngören',
+                  data.applicantName,
                   style: TextStyle(
                       fontFamily: 'Nunito', fontWeight: FontWeight.w700),
                 ),
@@ -146,21 +155,21 @@ class UsersTable extends StatelessWidget {
 }
 
 class ApplicationInfo extends StatelessWidget {
-  const ApplicationInfo({Key? key}) : super(key: key);
-
+  final Interview data;
+  ApplicationInfo(this.data);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          'Yazılım Mühendisi (Web Teknolojileri)',
+          data.title,
           style: TextStyle(
               fontFamily: 'Nunito', fontWeight: FontWeight.w700, fontSize: 18),
         ),
         Container(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
           child: Text(
-            'Elektro-mekanik üretim proseslerinde deneyim sahibi olmayı hedefleyen, meslek yüksek okullarının ilgili bölümlerinde eğitimine devam eden arkadaşları ekibimize stajyer olarak dahil etmek istiyoruz.',
+            data.applicationDesc,
             style: TextStyle(
                 fontFamily: 'Nunito',
                 fontWeight: FontWeight.normal,
@@ -174,7 +183,8 @@ class ApplicationInfo extends StatelessWidget {
 }
 
 class InterviewInfo extends StatelessWidget {
-  const InterviewInfo({Key? key}) : super(key: key);
+  final Interview data;
+  InterviewInfo(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +214,7 @@ class InterviewInfo extends StatelessWidget {
             children: [
               Icon(Icons.person_outlined),
               Text(
-                '  Firma Yetkilisi: Mehmet Sarıgül',
+                '  Firma Yetkilisi: ' + data.companyOfficer,
                 style: TextStyle(fontFamily: 'Nunito'),
               )
             ],

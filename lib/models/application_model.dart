@@ -2,6 +2,7 @@ class Application {
   Application({
     required this.id,
     required this.applicantId,
+    required this.advertId,
     required this.companyName,
     required this.companyLocation,
     required this.companyIcon,
@@ -15,6 +16,7 @@ class Application {
 
   int id;
   int applicantId;
+  int advertId;
   String companyName;
   String companyLocation;
   String companyIcon;
@@ -27,7 +29,8 @@ class Application {
 
   factory Application.fromJson(Map<String, dynamic> json) => Application(
         id: json["id"] == null ? null : json["id"],
-        applicantId: json["applicantId"] == null ? null : json["applicantId"],
+        applicantId: json["applicantId"] == null ? null : json["advertId"],
+        advertId: json["advertId"] == null ? null : json["advertId"],
         companyName: json["companyName"] == null ? null : json["companyName"],
         companyLocation:
             json["companyLocation"] == null ? null : json["companyLocation"],
@@ -44,4 +47,6 @@ class Application {
             : json["advertsDescription"],
         status: json["status"] == null ? null : json["status"],
       );
+
+  get length => null;
 }

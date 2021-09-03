@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class InterviewItem extends StatelessWidget {
-  Interview? snapshot;
+  const InterviewItem({Key? key, required this.data}) : super(key: key);
+  final List<Interview> data;
 
   @override
-  InterviewItem(this.snapshot);
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
@@ -30,7 +30,8 @@ class InterviewItem extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => InterviewScreen()),
+                                builder: (context) =>
+                                    InterviewScreen(data[index])),
                           );
                         },
                         child: Column(
@@ -38,9 +39,7 @@ class InterviewItem extends StatelessWidget {
                             Container(
                               width: (width / 2) - 30,
                               height: (width / 2) - 40,
-                              child: ImageCached(
-                                url: snapshot!.interview[index].companyImage,
-                              ),
+                              child: ImageCached(url: data[index].companyIcon),
                             ),
                             Container(
                               padding: EdgeInsets.symmetric(
@@ -50,8 +49,7 @@ class InterviewItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    snapshot!.interview[index].companyDate +
-                                        ' - ',
+                                    data[index].interDate + ' - ',
                                     style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
@@ -59,7 +57,7 @@ class InterviewItem extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   Text(
-                                    snapshot!.interview[index].department,
+                                    data[index].companyDepartment,
                                     style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
@@ -73,7 +71,7 @@ class InterviewItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                childCount: snapshot!.interview.length),
+                childCount: data.length),
           ),
         ],
       ),

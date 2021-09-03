@@ -1,23 +1,25 @@
 import 'package:deletedvgtv/pages/AdvertsScreen.dart';
 import 'package:deletedvgtv/pages/ApplicationScreen.dart';
+import 'package:deletedvgtv/pages/Corporate/CompanyApplication.dart';
 import 'package:deletedvgtv/pages/Corporate/CompanyInterview.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
 import 'package:deletedvgtv/pages/Corporate/CorparateHomepageScreen.dart';
 import 'package:deletedvgtv/pages/ForumScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/pages/InterviewListScreen.dart';
+import 'package:deletedvgtv/pages/InterviewScreen.dart';
 import 'package:deletedvgtv/pages/ProfileScreen.dart';
 import 'package:deletedvgtv/widgets/MainDraver.dart';
 import 'package:flutter/material.dart';
 
-class BottomMenu extends StatefulWidget {
+class CompanyBottomMenu extends StatefulWidget {
   @override
-  State<BottomMenu> createState() => _BottomMenuState();
+  State<CompanyBottomMenu> createState() => _CompanyBottomMenuState();
 }
 
-/// This is the private State class that goes with BottomMenu.
-class _BottomMenuState extends State<BottomMenu> {
-  int _selectedIndex = 2;
+/// This is the private State class that goes with CompanyBottomMenu.
+class _CompanyBottomMenuState extends State<CompanyBottomMenu> {
+  int _selectedIndex = 1;
   // ignore: unused_field
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
@@ -25,11 +27,9 @@ class _BottomMenuState extends State<BottomMenu> {
   );
 
   static final List<Widget> _widgetOptions = <Widget>[
-    ProfileScreen(),
     AdvertScreen(),
-    HomePageScreen(),
-    ForumScreen(),
-    CompanyScreen(),
+    CorparateHomepageScreen(), //HomePageScreen(),
+    CompanyInterview()
   ];
 
   void _onItemTapped(int index) {
@@ -46,7 +46,7 @@ class _BottomMenuState extends State<BottomMenu> {
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),
         centerTitle: true,
         title: const Text(
-          'Vizyoner Genç+',
+          'Kurumsal',
           style: TextStyle(
               fontFamily: 'Nunito',
               fontWeight: FontWeight.w600,
@@ -80,24 +80,16 @@ class _BottomMenuState extends State<BottomMenu> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined, size: 28.0),
-            label: 'Profil',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.article_outlined),
-            label: 'İlanlar',
+            label: 'Başvurular',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined, size: 28.0),
             label: 'Anasayfa',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum_outlined, size: 28.0),
-            label: 'Forum',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.business_outlined, size: 28.0),
-            label: 'Firmalar',
+            label: 'Mülakatlar',
           ),
         ],
         currentIndex: _selectedIndex,

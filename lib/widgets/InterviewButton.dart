@@ -7,8 +7,15 @@ import 'package:permission_handler/permission_handler.dart';
 class InterviewButton extends StatefulWidget {
   final String channelName;
   final int time;
+  final int interId;
+  final int applicantId;
 
-  InterviewButton({required this.channelName, required this.time});
+  InterviewButton({
+    required this.channelName,
+    required this.time,
+    required this.interId,
+    required this.applicantId,
+  });
 
   @override
   _InterviewButtonState createState() => _InterviewButtonState();
@@ -35,7 +42,10 @@ class _InterviewButtonState extends State<InterviewButton> {
 
     return Container(
       child: StreamBuilder<String>(
-        stream: InverviewRealTime.getInterview(),
+        stream: InverviewRealTime.getInterview(
+          widget.interId,
+          widget.applicantId,
+        ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
