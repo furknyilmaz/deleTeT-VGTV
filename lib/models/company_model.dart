@@ -1,78 +1,38 @@
-import 'dart:convert';
-
-Company companyFromJson(String str) => Company.fromJson(json.decode(str));
-
-String companyToJson(Company data) => json.encode(data.toJson());
-
 class Company {
   Company({
-    required this.company,
+    required this.id,
+    required this.companyName,
+    required this.companyUrl,
+    required this.companyDepartment,
+    required this.establishment,
+    required this.employeeCount,
+    required this.address,
+    required this.contact,
+    required this.website,
+    required this.companyAbout,
   });
 
-  List<CompanyElement> company;
+  int id;
+  String companyName;
+  String companyUrl;
+  String companyDepartment;
+  String establishment;
+  int employeeCount;
+  String address;
+  String contact;
+  String website;
+  String companyAbout;
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
-        company: List<CompanyElement>.from(
-            json["company"].map((x) => CompanyElement.fromJson(x))),
+        id: json["id"] as int,
+        companyName: json["companyName"] as String,
+        companyUrl: json["companyUrl"] as String,
+        companyDepartment: json["companyDepartment"] as String,
+        establishment: json["establishment"] as String,
+        employeeCount: json["employeeCount"] as int,
+        address: json["address"] as String,
+        contact: json["contact"] as String,
+        website: json["website"] as String,
+        companyAbout: json["companyAbout"] as String,
       );
-
-  Map<String, dynamic> toJson() => {
-        "company": List<dynamic>.from(company.map((x) => x.toJson())),
-      };
-}
-
-class CompanyElement {
-  CompanyElement({
-    required this.userId,
-    required this.id,
-    required this.title,
-    required this.imageUri,
-    required this.department,
-    required this.year,
-    required this.personCount,
-    required this.adress,
-    required this.phone,
-    required this.about,
-    required this.websites,
-  });
-
-  int userId;
-  int id;
-  String title;
-  String imageUri;
-  String department;
-  String year;
-  String personCount;
-  String adress;
-  String phone;
-  String about;
-  String websites;
-
-  factory CompanyElement.fromJson(Map<String, dynamic> json) => CompanyElement(
-        userId: json["userId"],
-        id: json["id"],
-        title: json["title"],
-        imageUri: json["imageUri"],
-        department: json["department"],
-        year: json["year"],
-        personCount: json["personCount"],
-        adress: json["adress"],
-        phone: json["phone"],
-        about: json["about"],
-        websites: json["websites"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "userId": userId,
-        "id": id,
-        "title": title,
-        "imageUri": imageUri,
-        "department": department,
-        "year": year,
-        "personCount": personCount,
-        "adress": adress,
-        "phone": phone,
-        "about": about,
-        "websites": websites,
-      };
 }

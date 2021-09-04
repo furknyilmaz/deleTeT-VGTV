@@ -5,7 +5,9 @@ import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreenPage extends StatefulWidget {
-  const LoginScreenPage({Key? key}) : super(key: key);
+  String info = "selam";
+
+  LoginScreenPage({required this.info});
 
   @override
   _LoginScreenPAgeState createState() => _LoginScreenPAgeState();
@@ -62,21 +64,41 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                         Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
-                            width: 280,
-                            height: 100,
-                            child: Image.asset("assets/logo.png"),
+                            width: 250,
+                            height: 90,
+                            child: Image.asset("assets/vgplus.png"),
                           ),
                         ),
+                        widget.info.length > 0
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  border: Border.all(
+                                      width: 0.4, color: Colors.grey.shade300),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 30),
+                                child: Text(
+                                  widget.info,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Nunito'),
+                                ),
+                              )
+                            : Text(""),
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: SelectRoleButton(),
+                          //child: SelectRoleButton(),
                         ),
                         new TextFormField(
                           style: TextStyle(fontSize: 16, fontFamily: 'Nunito'),
                           keyboardType: TextInputType.emailAddress,
-                          validator: (input) => !input!.contains('@')
-                              ? "Geçerli bir adres giriniz!"
-                              : null,
+                          validator: (input) =>
+                              input!.contains('@') && input.contains('.')
+                                  ? null
+                                  : "Geçerli bir adres giriniz!",
                           onSaved: (input) => requestModal.email = input,
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -92,7 +114,7 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                             hintText: 'E-posta adresiniz giriniz',
                             hintStyle:
                                 TextStyle(fontSize: 12, fontFamily: 'Nunito'),
-                            errorStyle: TextStyle(color: Colors.green),
+                            errorStyle: TextStyle(color: Colors.red),
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -110,6 +132,9 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
                           height: 10,
                         ),
                         new TextFormField(
+                            validator: (input) => input!.length < 5
+                                ? "En az 6 basamklı bir şifre giriniz"
+                                : null,
                             keyboardType: TextInputType.visiblePassword,
                             onSaved: (input) => requestModal.password = input,
                             obscureText: true,
@@ -205,92 +230,8 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
         isApiCallProgress = true;
       });
       form.save();
-      userLogin(requestModal, context);
-      Future.delayed(const Duration(milliseconds: 500), () {
-        setState(() {
-          isApiCallProgress = false;
-        });
-      });
+      userLogin(requestModal, context)
+          .then((value) => isApiCallProgress = false);
     }
-  }
-}
-
-bool role = false;
-
-class SelectRoleButton extends StatefulWidget {
-  const SelectRoleButton({Key? key}) : super(key: key);
-
-  @override
-  _SelectRoleButtonState createState() => _SelectRoleButtonState();
-}
-
-class _SelectRoleButtonState extends State<SelectRoleButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                role = true;
-              });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.green),
-                color: role ? Colors.green : Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10)),
-              ),
-              width: 120,
-              height: 35,
-              child: Text(
-                'Kurumsal',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    color: role ? Colors.white : Colors.grey.shade800,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                role = false;
-              });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.green),
-                color: !role ? Colors.green : Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-              ),
-              width: 120,
-              height: 35,
-              child: Text(
-                'Bireysel',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    color: !role ? Colors.white : Colors.grey.shade800,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

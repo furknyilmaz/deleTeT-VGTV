@@ -1,6 +1,7 @@
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
+import 'package:deletedvgtv/widgets/CompanyBottomMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -10,7 +11,7 @@ Future<void> userLogin(requestModal, context) async {
   apiServices
       .login(
     requestModal,
-    'https://dgsbilgim.com/api/login',
+    'http://89.252.131.149:8080/api/deletet/signin',
   )
       .then((response) async {
     print('ResponseCode: ' + response.statusCode.toString());
@@ -19,12 +20,14 @@ Future<void> userLogin(requestModal, context) async {
       var sp = await SharedPreferences.getInstance();
       sp.setString("user_id", data.id.toString());
       sp.setString("user_email", data.email.toString());
-      sp.setString("name", data.name.toString());
-
+      sp.setString("role", data.appUserRole.toString());
+      //sp.setString("name", data.firstName.toString());
+      var role = data.appUserRole.toString();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => BottomMenu(),
+          builder: (context) =>
+              role == 'COMPANY' ? CompanyBottomMenu() : BottomMenu(),
         ),
       );
     } else {

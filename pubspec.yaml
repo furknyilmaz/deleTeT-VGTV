@@ -13,8 +13,12 @@ dependencies:
   carousel_slider: ^2.2.1
   google_fonts: ^2.1.0
   cupertino_icons: ^1.0.2
+  flutter_html: ^2.1.1
   http: ^0.13.3
-
+  cached_network_image: ^3.1.0
+  percent_indicator: ^3.0.1
+  slide_countdown: ^0.0.3
+  flutter_datetime_picker: ^1.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -23,6 +27,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/vg.png
+    - assets/vgplus.png
   #- images/a_dot_ham.jpeg
 
   fonts:

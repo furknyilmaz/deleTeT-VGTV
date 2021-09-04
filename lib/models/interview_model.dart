@@ -1,81 +1,59 @@
-import 'dart:convert';
-
-Interview interviewFromJson(String str) => Interview.fromJson(json.decode(str));
-
-String interviewToJson(Interview data) => json.encode(data.toJson());
-
 class Interview {
-  Interview({required this.interview});
-
-  List<InterviewElement> interview;
-
-  factory Interview.fromJson(Map<String, dynamic> json) => Interview(
-        interview: List<InterviewElement>.from(
-            json["interview"].map((x) => InterviewElement.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "interview": List<dynamic>.from(interview.map((x) => x.toJson())),
-      };
-}
-
-class InterviewElement {
-  InterviewElement({
+  Interview({
     required this.id,
+    required this.applicantName,
+    required this.applicantId,
+    required this.applicantIcon,
     required this.companyName,
-    required this.companyDate,
-    required this.companyImage,
-    required this.companyDescription,
-    required this.companyOfficel,
-    required this.department,
-    required this.iChalengeStatu,
-    required this.iToken,
-    required this.iChallengeName,
-    required this.applicationName,
+    required this.companyId,
+    required this.companyIcon,
+    required this.applicationId,
+    required this.title,
     required this.applicationDesc,
+    required this.companyOfficer,
+    required this.companyDepartment,
+    required this.position,
+    required this.interDate,
+    required this.location,
+    required this.applicationStatus,
+    required this.interStatus,
   });
 
   int id;
+  String applicantName;
+  int applicantId;
+  String applicantIcon;
   String companyName;
-  String companyDate;
-  String companyImage;
-  String companyDescription;
-  String companyOfficel;
-  String department;
-  bool iChalengeStatu;
-  String iToken;
-  String iChallengeName;
-  String applicationName;
+  int companyId;
+  String companyIcon;
+  int applicationId;
+  String title;
   String applicationDesc;
+  String companyOfficer;
+  String companyDepartment;
+  String position;
+  String interDate;
+  String location;
+  String applicationStatus;
+  String interStatus;
 
-  factory InterviewElement.fromJson(Map<String, dynamic> json) =>
-      InterviewElement(
+  factory Interview.fromJson(Map<String, dynamic> json) => Interview(
         id: json["id"],
+        applicantName: json["applicantName"],
+        applicantId: json["applicantId"],
+        applicantIcon: json["applicantIcon"],
         companyName: json["companyName"],
-        companyDate: json["companyDate"],
-        companyImage: json["companyImage"],
-        companyDescription: json["companyDescription"],
-        companyOfficel: json["companyOfficel"],
-        department: json["department"],
-        iChalengeStatu: json["iChalengeStatu"],
-        iToken: json["iToken"],
-        iChallengeName: json["iChallengeName"],
-        applicationName: json["applicationName"],
+        companyId: json["companyId"],
+        companyIcon: json["companyIcon"],
+        applicationId: json["applicationId"],
+        title: json["title"],
         applicationDesc: json["applicationDesc"],
+        companyOfficer: json["companyOfficer"],
+        companyDepartment: json["companyDepartment"],
+        position: json["position"],
+        interDate: json["interDate"],
+        location: json["location"],
+        applicationStatus: json["applicationStatus"],
+        interStatus: json["interStatus"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "companyName": companyName,
-        "companyDate": companyDate,
-        "companyImage": companyImage,
-        "companyDescription": companyDescription,
-        "companyOfficel": companyOfficel,
-        "department": department,
-        "iChalengeStatu": iChalengeStatu,
-        "iToken": iToken,
-        "iChallengeName": iChallengeName,
-        "applicationName": applicationName,
-        "applicationDesc": applicationDesc,
-      };
 }

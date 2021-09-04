@@ -19,11 +19,13 @@ class _RegisterPageeState extends State<RegisterScreen> {
   late RegisterRequestModal requestModal;
   bool isApiCallProgress = false;
   bool checkbox = false;
+  int roleStatus = 1;
 
   @override
   void initState() {
     super.initState();
     requestModal = new RegisterRequestModal();
+    requestModal.role = 1;
     print(requestModal);
   }
 
@@ -40,6 +42,9 @@ class _RegisterPageeState extends State<RegisterScreen> {
   @override
   // ignore: override_on_non_overriding_member
   Widget _uiSteup(BuildContext context) {
+    var screen = MediaQuery.of(context);
+    final double width = screen.size.width;
+    final double itemWidth = (width / 2) - 15;
     return Scaffold(
         key: scoffoldKey,
         backgroundColor: Colors.white,
@@ -63,53 +68,140 @@ class _RegisterPageeState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(30.0),
                           child: SizedBox(
                             width: 280,
-                            height: 100,
-                            child: Image.asset("assets/logo.png"),
+                            height: 90,
+                            child: Image.asset("assets/vgplus.png"),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: SelectRoleButton(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      role = true;
+                                      print(role);
+                                      requestModal.role = 2;
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 0.5, color: Colors.green),
+                                      color: role ? Colors.green : Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10)),
+                                    ),
+                                    width: 120,
+                                    height: 35,
+                                    child: Text(
+                                      'Kurumsal',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'Nunito',
+                                          color: role
+                                              ? Colors.white
+                                              : Colors.grey.shade800,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      role = false;
+                                      requestModal.role = 1;
+                                      print(role);
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 0.5, color: Colors.green),
+                                      color:
+                                          !role ? Colors.green : Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(10)),
+                                    ),
+                                    width: 120,
+                                    height: 35,
+                                    child: Text(
+                                      'Bireysel',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'Nunito',
+                                          color: !role
+                                              ? Colors.white
+                                              : Colors.grey.shade800,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        new TextFormField(
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Nunito',
-                          ),
-                          validator: (input) => input!.length < 2
-                              ? "Lütfen tam adınızı giriniz!"
-                              : null,
-                          keyboardType: TextInputType.name,
-                          onSaved: (input) => requestModal.name = input,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: (BorderSide(
-                                color: Colors.green,
-                              )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: width - 80,
+                              child: new TextFormField(
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: 'Nunito',
+                                ),
+                                validator: (input) => input!.length < 2
+                                    ? "Lütfen tam adınızı giriniz!"
+                                    : null,
+                                keyboardType: TextInputType.name,
+                                onSaved: (input) =>
+                                    requestModal.fullName = input,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: (BorderSide(
+                                      color: Colors.green,
+                                    )),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 0.5),
+                                  ),
+                                  contentPadding: EdgeInsets.only(left: 15.0),
+                                  hintText: 'Adınız',
+                                  hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Nunito',
+                                  ),
+                                  errorStyle: TextStyle(color: Colors.green),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icons.person_rounded,
+                                    color: Colors.green,
+                                    size: 18,
+                                  ),
+                                ),
+                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 0.5),
-                            ),
-                            contentPadding: EdgeInsets.only(left: 15.0),
-                            hintText: 'Lütfen adınızı giriniz',
-                            hintStyle: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Nunito',
-                            ),
-                            errorStyle: TextStyle(color: Colors.green),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person_rounded,
-                              color: Colors.green,
-                              size: 18,
-                            ),
-                          ),
+                          ],
                         ),
                         SizedBox(
                           height: 5,
@@ -235,7 +327,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             register();
                           },
                           child: Text(
-                            'Giriş yap',
+                            'Kayıt Ol',
                             style: TextStyle(fontFamily: 'Nunito'),
                           ),
                         ),
@@ -251,7 +343,7 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginScreenPage(),
+                                builder: (context) => LoginScreenPage(info: ""),
                               ),
                             );
                           },
@@ -285,12 +377,8 @@ class _RegisterPageeState extends State<RegisterScreen> {
           isApiCallProgress = true;
         });
         form.save();
-        userRegister(requestModal, context);
-        Future.delayed(const Duration(milliseconds: 500), () {
-          setState(() {
-            isApiCallProgress = false;
-          });
-        });
+        userRegister(requestModal, context)
+            .then((value) => isApiCallProgress = false);
       } else {
         final snackBar = SnackBar(
           backgroundColor: Color(0xff38a3a5),
@@ -310,81 +398,3 @@ class _RegisterPageeState extends State<RegisterScreen> {
 }
 
 bool role = false;
-
-class SelectRoleButton extends StatefulWidget {
-  const SelectRoleButton({Key? key}) : super(key: key);
-
-  @override
-  _SelectRoleButtonState createState() => _SelectRoleButtonState();
-}
-
-class _SelectRoleButtonState extends State<SelectRoleButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                role = true;
-              });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.green),
-                color: role ? Colors.green : Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10)),
-              ),
-              width: 120,
-              height: 35,
-              child: Text(
-                'Kurumsal',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    color: role ? Colors.white : Colors.grey.shade800,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                role = false;
-              });
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.green),
-                color: !role ? Colors.green : Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-              ),
-              width: 120,
-              height: 35,
-              child: Text(
-                'Bireysel',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    color: !role ? Colors.white : Colors.grey.shade800,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

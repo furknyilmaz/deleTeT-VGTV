@@ -1,8 +1,8 @@
 import 'package:deletedvgtv/models/company_model.dart';
 import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/CompanyItem.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class CompanyScreen extends StatefulWidget {
   @override
@@ -15,22 +15,45 @@ class _CompanyScreenState extends State<CompanyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: getCompany(companyAPI),
-        builder: (context, AsyncSnapshot<Company> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            debugPrint(snapshot.data!.company[0].title);
-            return CompanyItem(snapshot.data);
-          } else {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
-          }
-        },
+      backgroundColor: Colors.grey.shade100,
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+        child: FutureBuilder<List<Company>>(
+          future: fetchCompany(
+            http.Client(),
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 60,
+                      color: Colors.grey.shade700,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        'deneme',
+                        style: TextStyle(fontFamily: 'Nunito'),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else if (snapshot.hasData) {
+              return CompanyItem(data: snapshot.data!);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
