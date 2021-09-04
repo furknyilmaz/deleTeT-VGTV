@@ -68,7 +68,8 @@ class _ProfileScreen extends State<ProfileScreen> {
                               padding: EdgeInsets.all(5),
                               width: 140,
                               height: 180,
-                              child: ImageCached(url: snapshot.data!.imageUrl),
+                              child: ImageCached(
+                                  url: snapshot.data!.imageUrl, type: 'height'),
                             ),
                             Container(
                               decoration: BoxDecoration(

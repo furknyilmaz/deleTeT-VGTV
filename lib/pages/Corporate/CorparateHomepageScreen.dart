@@ -21,12 +21,11 @@ class _CorparateHomepageScreenState extends State<CorparateHomepageScreen> {
       backgroundColor: Colors.grey.shade100,
       body: Center(
           child: Container(
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.all(10),
         child: Column(
           children: [
-            Expanded(flex: 10, child: CompanyInfoWidget()),
             Expanded(
-              flex: 30,
+              flex: 1,
               child: FutureBuilder<List<Advers>>(
                 future: fetchCompanyAdverts(
                   http.Client(),
@@ -86,27 +85,46 @@ class _CorparateHomepageScreenState extends State<CorparateHomepageScreen> {
 }
 
 class CompanyInfoWidget extends StatelessWidget {
-  const CompanyInfoWidget({Key? key}) : super(key: key);
-
+  String companyName;
+  String companyIcon;
+  CompanyInfoWidget(this.companyIcon, this.companyName);
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(width: 0.5, color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(8),
+      ),
       width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            "assets/vg.png",
-            width: 100,
+          Container(
+            padding: EdgeInsets.all(30),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(width: 0.5, color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(30),
+                image: new DecorationImage(
+                  fit: BoxFit.fitWidth,
+                  image: new NetworkImage(companyIcon),
+                )),
+            width: 120,
+            height: 120,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Vizyoner Genç',
-              style: TextStyle(fontFamily: 'Nunito', fontSize: 20),
+            child: Container(
+              width: width - 100,
+              child: Text(
+                companyName,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontFamily: 'Nunito', fontSize: 20),
+              ),
             ),
           )
         ],
@@ -126,28 +144,34 @@ class AdvertsInfo extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 10,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'İlanlar',
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  'Tümünü Gör',
+            flex: 120,
+            child: CompanyInfoWidget(data[0].companyIcon, data[0].companyName)),
+        Expanded(
+          flex: 20,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Yayındaki İlanlarınız',
                   style: TextStyle(
                       fontFamily: 'Nunito',
-                      fontSize: 13,
+                      fontSize: 17,
                       fontWeight: FontWeight.w600),
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    'Tümünü Gör',
+                    style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Expanded(
@@ -161,8 +185,8 @@ class AdvertsInfo extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            CompanyApplications(data[index].id),
+                        builder: (context) => CompanyApplications(
+                            data[index].id, data[index].companyId),
                       ));
                 },
                 child: Container(
@@ -188,18 +212,19 @@ class AdvertsInfo extends StatelessWidget {
                               style: TextStyle(
                                   fontFamily: 'Nunito',
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 16),
+                                  fontSize: 15),
                             ),
                             Container(height: 3),
                             Row(
                               children: [
                                 Icon(
                                   Icons.date_range_outlined,
-                                  size: 16,
+                                  size: 14,
                                 ),
                                 Text(
                                   ' ' + data[index].advertsDate,
-                                  style: TextStyle(fontFamily: 'Nunito'),
+                                  style: TextStyle(
+                                      fontFamily: 'Nunito', fontSize: 12),
                                 ),
                               ],
                             ),
@@ -208,11 +233,12 @@ class AdvertsInfo extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.timelapse_outlined,
-                                  size: 16,
+                                  size: 14,
                                 ),
                                 Text(
                                   ' ' + data[index].wayOfWorking,
-                                  style: TextStyle(fontFamily: 'Nunito'),
+                                  style: TextStyle(
+                                      fontFamily: 'Nunito', fontSize: 12),
                                 ),
                               ],
                             ),
@@ -220,8 +246,8 @@ class AdvertsInfo extends StatelessWidget {
                         ),
                         Image.network(
                           data[index].companyIcon,
-                          width: 60,
-                          height: 60,
+                          width: 80,
+                          height: 80,
                         )
                       ],
                     ),

@@ -148,7 +148,7 @@ class ApplicationDetailScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 top: 0, left: 20, right: 20, bottom: 15),
                             child: Text(
-                              application.companyDesc,
+                              application.advertsDescription,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 12,
@@ -177,7 +177,8 @@ class ApplicationDetailScreen extends StatelessWidget {
                           children: [
                             Icon(Icons.location_city, size: 16),
                             Text(
-                              ' ' + application.companyLocation,
+                              ' ' +
+                                  application.companyLocation.substring(0, 10),
                               style:
                                   TextStyle(fontFamily: 'Nunito', fontSize: 12),
                             )

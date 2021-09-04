@@ -1,15 +1,14 @@
-import 'package:deletedvgtv/models/application_model.dart';
-import 'package:deletedvgtv/pages/ApplicationScreen.dart';
+import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/widgets/Corporate/CompanyApplicationItem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class CompanyApplications extends StatefulWidget {
+  CompanyApplications(this.adverstID, this.companyID);
   int adverstID;
-
-  CompanyApplications(this.adverstID);
-
+  int companyID;
   @override
   _CompanyApplicationsState createState() => _CompanyApplicationsState();
 }
@@ -19,12 +18,15 @@ class _CompanyApplicationsState extends State<CompanyApplications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Başvurular"),
-      ),
-      body: FutureBuilder<List<Application>>(
-        future: fetchCompanyApplication(
-          http.Client(),
+        title: Text(
+          "İlana Başvurunlar",
+          style: TextStyle(fontFamily: 'Nunito', fontSize: 18),
         ),
+        backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+      ),
+      body: FutureBuilder<List<ApplicationCompany>>(
+        future: fetchCompanyApplication(
+            http.Client(), widget.adverstID, widget.companyID),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(

@@ -65,11 +65,12 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
 
     print(widget.advers);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(69, 123, 157, 1),
-          title: Text('İlan Bilgileri'),
-        ),
-        body: SingleChildScrollView(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(69, 123, 157, 1),
+        title: Text('İlan Bilgileri'),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Container(
             child: SafeArea(
               child: Center(
@@ -114,7 +115,7 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                               widget.advers.advertsTitle,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
                                   fontFamily: 'Nunito'),
@@ -136,14 +137,51 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 0, horizontal: 10),
-                            child: Text(
-                              widget.advers.companyDesc,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 12.5,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                  fontFamily: 'Nunito'),
+                            child: Html(
+                              data: widget.advers.companyDesc,
+                              style: {
+                                "body": Style(
+                                  fontFamily: 'Nunito',
+                                  fontSize: FontSize(12.0),
+                                  fontWeight: FontWeight.normal,
+                                  textAlign: TextAlign.center,
+                                ),
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0, left: 30, right: 30, bottom: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                border: Border.all(
+                                    width: 0.5, color: Colors.grey.shade200),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              padding: EdgeInsets.all(8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.location_on_outlined,
+                                    size: 24,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 5),
+                                    width: width * 0.65,
+                                    child: Text(
+                                      widget.advers.companyLocation,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black,
+                                          fontFamily: 'Nunito'),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Container(
@@ -185,6 +223,16 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Başvuru Şartları",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Nunito',
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
                               Html(
                                 data: widget.advers.advertsAbout,
                                 style: {
@@ -226,7 +274,9 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
               )),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -259,7 +309,7 @@ class OkApplicationButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.thumb_up_outlined,
+                    Icon(Icons.done_outline_outlined,
                         color: Colors.white, size: 18),
                     Text(
                       ' İlana Başvuruldu',
@@ -333,7 +383,7 @@ class ApplicationAdd extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 10),
         child: Container(
           width: width * 0.8,
           child: Row(
@@ -342,7 +392,7 @@ class ApplicationAdd extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(width: 0.6, color: Colors.green),
-                  color: Colors.white,
+                  color: Color.fromRGBO(69, 123, 157, 1),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
@@ -350,9 +400,17 @@ class ApplicationAdd extends StatelessWidget {
                 width: width * 0.8,
                 height: 40,
                 child: Center(
-                  child: Text(
-                    status ? 'İlana Başvur' : 'İlana Başvuruldu',
-                    style: TextStyle(fontFamily: 'Nunito', color: Colors.black),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.label_important_outlined,
+                          color: Colors.white, size: 18),
+                      Text(
+                        ' İlana Başvur',
+                        style: TextStyle(
+                            fontFamily: 'Nunito', color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               )
@@ -362,6 +420,4 @@ class ApplicationAdd extends StatelessWidget {
       ),
     );
   }
-
-  fetchApplicationAdd() {}
 }

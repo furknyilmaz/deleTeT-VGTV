@@ -1,15 +1,14 @@
-import 'package:deletedvgtv/models/application_model.dart';
-import 'package:deletedvgtv/pages/ApplicationDetailScreen.dart';
-import 'package:deletedvgtv/services/api_services.dart';
+import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
+import 'package:deletedvgtv/pages/Corporate/CompanyApplicationDetailScreen.dart';
+import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class CompanyApplicationItem extends StatelessWidget {
   const CompanyApplicationItem({Key? key, required this.data, required this.id})
       : super(key: key);
-  final List<Application> data;
+  final List<ApplicationCompany> data;
   final int id;
 
   @override
@@ -50,125 +49,137 @@ class CompanyApplicationItem extends StatelessWidget {
                 } else {
                   stack++;
                   return SingleChildScrollView(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border:
-                            Border.all(width: 0.5, color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      margin:
-                          EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 0),
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 15, left: 10, right: 10, bottom: 0),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 80.0,
-                                    height: 80.0,
-                                    child: Container(
-                                        child: ImageCached(
-                                            width: 70,
-                                            height: 70,
-                                            url:
-                                                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                                        decoration: BoxDecoration(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CompanyApplicationDetailScreen()),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              width: 0.5, color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        margin: EdgeInsets.only(
+                            top: 6, left: 8, right: 8, bottom: 0),
+                        child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 10, left: 10, right: 10, bottom: 0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
                                           color: Colors.white,
                                           border: Border.all(
                                               width: 0.5,
                                               color: Colors.grey.shade300),
                                           borderRadius:
-                                              BorderRadius.circular(6),
-                                        )),
-                                  ),
-                                  Container(
-                                    width: width * 0.65,
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          data[index].advertsTitle,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                              fontFamily: 'Nunito'),
-                                        ),
-                                        Text(
-                                          'Bahadır Tıraş',
-                                          // snapshot!.application[index].companyDesc,
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              fontFamily: 'Nunito',
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          "Bahadır Tıraş 1194 yılında İneboluda dünaya geldi. Ölğmle yaşamı ayıramadığı için o ince çizgiyi bulamadı.Bahadır Tıraş 1194 yılında İneboluda dünaya geldi. Ölğmle yaşamı ayıramadığı için o ince çizgiyi bulamadı.",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily: 'Nunito'),
-                                        ),
-                                      ],
+                                              BorderRadius.circular(40),
+                                          image: new DecorationImage(
+                                            fit: BoxFit.fitWidth,
+                                            image: new NetworkImage(
+                                                data[index].applicantImg),
+                                          )),
+                                      width: 60,
+                                      height: 60,
                                     ),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                height: 1,
-                                color: Colors.grey.shade200,
-                                margin: EdgeInsets.only(top: 10),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
+                                    Container(
+                                      width: width * 0.65,
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Icon(
-                                            Icons.date_range,
-                                            size: 16,
+                                          Text(
+                                            data[index].applicantName,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                                fontFamily: 'Nunito'),
                                           ),
                                           Text(
-                                            ' ' + data[index].applicationDate,
+                                            'Software Developer',
                                             style: TextStyle(
-                                                fontSize: 12,
+                                                fontSize: 11,
+                                                fontFamily: 'Nunito',
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            data[index].applicantAbout.length >
+                                                    120
+                                                ? data[index]
+                                                        .applicantAbout
+                                                        .substring(0, 120) +
+                                                    '...'
+                                                : data[index].applicantAbout,
+                                            style: TextStyle(
+                                                fontSize: 10,
                                                 fontFamily: 'Nunito'),
                                           ),
                                         ],
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ApplicationDetailScreen(
-                                                        data[index])),
-                                          );
-                                        },
-                                        child: Status(
-                                          data[index].status.toString(),
+                                    )
+                                  ],
+                                ),
+                                Container(
+                                  height: 1,
+                                  color: Colors.grey.shade200,
+                                  margin: EdgeInsets.only(top: 10),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.date_range,
+                                              size: 16,
+                                            ),
+                                            Text(
+                                              ' ' + data[index].applicationDate,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'Nunito'),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HomePageScreen()),
+                                            );
+                                          },
+                                          child: Status(
+                                            data[index].status.toString(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )),
+                              ],
+                            )),
+                      ),
                     ),
                   );
                 }
@@ -190,15 +201,15 @@ class Status extends StatelessWidget {
     switch (status) {
       case "1":
         {
-          title = "Detaylar  ";
+          title = " Başvuru Alındı";
           color = const Color(0xffc1def8);
-          icon = const Icon(Icons.mark_email_read_outlined, size: 18);
+          icon = const Icon(Icons.fact_check_outlined, size: 16);
         }
         break;
 
       case "2":
         {
-          title = "İnceleniyor   ";
+          title = "İncelediniz  ";
           color = const Color(0xfffcebba);
           icon = const Icon(Icons.hourglass_bottom_outlined, size: 18);
         }
@@ -206,7 +217,7 @@ class Status extends StatelessWidget {
 
       case "3":
         {
-          title = "Mülakata bekleniyor   ";
+          title = "Mülakat oluşturuldu   ";
           color = const Color(0xffcee4cb);
           icon = const Icon(Icons.task_alt_outlined, size: 18);
         }
@@ -214,7 +225,7 @@ class Status extends StatelessWidget {
 
       case "4":
         {
-          title = "Olumsuz Sonuçlandı   ";
+          title = "Olumsuz Sonuçlandırdınız   ";
           color = const Color(0xfff7c7d3);
           icon = const Icon(Icons.mood_bad_outlined, size: 18);
         }
@@ -222,9 +233,9 @@ class Status extends StatelessWidget {
 
       case "5":
         {
-          title = "Olumlu Sonuçlandı   ";
+          title = "Olumlu Sonuçlandırdınız  ";
           color = const Color(0xff57cc99);
-          icon = const Icon(Icons.verified_outlined, size: 18);
+          icon = const Icon(Icons.verified_outlined, size: 16);
         }
         break;
 
@@ -236,7 +247,7 @@ class Status extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.all(
@@ -249,14 +260,14 @@ class Status extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                fontSize: 12,
+                fontSize: 11,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Nunito'),
             textAlign: TextAlign.center,
           ),
           Icon(
             Icons.arrow_forward_outlined,
-            size: 18,
+            size: 16,
           )
         ],
       ),

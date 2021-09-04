@@ -67,15 +67,10 @@ class AdvertsItem extends StatelessWidget {
                             children: [
                               Icon(Icons.access_time_outlined, size: 12),
                               Text(
-                                data[index].wayOfWorking + ' - ',
+                                data[index].wayOfWorking,
                                 style: TextStyle(
                                     fontFamily: 'Nunito', fontSize: 12),
                               ),
-                              Text(
-                                data[index].companyLocation,
-                                style: TextStyle(
-                                    fontSize: 11, fontFamily: 'Nunito'),
-                              )
                             ],
                           ),
                           Row(

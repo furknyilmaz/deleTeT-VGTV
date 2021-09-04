@@ -1,3 +1,4 @@
+import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
 import 'package:deletedvgtv/models/application_model.dart';
@@ -30,9 +31,19 @@ class UserAPIServices {
   // Kullanıcı Kayıt API bağlantısı
   register(RegisterRequestModal requestModal, localUrl) async {
     var url = Uri.parse(localUrl);
-
-    print(requestModal.toJson());
     final response = await http.post(
+      url,
+      body: json.encode(requestModal),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+    return response;
+  }
+
+  updateProfile(ProfileUpdateModal requestModal, localUrl) async {
+    var url = Uri.parse(localUrl);
+    final response = await http.put(
       url,
       body: json.encode(requestModal),
       headers: <String, String>{
@@ -44,7 +55,6 @@ class UserAPIServices {
 
   // Başvuru ekle API bağlantısı
   applicationAdd(ApplicationAddModal applicationModal, localUrl) async {
-    print(applicationModal.toString());
     var url = Uri.parse(applicationAPI + 'create');
     final response = await http.post(
       url,
@@ -107,8 +117,6 @@ Future<List<Interview>> fetchInterview(http.Client client) async {
   var sp = await SharedPreferences.getInstance();
   var id = (sp.getString("user_id")!);
   final response = await client.get(Uri.parse(interviewAPI + id));
-  print(response.body);
-
   return compute(parseInterview, utf8.decode(response.bodyBytes));
 }
 
@@ -141,7 +149,6 @@ Future<List<Advers>> fetchCompanyAdverts(http.Client client) async {
   var sp = await SharedPreferences.getInstance();
   String? id = sp.getString("user_id");
   var url = adversCompanyAPI + id.toString();
-  print(id.toString());
   final response = await client.get(Uri.parse(url));
   return compute(parseCompanyAdverts, utf8.decode(response.bodyBytes));
 }
@@ -163,20 +170,23 @@ List<Advers> parseCompanyAdverts(String responseBody) {
 //
 //
 // Başvurular Firma API bağlantısı
-Future<List<Application>> fetchCompanyApplication(http.Client client) async {
-  var sp = await SharedPreferences.getInstance();
-  String? id = sp.getString("user_id");
-  var url = applicationCompanyAPI + id.toString();
-  print(id.toString());
-  final response = await client.get(Uri.parse(url));
+Future<List<ApplicationCompany>> fetchCompanyApplication(
+    http.Client client, adverstId, companyId) async {
+  var url = Uri.parse(applicationCompanyAPI);
+  final response = await http.post(
+    url,
+    body: json.encode({"companyId": companyId, "advertId": adverstId}),
+    headers: {'Content-Type': 'application/json'},
+  );
   return compute(parseCompanyApplication, utf8.decode(response.bodyBytes));
 }
 
-List<Application> parseCompanyApplication(String responseBody) {
+List<ApplicationCompany> parseCompanyApplication(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Application>((json) => Application.fromJson(json)).toList();
+  return parsed
+      .map<ApplicationCompany>((json) => ApplicationCompany.fromJson(json))
+      .toList();
 }
-
 //
 //
 //

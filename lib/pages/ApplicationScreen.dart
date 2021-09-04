@@ -29,9 +29,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
       ),
       backgroundColor: Colors.grey.shade200,
       body: FutureBuilder<List<Application>>(
-        future: fetchApplication(
-          http.Client(),
-        ),
+        future: fetchApplication(http.Client()),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(

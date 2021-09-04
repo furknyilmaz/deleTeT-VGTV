@@ -2,7 +2,6 @@ class ApplicationAddModal {
   int? applicantId;
   int? companyid;
   int? advertId;
-
   int? status;
 
   ApplicationAddModal({

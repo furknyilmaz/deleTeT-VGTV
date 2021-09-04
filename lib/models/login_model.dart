@@ -68,3 +68,42 @@ class RegisterResponseModal {
     );
   }
 }
+
+class ProfileUpdateModal {
+  String? fullName;
+  String? tckn;
+  String? website;
+  String? phoneNumber;
+  String? university;
+  String? experiences;
+  String? address;
+  String? imageUrl;
+  String? about;
+
+  ProfileUpdateModal({
+    this.fullName,
+    this.tckn,
+    this.website,
+    this.phoneNumber,
+    this.university,
+    this.experiences,
+    this.address,
+    this.imageUrl,
+    this.about,
+  });
+
+  Map<String, dynamic>? toJson() {
+    Map<String, dynamic> map = {
+      'fullName': fullName?.trim(),
+      'tckn': tckn?.trim(),
+      'website': website?.trim(),
+      'phoneNumber': phoneNumber?.trim(),
+      'university': university?.trim(),
+      'experiences': experiences?.trim(),
+      'address': address,
+      'imageUrl': imageUrl,
+      'about': about
+    };
+    return map;
+  }
+}

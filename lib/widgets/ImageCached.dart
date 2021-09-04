@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ImageCached extends StatelessWidget {
   String url;
+  String type;
   double? width;
   double? height;
 
@@ -11,6 +12,7 @@ class ImageCached extends StatelessWidget {
     required this.url,
     this.width = 30.0,
     this.height = 30.0,
+    this.type = 'width',
   });
 
   @override
@@ -23,7 +25,7 @@ class ImageCached extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: imageProvider,
-                fit: BoxFit.fitWidth,
+                fit: type == 'width' ? BoxFit.fitWidth : BoxFit.fitHeight,
               ),
             ),
           ),

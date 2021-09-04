@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/pages/LoginScreen.dart';
 import 'package:deletedvgtv/models/login_model.dart';
+import 'package:deletedvgtv/pages/ProfileInfoScreen.dart';
 import 'package:deletedvgtv/utils/userRegister.dart';
 import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
@@ -343,8 +344,9 @@ class _RegisterPageeState extends State<RegisterScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginScreenPage(info: ""),
-                              ),
+                                  builder: (context) =>
+                                      ProfileInfo() //LoginScreenPage(info: ""),
+                                  ),
                             );
                           },
                           child: Padding(
