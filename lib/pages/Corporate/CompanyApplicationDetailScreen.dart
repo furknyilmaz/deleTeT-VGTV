@@ -1,13 +1,14 @@
-import 'package:deletedvgtv/models/advers_modal.dart';
-import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/widgets/Corporate/CompanyApplicationAdversInfo.dart';
+import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
 import 'package:deletedvgtv/widgets/Corporate/CompanyApplicationButton.dart';
 import 'package:deletedvgtv/widgets/Corporate/CompanyApplicationUserProfile.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class CompanyApplicationDetailScreen extends StatefulWidget {
-  const CompanyApplicationDetailScreen({Key? key}) : super(key: key);
+  ApplicationCompany? data;
+
+  @override
+  CompanyApplicationDetailScreen(this.data);
 
   @override
   _CompanyApplicationDetailScreenState createState() =>
@@ -19,52 +20,33 @@ class _CompanyApplicationDetailScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Başvuru Detayı',
-          style: TextStyle(fontFamily: 'Nunito', fontSize: 18),
+        appBar: AppBar(
+          title: Text(
+            'Başvuru Detayı',
+            style: TextStyle(fontFamily: 'Nunito', fontSize: 18),
+          ),
+          backgroundColor: Color.fromRGBO(69, 123, 157, 1),
         ),
-        backgroundColor: Color.fromRGBO(69, 123, 157, 1),
-      ),
-      backgroundColor: Colors.grey.shade100,
-      body: FutureBuilder<List<Advers>>(
-        future: fetchAdvers(http.Client()),
-        builder: (context, snapshot) {
-          print(snapshot.error);
-          if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                children: [
-                  Icon(Icons.dangerous),
-                  Text('Bir hata ile karşılaşıldı'),
-                ],
-              ),
-            );
-          } else if (snapshot.hasData) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0),
-              child: SafeArea(
-                child: Container(
-                  color: Colors.grey.shade100,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        CompanyApplicationUserProfile(),
-                        CompanyApplicationAdvertsInfo(),
-                        CompanyApplicationButton(),
-                      ],
+        backgroundColor: Colors.grey.shade100,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0),
+          child: SafeArea(
+            child: Container(
+              color: Colors.grey.shade100,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CompanyApplicationUserProfile(widget.data!.applicantId),
+                    //CompanyApplicationAdvertsInfo(widget.data),
+                    CompanyApplicationButton(
+                      widget.data!.id,
+                      widget.data!.status,
                     ),
-                  ),
+                  ],
                 ),
               ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
+            ),
+          ),
+        ));
   }
 }

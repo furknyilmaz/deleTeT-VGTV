@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     var sp = await SharedPreferences.getInstance();
     String? username = sp.getString("user_id");
     String? role = sp.getString("role");
-    print(role);
     if (username != null) {
       if (role == 'USER') {
         return '1';

@@ -1,13 +1,9 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
-import 'package:deletedvgtv/models/application_model.dart';
 import 'package:deletedvgtv/utils/applicationAdd.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class CompanyAdverts extends StatefulWidget {
   final Advers advers;

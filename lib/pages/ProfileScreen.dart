@@ -1,27 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:deletedvgtv/models/profile_modal.dart';
-import 'package:deletedvgtv/pages/ProfileScreenItem.dart';
-import 'package:deletedvgtv/utils/constants.dart';
+import 'package:deletedvgtv/utils/requestManeger.dart';
+import 'package:deletedvgtv/widgets/ProfileScreenItem.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-Future<Profile> fetchProfile() async {
-  var sp = await SharedPreferences.getInstance();
-  String? userID = sp.getString("user_id");
-  if (userID != null) {}
-  final response = await http.get(Uri.parse('${profileAPI + userID!}'));
-  if (response.statusCode == 200) {
-    final jsonresponse = json.decode(utf8.decode(response.bodyBytes));
-    return Profile.fromJson(jsonresponse[0]);
-  } else {
-    throw Exception(
-        'Kullanıcı verilerilerine erişirken bir hata meydana geldi');
-  }
-}
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -34,7 +18,7 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchProfile();
+    futureAlbum = fetchProfileID();
   }
 
   @override
@@ -69,7 +53,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                               width: 140,
                               height: 180,
                               child: ImageCached(
-                                  url: snapshot.data!.imageUrl, type: 'height'),
+                                  url: snapshot.data!.imageUrl, type: 'width'),
                             ),
                             Container(
                               decoration: BoxDecoration(

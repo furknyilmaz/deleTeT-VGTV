@@ -21,8 +21,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   void initState() {
     super.initState();
     requestModal = new ProfileUpdateModal();
-    requestModal.imageUrl =
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+    requestModal.imageUrl = "https://vizyonergenc.com/users/default.png";
     print("data" + requestModal.toString());
   }
 
@@ -458,7 +457,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
               image: new DecorationImage(
                 fit: BoxFit.fitWidth,
                 image: new NetworkImage(
-                    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                    "https://vizyonergenc.com/users/default.png"),
               )),
           width: 150,
           height: 150,

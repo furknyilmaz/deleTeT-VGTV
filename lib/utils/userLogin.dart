@@ -1,5 +1,6 @@
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/models/login_model.dart';
+import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/BottomMenuWidget.dart';
 import 'package:deletedvgtv/widgets/CompanyBottomMenu.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ Future<void> userLogin(requestModal, context) async {
   apiServices
       .login(
     requestModal,
-    'http://89.252.131.149:8080/api/deletet/signin',
+    singinAPI,
   )
       .then((response) async {
     print('ResponseCode: ' + response.statusCode.toString());

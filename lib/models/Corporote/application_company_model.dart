@@ -15,6 +15,7 @@ class ApplicationCompany {
     required this.applicantName,
     required this.applicantImg,
     required this.applicantAbout,
+    required this.applicantExp,
   });
 
   int id;
@@ -31,6 +32,7 @@ class ApplicationCompany {
   String applicantName;
   String applicantImg;
   String applicantAbout;
+  String applicantExp;
   int status;
 
   factory ApplicationCompany.fromJson(Map<String, dynamic> json) =>
@@ -59,6 +61,8 @@ class ApplicationCompany {
             json["applicantImg"] == null ? null : json["applicantImg"],
         applicantAbout:
             json["applicantAbout"] == null ? null : json["applicantAbout"],
+        applicantExp:
+            json["applicantExp"] == null ? null : json["applicantExp"],
       );
 
   get length => null;

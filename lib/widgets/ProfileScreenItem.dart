@@ -1,4 +1,3 @@
-import 'package:deletedvgtv/models/profile_modal.dart';
 import 'package:deletedvgtv/services/api_services.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class ProfileScreenItem extends StatefulWidget {
   String? data;
   ProfileScreenItem();
@@ -21,19 +21,16 @@ class _ProfileScreenState extends State<ProfileScreenItem> {
   @override
   void initState() {
     super.initState();
-    print("id:" + id.toString());
     control().then((value) => id = value);
     fetchCProfile(
       http.Client(),
     ).then((value) => data = value);
-    print("dddd" + data.toString());
   }
 
   Future<String> control() async {
     var sp = await SharedPreferences.getInstance();
     String? username = sp.getString("user_id");
     if (username != null) {
-      print(username);
       return username;
     } else {
       return 'false';

@@ -16,7 +16,6 @@ String? inputStatu = "online";
 class _InterviewTimerState extends State<InterviewTimer> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.time < 0) {
       if (widget.time < 100000) {

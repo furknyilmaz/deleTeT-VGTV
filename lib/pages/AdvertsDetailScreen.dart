@@ -1,6 +1,7 @@
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
 import 'package:deletedvgtv/utils/applicationAdd.dart';
+import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -40,13 +41,10 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
 
   void control(id) async {
     final response = await http.post(
-      Uri.parse("http://89.252.131.149:8080/api/deletet/adverts/check"),
+      Uri.parse(advertsCheckAPI),
       body: json.encode({"userid": id, "advertid": widget.advers.id}),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
     if (response.body == 'true') {
       setState(() {
         status = false;
@@ -62,8 +60,6 @@ class _AdvertsDetailScreenState extends State<AdvertsDetailScreen> {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-
-    print(widget.advers);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(69, 123, 157, 1),

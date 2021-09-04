@@ -1,3 +1,16 @@
+// To parse this JSON data, do
+//
+//     final applicationResponse = applicationResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+List<ApplicationResponse> applicationResponseFromJson(String str) =>
+    List<ApplicationResponse>.from(
+        json.decode(str).map((x) => ApplicationResponse.fromJson(x)));
+
+String applicationResponseToJson(List<ApplicationResponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class ApplicationResponse {
   ApplicationResponse({
     required this.id,
@@ -14,9 +27,6 @@ class ApplicationResponse {
     required this.advertsDescription,
     required this.advertsAbout,
     required this.status,
-    required this.applicantName,
-    required this.applicantImg,
-    required this.applicantAbout,
   });
 
   int id;
@@ -33,9 +43,6 @@ class ApplicationResponse {
   String advertsDescription;
   String advertsAbout;
   int status;
-  String applicantName;
-  String applicantImg;
-  String applicantAbout;
 
   factory ApplicationResponse.fromJson(Map<String, dynamic> json) =>
       ApplicationResponse(
@@ -53,8 +60,22 @@ class ApplicationResponse {
         advertsDescription: json["advertsDescription"],
         advertsAbout: json["advertsAbout"],
         status: json["status"],
-        applicantName: json["applicantName"],
-        applicantImg: json["applicantImg"],
-        applicantAbout: json["applicantAbout"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "applicantId": applicantId,
+        "companyId": companyId,
+        "advertId": advertId,
+        "companyName": companyName,
+        "companyLocation": companyLocation,
+        "companyIcon": companyIcon,
+        "companyDesc": companyDesc,
+        "applicationDate": applicationDate,
+        "wayOfWorking": wayOfWorking,
+        "advertsTitle": advertsTitle,
+        "advertsDescription": advertsDescription,
+        "advertsAbout": advertsAbout,
+        "status": status,
+      };
 }

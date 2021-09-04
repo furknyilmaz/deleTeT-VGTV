@@ -315,9 +315,7 @@ class InterviewButton extends StatelessWidget {
                         fontSize: 16),
                   ),
                   ElevatedButton(
-                    onLongPress: () {
-                      print('selam');
-                    },
+                    onLongPress: () {},
                     onPressed: () {},
                     child: Text(
                       "Detaylar",

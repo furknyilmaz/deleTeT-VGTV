@@ -4,6 +4,7 @@ import 'package:deletedvgtv/utils/userLogin.dart';
 import 'package:deletedvgtv/widgets/ProgressHUD.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LoginScreenPage extends StatefulWidget {
   String info = "selam";
 
@@ -26,7 +27,6 @@ class _LoginScreenPAgeState extends State<LoginScreenPage> {
   void initState() {
     super.initState();
     requestModal = new LoginRequestModal();
-    print(requestModal.toJson());
   }
 
   @override

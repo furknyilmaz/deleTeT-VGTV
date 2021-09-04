@@ -1,8 +1,6 @@
 import 'package:deletedvgtv/pages/AdvertsScreen.dart';
 import 'package:deletedvgtv/pages/ApplicationScreen.dart';
-import 'package:deletedvgtv/pages/Corporate/CompanyInterview.dart';
 import 'package:deletedvgtv/pages/CompanyScreen.dart';
-import 'package:deletedvgtv/pages/Corporate/CorparateHomepageScreen.dart';
 import 'package:deletedvgtv/pages/ForumScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
 import 'package:deletedvgtv/pages/InterviewListScreen.dart';

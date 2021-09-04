@@ -19,7 +19,6 @@ class _AdvertScreenState extends State<AdvertScreen> {
       body: FutureBuilder<List<Advers>>(
         future: fetchAdvers(http.Client()),
         builder: (context, snapshot) {
-          print(snapshot.error);
           if (snapshot.hasError) {
             return Center(
               child: Column(
@@ -44,53 +43,3 @@ class _AdvertScreenState extends State<AdvertScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-/*
-GestureDetector(
-  child: Container(
-    decoration: BoxDecoration(
-      color: Colors.blue,
-      borderRadius: BorderRadius.all(
-        Radius.circular(5),
-      ),
-    ),
-    margin: EdgeInsets.only(top: 10),
-    width: width,
-    height: 30,
-    child: Column(
-      mainAxisAlignment:
-          MainAxisAlignment.center,
-      crossAxisAlignment:
-          CrossAxisAlignment.center,
-      children: [
-        Text(
-          "Başvur",
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Nunito'),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    ),
-  ),
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              AdvertsDetailScreen(
-                imageUri[index],
-                advertsDetails[index],
-                companyName[index],
-                advertstitleDetails[index],
-              )),
-    );
-  },
-),
-*/

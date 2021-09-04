@@ -1,7 +1,12 @@
+import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CompanyApplicationAdvertsInfo extends StatefulWidget {
-  const CompanyApplicationAdvertsInfo({Key? key}) : super(key: key);
+  ApplicationCompany? data;
+
+  @override
+  CompanyApplicationAdvertsInfo(this.data);
 
   @override
   _CompanyApplicationAdvertsInfoState createState() =>
@@ -51,7 +56,7 @@ class _CompanyApplicationAdvertsInfoState
                   ),
                 ),
                 Text(
-                  'Savunma Teknolojileri Mühensilik ve Ticaret A:Ş',
+                  widget.data!.companyName,
                   style: TextStyle(fontFamily: 'Nunito'),
                 ),
               ],
@@ -73,7 +78,7 @@ class _CompanyApplicationAdvertsInfoState
                   ),
                 ),
                 Text(
-                  'Uzman Gönüllü Yazılım Mühendisliği',
+                  widget.data!.advertsTitle,
                   style: TextStyle(fontFamily: 'Nunito'),
                 ),
               ],
@@ -94,7 +99,7 @@ class _CompanyApplicationAdvertsInfoState
                   ),
                 ),
                 Text(
-                  'Tam Zamanlı',
+                  widget.data!.wayOfWorking,
                   style: TextStyle(fontFamily: 'Nunito'),
                 ),
               ],
@@ -119,7 +124,7 @@ class _CompanyApplicationAdvertsInfoState
                 Container(
                   width: width - 100,
                   child: Text(
-                    "Mühendislik ve Tic. A.Ş. Mustafa Kemal Mahallesi 2151.Cadde No:3/A Çankaya-ANKARA",
+                    widget.data!.companyLocation,
                     style: TextStyle(fontFamily: 'Nunito'),
                   ),
                 ),

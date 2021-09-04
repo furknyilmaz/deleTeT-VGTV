@@ -1,4 +1,5 @@
 import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
+import 'package:deletedvgtv/models/Corporote/application_response.model.dart';
 import 'package:deletedvgtv/models/advers_modal.dart';
 import 'package:deletedvgtv/models/application_add_modal.dart';
 import 'package:deletedvgtv/models/application_model.dart';
@@ -100,6 +101,27 @@ List<Advers> parseAdvers(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Advers>((json) => Advers.fromJson(json)).toList();
 }
+
+//
+//
+/// İlanlar API bapantısı
+Future<List<ApplicationResponse>> fetchCompanyAplication(
+    http.Client client) async {
+  final response = await client.get(Uri.parse(
+      'http://89.252.131.149:8080/api/deletet/application/company/54'));
+  return compute(parseCompanyAplication, utf8.decode(response.bodyBytes));
+}
+
+List<ApplicationResponse> parseCompanyAplication(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+  return parsed
+      .map<ApplicationResponse>((json) => ApplicationResponse.fromJson(json))
+      .toList();
+}
+
+//
+//
+//
 
 // Anasayfa Haberler API Bağlantısı
 Future<List<Newsfeed>> fetchNewfeed(http.Client client) async {

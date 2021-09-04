@@ -1,4 +1,3 @@
-import 'package:deletedvgtv/pages/LoginScreen.dart';
 import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/pages/ProfileInfoScreen.dart';
 import 'package:deletedvgtv/utils/userRegister.dart';
@@ -45,7 +44,6 @@ class _RegisterPageeState extends State<RegisterScreen> {
   Widget _uiSteup(BuildContext context) {
     var screen = MediaQuery.of(context);
     final double width = screen.size.width;
-    final double itemWidth = (width / 2) - 15;
     return Scaffold(
         key: scoffoldKey,
         backgroundColor: Colors.white,

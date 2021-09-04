@@ -15,8 +15,6 @@ class CorparateHomepageScreen extends StatefulWidget {
 class _CorparateHomepageScreenState extends State<CorparateHomepageScreen> {
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double width = screen.size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: Center(
@@ -84,6 +82,7 @@ class _CorparateHomepageScreenState extends State<CorparateHomepageScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class CompanyInfoWidget extends StatelessWidget {
   String companyName;
   String companyIcon;
@@ -95,7 +94,7 @@ class CompanyInfoWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(width: 0.5, color: Colors.grey.shade200),
+        border: Border.all(width: 0.5, color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(8),
       ),
       width: width,
@@ -107,7 +106,7 @@ class CompanyInfoWidget extends StatelessWidget {
             padding: EdgeInsets.all(30),
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 0.5, color: Colors.grey.shade300),
+                border: Border.all(width: 0.6, color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(30),
                 image: new DecorationImage(
                   fit: BoxFit.fitWidth,
@@ -119,11 +118,11 @@ class CompanyInfoWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              width: width - 100,
+              width: width - 150,
               child: Text(
                 companyName,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontFamily: 'Nunito', fontSize: 20),
+                style: TextStyle(fontFamily: 'Nunito', fontSize: 18),
               ),
             ),
           )
@@ -139,8 +138,6 @@ class AdvertsInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context);
-    final double width = screen.size.width;
     return Column(
       children: [
         Expanded(
@@ -192,7 +189,7 @@ class AdvertsInfo extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(width: 0.5, color: Colors.grey.shade200),
+                    border: Border.all(width: 0.5, color: Colors.grey.shade300),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   width: 100,
@@ -261,51 +258,3 @@ class AdvertsInfo extends StatelessWidget {
     );
   }
 }
-
-/* 
-Container(
-      width: width,
-      color: Colors.amber,
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          /////////////////// Başlık ve Tümünü Gör ////////////////
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'İlanlarınız',
-                style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  'Tümünü Gör',
-                  style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ],
-          ),
-          //////////////////İçerik //////////////////////////
-          Row(
-            children: [
-              Container(
-                width: 120,
-                height: 120,
-                color: Colors.red,
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Center(child: Text('İlanlar')),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-*/

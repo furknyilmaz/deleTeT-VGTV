@@ -26,7 +26,6 @@ class CompanyItem extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CompanyDetail(data[index], index),
-                  //Listeden hangi firmanın üzerine tıklanırsa o firmanın indexi aktarılır
                 ),
               );
             },

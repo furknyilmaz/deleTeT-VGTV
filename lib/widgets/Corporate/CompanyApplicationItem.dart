@@ -1,7 +1,6 @@
 import 'package:deletedvgtv/models/Corporote/application_company_model.dart';
 import 'package:deletedvgtv/pages/Corporate/CompanyApplicationDetailScreen.dart';
 import 'package:deletedvgtv/pages/HomepageScreen.dart';
-import 'package:deletedvgtv/widgets/ImageCached.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -55,7 +54,7 @@ class CompanyApplicationItem extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  CompanyApplicationDetailScreen()),
+                                  CompanyApplicationDetailScreen(data[index])),
                         );
                       },
                       child: Container(
@@ -109,7 +108,7 @@ class CompanyApplicationItem extends StatelessWidget {
                                                 fontFamily: 'Nunito'),
                                           ),
                                           Text(
-                                            'Software Developer',
+                                            data[index].applicantExp,
                                             style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily: 'Nunito',

@@ -2,15 +2,14 @@ import 'dart:convert';
 import 'package:deletedvgtv/models/login_model.dart';
 import 'package:deletedvgtv/pages/ProfileInfoScreen.dart';
 import 'package:deletedvgtv/services/api_services.dart';
+import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/CompanyBottomMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> userRegister(requestModal, context) async {
   UserAPIServices apiServices = new UserAPIServices();
-  apiServices
-      .register(requestModal, 'http://89.252.131.149:8080/api/deletet/register')
-      .then((response) async {
+  apiServices.register(requestModal, registerAPI).then((response) async {
     if (response.statusCode == 200) {
       var data = LoginResponseModal.fromJson(json.decode(response.body));
       var sp = await SharedPreferences.getInstance();

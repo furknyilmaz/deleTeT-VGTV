@@ -1,14 +1,6 @@
 import 'package:deletedvgtv/pages/AdvertsScreen.dart';
-import 'package:deletedvgtv/pages/ApplicationScreen.dart';
-import 'package:deletedvgtv/pages/Corporate/CompanyApplication.dart';
 import 'package:deletedvgtv/pages/Corporate/CompanyInterview.dart';
-import 'package:deletedvgtv/pages/CompanyScreen.dart';
 import 'package:deletedvgtv/pages/Corporate/CorparateHomepageScreen.dart';
-import 'package:deletedvgtv/pages/ForumScreen.dart';
-import 'package:deletedvgtv/pages/HomepageScreen.dart';
-import 'package:deletedvgtv/pages/InterviewListScreen.dart';
-import 'package:deletedvgtv/pages/InterviewScreen.dart';
-import 'package:deletedvgtv/pages/ProfileScreen.dart';
 import 'package:deletedvgtv/widgets/MainDraver.dart';
 import 'package:flutter/material.dart';
 
@@ -52,27 +44,6 @@ class _CompanyBottomMenuState extends State<CompanyBottomMenu> {
               fontWeight: FontWeight.w600,
               fontSize: 18.0),
         ),
-        actions: [
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ApplicationScreen()));
-              },
-              child: Icon(Icons.fact_check_outlined, size: 22)),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InretviewListScreen()),
-              );
-            },
-            child: Icon(Icons.record_voice_over, size: 24),
-          ),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

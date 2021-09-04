@@ -1,6 +1,5 @@
 import 'package:deletedvgtv/models/interview_model.dart';
 import 'package:deletedvgtv/services/api_services.dart';
-import 'package:deletedvgtv/utils/constants.dart';
 import 'package:deletedvgtv/widgets/InterviewItem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
